@@ -1,0 +1,32 @@
+ \input{EncabezadoTesis}
+\input{formulario}
+\begin{document}
+\pagenumbering{roman}
+\input{HojaTitulo/HojaTitulo}
+
+\renewcommand{\tablename}{\textbf{Tabla}}
+\renewcommand{\figurename}{\textbf{Figura}}
+\renewcommand{\listtablename}{Lista de Tablas}
+\renewcommand{\listfigurename}{Lista de Figuras}
+\renewcommand{\contentsname}{Contenido}
+
+\tableofcontents
+\include{Tab_Simbolos/TabSimbolos}
+\pagenumbering{arabic}
+\input{DatosGenerales}
+\input{Antecedentes}
+\input{EstadoArte}
+\input{DescripcionProblema}
+\input{Justificacion}
+\input{Objetivos}
+\input{AlcanceDelimitacion}
+\input{MarcoTeorico}
+\input{Metodologia}
+\input{Presupuesto}
+\input{Cronograma}
+\include{Glosario}
+\include{Anexos/Anexos}
+\addcontentsline{toc}{chapter}{\numberline{}Bibliograf\'{\i}a}
+\bibliographystyle{unsrt}
+\bibliography{BibliMSc}
+\end{document}
