@@ -31,17 +31,42 @@ La integración de Bluetooth, Bluetooth LE y Wi-Fi garantiza que se pueda orient
 El sistema operativo elegido para ESP32 es freeRTOS con LwIP; TLS 1.2 con aceleración de hardware está integrado también. También se admite la actualización segura (cifrada) a través del aire (OTA), de modo que los desarrolladores puedan actualizar continuamente sus productos incluso después de su lanzamiento. \\
 
 
+\begin{figure}
+	\centering
+	\caption{ESP WROOM 32}
+	\label{fig:esp32-wroom-s32-00}
+	\includegraphics{Imagenes/esp32-wroom-s32-00}
+\end{figure}
+
+%http://www.electrodragon.com/product/wroom-32/
+
+
 \subsection{Control de potencia AC por ángulo de fase}
 
 %TRIACS, detector de cruce por cero, optoacopladores
 
-%\subsection{Switch con transistore}
+\subsection{Switch con transistores}
+
+%Switch y control de cargas DC
+
+\subsection{I2C}
+
+\subsection{Optoacoplador}
+
+\subsection{Sensores}
+
+\subsubsection{Luminosidad}
+
+\subsection{Cargas AC}
+
+\subsection{Cargas DC}
 
 \section{Software}
 
 \subsection{RTOS}
 
-\cite{SO} Los sistemas operativos en tiempo real, tienen como parámetro clave al tiempo, ya que en gran variedad de situaciones, como por ejemplo, un proceso industrial, se requiere recolectar múltiples datos, los cuales son usados para el control de múltiples procesos, los cuales deben ser ejecutados en determinados instantes, de no ser así, podría causar desde la mala ejecución de una tarea, hasta un accidente según la delicadeza del proceso.\\ 
+\cite{SO} Los sistemas operativos en tiempo real, tienen como parámetro clave al tiempo, ya que en gran variedad de situaciones, como por ejemplo, un proceso industrial, se requiere recolectar múltiples datos, los cuales son usados para el control de múltiples procesos, los cuales deben ser ejecutados en determinados instantes, de no ser así, podría causar desde la mala ejecución de una tarea, hasta un accidente según la delicadeza del proceso.\\ 
+
 
 Para procesos con nula tolerancia a fallos, se conoce como un sistema en tiempo real duro, muchos de estos sistemas se encuentran en el control de procesos industriales, en aeronáutica, en la milicia y en áreas de aplicación similares. el caso contrario, cuando se tiene cierta tolerancia a que muy ocasionalmente existan fallos, se conoce como sistema en tiempo real suave, los sistemas de audio digital o de multimedia están en esta categoría. Los teléfonos digitales también son ejemplos de sistema en tiempo real suave. \\
 
@@ -57,3 +82,20 @@ Los sistemas de computadoras de bolsillo y los sistemas integrados están diseñ
 \subsection{ESP-IDF}
 
 ESP-IDF es el entorno de desarrollo oficial para el ESP32 desarrollado por Espressif System, el cual mediante una serie de comandos específicos escritos en la terminal (para el caso de linux), permite realizar una configuración del ESP32 en cuanto a su funcionamiento, es decir, permite encender o apagar características como el WiFi, el Bluetooth o realizar particiones de memoria, ademas de esto, se puede cargar el código por el puerto USB al ESP32, al igual que se puede visualizar la información generada por el ESP32 por este mismo puerto.\\
+
+\subsubsection{Particiones}
+\subsubsection{Consola}
+\subsubsection{OTA}
+\subsubsection{HTTP Request}
+\subsubsection{Timers}
+
+\subsection{Heroku}
+
+\subsection{Framework IoT}
+%Framework del profesor Cesar Alvarez
+
+\subsection{HTTP}
+
+\subsection{JSON}
+
+\subsection{Proteus}
