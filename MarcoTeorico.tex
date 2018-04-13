@@ -86,17 +86,13 @@ El sistema operativo elegido para ESP32 es freeRTOS con LwIP; TLS 1.2 con aceler
 
 \subsection{Corriente Alterna (AC)}
 
-Es un tipo de corriente eléctrica, en la que la dirección del flujo de electrones va y viene a intervalos regulares o en ciclos. La corriente que fluye por las líneas eléctricas y la electricidad disponible normalmente en las casas procedente de los enchufes de la pared es corriente alterna. La corriente estándar utilizada en los EE.UU. es de 60 ciclos por segundo (es decir, una frecuencia de 60 Hz); en Europa y en la mayor parte del mundo es de 50 ciclos por segundo (es decir, una frecuencia de 50 Hz.).
-
-%https://www.greenfacts.org/es/glosario/abc/corriente-alterna.htm
+``Es un tipo de corriente eléctrica, en la que la dirección del flujo de electrones va y viene a intervalos regulares o en ciclos. La corriente que fluye por las líneas eléctricas y la electricidad disponible normalmente en las casas procedente de los enchufes de la pared es corriente alterna. La corriente estándar utilizada en los EE.UU. es de 60 ciclos por segundo (es decir, una frecuencia de 60 Hz); en Europa y en la mayor parte del mundo es de 50 ciclos por segundo (es decir, una frecuencia de 50 Hz.)''. \cite{Cor}
 
 \subsection{Corriente Directa (DC)}
 
-Es la corriente eléctrica que fluye de forma constante en una dirección, como la que fluye en una linterna o en cualquier otro aparato con baterías es corriente continua.
+``Es la corriente eléctrica que fluye de forma constante en una dirección, como la que fluye en una linterna o en cualquier otro aparato con baterías es corriente continua.
 
-Una de las ventajas de la corriente alterna es su relativamente económico cambio de voltaje. Además, la pérdida inevitable de energía al transportar la corriente a largas distancias es mucho menor que con la corriente continua. 
-
-%https://www.greenfacts.org/es/glosario/abc/corriente-alterna.htm
+Una de las ventajas de la corriente alterna es su relativamente económico cambio de voltaje. Además, la pérdida inevitable de energía al transportar la corriente a largas distancias es mucho menor que con la corriente continua''. \cite{Cor}
 
 \subsection{Control de potencia AC por ángulo de fase}
 
@@ -124,9 +120,9 @@ Una de las ventajas de la corriente alterna es su relativamente económico cambi
 
 \subsubsection{Módulo GY-30}
 
-``Sensor GY-30 BH1750FVI. Es un sensor digital de intensidad de luz ambiente, tiene un conversor ADC de 16bits interno y comunicación por I2C como se observa en la figura \ref{fig:gy-30}. Esta es una versión mejorada del típico sensor de luz a base de un LDR, el cual simplemente entrega un valor analógico. Compatible con Arduino, PIC, etc. 
+``Sensor GY-30 BH1750FVI. Es un sensor digital de intensidad de luz ambiente, tiene un conversor ADC de 16bits interno y comunicación por I2C como se observa en la figura \ref{fig:gy-30}. Esta es una versión mejorada del típico sensor de luz a base de un LDR, el cual simplemente entrega un valor analógico. Compatible con Arduino, PIC, etc. \\
 
-El módulo BH1750 es un sensor de luz, que a diferencia del LDR es digital y nos entrega valores de medición en Lux ( lumen /m$^2$ ) que es una  unidad de medida estándar para el nivel de iluminación (iluminancia). Tiene alta precisión y un rango ente 1 – 65535 lx el cual es configurable.
+El módulo BH1750 es un sensor de luz, que a diferencia del LDR es digital y nos entrega valores de medición en Lux ( lumen /m$^2$ ) que es una  unidad de medida estándar para el nivel de iluminación (iluminancia). Tiene alta precisión y un rango ente 1 – 65535 lx el cual es configurable.\\
 
 La interfaz de comunicación es I2C pudiéndolo implementar en la mayoría de micro controladores, el módulo aparte de los pines de alimentación y pines I2C tiene un pin para establecer la dirección''.\cite{GY30}
 
@@ -151,9 +147,7 @@ La interfaz de comunicación es I2C pudiéndolo implementar en la mayoría de mi
 
 \subsubsection{Módulo sensor de calidad de aire MQ-135}
 
-Los sensores de gas de la serie MQ son sensores analógicos por lo que son fáciles de implementar con cualquier microcontrolador.
-
-Estos sensores son electroquímicos y varían su resistencia cuando se exponen a determinados gases, internamente posee un calentador encargado de aumentar la temperatura interna y con esto el sensor pueda reaccionar con los gases provocando un cambio en el valor de la resistencia. El calentador dependiendo del modelo puede necesitar un voltaje entre 5 y 2 voltios, el sensor se comporta como una resistencia y necesita una resistencia de carga (RL) para cerrar el circuito y con este hacer un divisor de tención y poder leerlo desde un microcontrolador:
+La serie MQ de sensores de gas son sensores analógicos por lo que son fáciles de implementar con cualquier microcontrolador que posea un conversor analógico digital (ADC) adecuado. Estos sensores son electroquímicos y varán su resistencia con la exposición a determinados gases, internamente poseen un calentador que se encarga de aumentar la temperatura interna para que el sensor pueda reaccionar con los gases provocando un cambio de valor en la resistencia, su estructura interna se puede observar en la figura \ref{fig:estructura-del-sensor-mq}.\cite{MQ1}\\
 
 \begin{figure}
 	\centering
@@ -162,11 +156,7 @@ Estos sensores son electroquímicos y varían su resistencia cuando se exponen a
 	\includegraphics[width=0.7\linewidth]{Imagenes/Estructura_del_sensor_MQ}
 \end{figure}
 
-Debido al calentador es necesario esperar un tiempo de calentamiento para que la salida sea estable y tenga las características que el fabricante muestra en sus datasheet, dicho tiempo dependiendo del modelo puede ser entre 12 y 48 horas.
-
-En el mercado, generalmente los sensores MQ se encuentran en módulos, lo que nos simplifica la parte de conexiones y nos facilitan su uso, solo basta con alimentar el módulo y empezar a leer el sensor, estos módulos también tienen una salida digital la cual internamente trabaja con un comparador y con la ayuda de un potenciómetro podemos calibrar el umbral y así poder interpretar la salida digital como presencia o ausencia del gas.
-
-El Sensor Calidad Aire MQ135 se utilizan en equipos de control de calidad del aire para edificios y oficinas, son adecuados para la detección de NH3, NOx, alcohol, benceno, humo, CO2, etc.
+El Sensor Calidad Aire MQ135 se utilizan en equipos de control de calidad del aire para edificios y oficinas, son adecuados para la detección de NH3, NOx, alcohol, benceno, humo, CO2, etc. Además de que estos sensores vienen en módulos como se observa en la figura \ref{fig:sensor-calidad-aire-mq135}, lo que facilita el uso de estos, simplemente se debe conectar al microcontrolador sin necesidad de hacer algún circuito de acople. \cite{MQ1}\\
 
 \begin{figure}
 	\centering
@@ -175,10 +165,9 @@ El Sensor Calidad Aire MQ135 se utilizan en equipos de control de calidad del ai
 	\includegraphics[width=0.35\linewidth]{Imagenes/sensor-calidad-aire-mq135}
 \end{figure}
 
+Este sensor es sensible en similar proporción a los gases mencionados, con lo que se puede determinar si el aire está limpio o si existe presencia de algún gas nocivo.\\
 
-Este sensor es sensible en similar proporción a los gases mencionados, con lo que podemos determinar si el aire está limpio.
-
-Los valores de salida de este sensor no son valores absolutos, simplemente proporciona una salida analógica que se debe monitorear y ser comparada con los valores tipicos proporcionados en la hoja de datos.\cite{MQ2}
+Los valores de salida de este sensor no son valores absolutos, simplemente proporciona una salida analógica que se debe monitorear y ser comparada con los valores tipicos proporcionados en la hoja de datos como se menciona anteriormente.\cite{MQ2}
 
 \subsubsection{Sensores de Estado}
 
@@ -186,7 +175,8 @@ Los sensores de estado describen si la variable esta en alto (1) o en bajo (0), 
 
 \paragraph{Módulo detector de lluvia: }
 
-Este módulo consiste en una serie de pistas conductoras impresas sobre una placa de baquelita. La separación entre las pistas es muy pequeña. Lo que este módulo hace es crear un corto circuito cada vez que las pistas se mojan. El agua hace que se cree un camino de baja resistencia entre las pistas con polaridad positiva y las pistas conectadas al GND. La corriente que fluye a través de estas pistas se ve limitada por resistencias de 10K en cada conductor, lo que impide que el corto circuito que se genera cuando se moja la placa vaya a estropear el micro controlador.
+Es un módulo relativamente simple que consiste en una serie de pistas conductoras organizadas de forma paralela e impresas sobre una placa de baquelita como se observa en la figura \ref{fig:yl-83}. La separación entre sus pistas 
+es muy pequeña, con el fin de crear un corto circuito cada vez que las pistas se mojan, ya que es un circuito abierto y el agua hace que se cree un camino de baja resistencia entre las pistas que tienen diferente potencial (Vcc-GND). La corriente que fluye a través de estas pistas se ve limitada por resistencias de 10K en cada conductor, lo que impide que el corto circuito que se genera cuando se moja la placa vaya a estropear el micro controlador.\cite{LLU}\\
 
 \begin{figure}
 	\centering
@@ -195,8 +185,9 @@ Este módulo consiste en una serie de pistas conductoras impresas sobre una plac
 	\includegraphics[width=0.35\linewidth]{Imagenes/YL-83}
 \end{figure}
 
+El circuito de control es el que posee las resistencias limitadoras de corriente y es el encargado de alimentar el módulo de la figura \ref{fig:yl-83}. Como se observa en la figura \ref{fig:yl-831} posee un amplificador operacional, específicamente el circuito integrado LM392. Este es el encargado de amplificar el pequeño diferencial de voltaje que se general cuando una gota de agua cae sobre las pistas del módulo. Aquí es donde se genera la señal de salida que puede ser del tipo analógica o digital. La señal digital oscilará entre los valores HIGH y LOW dependiendo de si hay agua o no sobre las pistas de la placa.\\
 
-Este módulo consta de dos partes, la placa que se muestra en la imagen de arriba y un pequeño circuito de control.
+La salida analógica entregará un nivel de voltaje que variará dependiendo de la cantidad de agua que haya sobre el módulo.\cite{LLU}
 
 \begin{figure}
 	\centering
@@ -205,46 +196,36 @@ Este módulo consta de dos partes, la placa que se muestra en la imagen de arrib
 	\label{fig:yl-831}
 \end{figure}
 
-El circuito de control es el que posee las resistencias limitadoras de corriente y es el encargado de alimentar el módulo YL-83. Posee un amplificador operacional, específicamente el circuito integrado LM392. Este es el encargado de amplificar el pequeño diferencial de voltaje que se general cuando una gota de agua cae sobre las pistas del módulo. Aquí es donde se genera la señal de salida que puede ser del tipo analógica o digital. La señal digital oscilará entre los valores HIGH y LOW dependiendo de si hay agua o no sobre las pistas de la placa YL-83.
-
-La salida analógica entregará un nivel de voltaje que variará dependiendo de la cantidad de agua que haya sobre el módulo.\cite{LLU}
-
 \paragraph{Módulo PIR HC-SR501: }
 
-Los sensores PIR tienen como función detector movimiento, normalmente se busca detector el movimiento de una persona dentro del rango del sensor. Son baratos, pequeños, de bajo consumo y fáciles de utilizar, además no se desgastan. Normalmente los podemos encontrar en electrodomésticos y gadgets para la oficina o el hogar. Son conocidos como PIR, “Sensores Infrarrojos” o “Sensores de movimiento”.
+La función de los sensores PIR es detectar movimiento, normalmente se busca detectar el movimiento de una persona dentro del rango del sensor. Son baratos, pequeños, de bajo consumo y fáciles de utilizar, además no se desgastan. Normalmente se encuentran en electrodomésticos y gadgets para la oficina o el hogar. Son conocidos como PIR, ``Sensores Infrarrojos'' o ``Sensores de movimiento''.\\
 
-Este módulo contiene un sensor Piroelectrico, el cual puede detectar niveles de radiación infrarroja. Todo objeto emite cierto nivel de radiación, y entre mayor temperatura tenga, mayor radiación emitirá. El sensor en un detector de movimientos está dividido en 2 mitades. La razón para esto es que estamos buscando la diferencia en el movimiento no el promedio. Las dos mitades están unidas por cables de modo que se cancelan una a otra. Si una mitad recibe más o menos radiación IR, la salida cambiará a Alto o Bajo.
-
-Los sensores PIR son perfectos para detectar cuando una persona ingresa o abandona un área, a partir de esto podemos programar muchas acciones como el encendido/apagado automático de luces, sonidos, alarmas, etc. Si bien son capaces de detectar personas, no nos pueden decir cuántas ni en qué dirección se encuentran y en algunos casos son activados por mascotas, la clave está en experimentar y encontrar los valores que funcionen adecuadamente.\cite{PIR1}
+Este módulo contiene un sensor Piroelectrico, el cual puede detectar niveles de radiación infrarroja como se observa en la figura \ref{fig:sensor-hc-sr501-1000-m}. Este sensor de movimiento está dividido en 2 mitades, la razón para esto es que se busca la diferencia en el movimiento y no el promedio. Las dos mitades están unidas  de modo que se cancelan una a otra. Entonces, si una mitad recibe más o menos radiación IR, la salida cambiará a Alto o Bajo. \cite{PIR1}\\
 
 El módulo PIR modelo HC-SR501, es pequeño y de bajo costo como se observa en la figura , incorpotando la tecnología más reciente en sensores infrarrojos pasivos para detectar movimiento. La emisión infrarroja se da en personas por su temperatura comporal y en animales (mamíferos), ya que emiten una radiación similar a los humanos. \cite{PIR2}
 
 \begin{figure}
 	\centering
-	\includegraphics[width=0.5\linewidth]{Imagenes/SENSOR-HC-SR501-1000-M}
-	\caption{Sensor HCSR501}
+	\caption{Sensor HCSR501 \cite{PIR2}}
 	\label{fig:sensor-hc-sr501-1000-m}
+	\includegraphics[width=0.5\linewidth]{Imagenes/SENSOR-HC-SR501-1000-M}
 \end{figure}
 
 \section{Software}
 
 \subsection{RTOS}
 
-\cite{SO} Los sistemas operativos en tiempo real, tienen como parámetro clave al tiempo, ya que en gran variedad de situaciones, como por ejemplo, un proceso industrial, se requiere recolectar múltiples datos, los cuales son usados para el control de múltiples procesos, los cuales deben ser ejecutados en determinados instantes, de no ser así, podría causar desde la mala ejecución de una tarea, hasta un accidente según la delicadeza del proceso.\\ 
+Los sistemas operativos en tiempo real, tienen como parámetro clave al tiempo, ya que en gran variedad de situaciones, como por ejemplo, un proceso industrial, se requiere recolectar múltiples datos, los cuales son usados para el control de múltiples procesos, los cuales deben ser ejecutados en determinados instantes, de no ser así, podría causar desde la mala ejecución de una tarea, hasta un accidente según la delicadeza del proceso.\\ 
 
-Para procesos con nula tolerancia a fallos, se conoce como un sistema en tiempo real duro, muchos de estos sistemas se encuentran en el control de procesos industriales, en aeronáutica, en la milicia y en áreas de aplicación similares. el caso contrario, cuando se tiene cierta tolerancia a que muy ocasionalmente existan fallos, se conoce como sistema en tiempo real suave, los sistemas de audio digital o de multimedia están en esta categoría. Los teléfonos digitales también son ejemplos de sistema en tiempo real suave. \\
-
-%Otro tipo de sistema operativo es el sistema en tiempo real. Estos sistemas se caracterizan por tener el tiempo como un parámetro clave. Por ejemplo, en los sistemas de control de procesos industriales, las computadoras en tiempo real tienen que recolectar datos acerca del proceso de producción y utilizarlos para controlar las máquinas en la fábrica. A menudo hay tiempos de entrega estrictos que se deben cumplir. Por ejemplo, si un auto se desplaza sobre una línea de ensamblaje, deben lle- varse a cabo ciertas acciones en determinados instantes. Si un robot soldador realiza su trabajo de soldadura antes o después de tiempo, el auto se arruinará. Si la acción debe ocurrir sin excepción en cierto momento (o dentro de cierto rango), tenemos un sistema en tiempo real duro. Muchos de estos sistemas se encuentran en el control de procesos industriales, en aeronáutica, en la milicia y en áreas de aplicación similares. Estos sistemas deben proveer garantías absolutas de que cierta acción ocurrirá en un instante determinado. 
-
-%Otro tipo de sistema en tiempo real es el sistema en tiempo real suave, en el cual es acepta- ble que muy ocasionalmente se pueda fallar a un tiempo predeterminado. Los sistemas de audio di- gital o de multimedia están en esta categoría. Los teléfonos digitales también son ejemplos de sistema en tiempo real suave. 
+Para procesos con nula tolerancia a fallos, se conoce como un sistema en tiempo real duro, muchos de estos sistemas se encuentran en el control de procesos industriales, en aeronáutica, en la milicia y en áreas de aplicación similares. el caso contrario, cuando se tiene cierta tolerancia a que muy ocasionalmente existan fallos, se conoce como sistema en tiempo real suave, los sistemas de audio digital o de multimedia están en esta categoría. Los teléfonos digitales también son ejemplos de sistema en tiempo real suave. \cite{SO} \\
 
 ``Como en los sistemas en tiempo real es crucial cumplir con tiempos predeterminados para realizar una acción, algunas veces el sistema operativo es simplemente una biblioteca enlazada con los programas de aplicación, en donde todo está acoplado en forma estrecha y no hay protección entre cada una de las partes del sistema. Un ejemplo de este tipo de sistema en tiempo real es freeRTOS.  Las categorías de sistemas para computadoras de bolsillo, sistemas integrados y sistemas en tiempo real se traslapan en forma considerable. Casi todos ellos tienen por lo menos ciertos aspectos de tiempo real suave. Los sistemas integrados y de tiempo real sólo ejecutan software que colocan los diseñadores del sistema; los usuarios no pueden agregar su propio software, lo cual facilita la protección. \\
 
-Los sistemas de computadoras de bolsillo y los sistemas integrados están diseñados para los consumidores, mientras que los sistemas en tiempo real son más adecuados para el uso industrial. Sin embargo, tienen ciertas características en común''.\\
+Los sistemas de computadoras de bolsillo y los sistemas integrados están diseñados para los consumidores, mientras que los sistemas en tiempo real son más adecuados para el uso industrial. Sin embargo, tienen ciertas características en común''. \cite{SO}\\
 
 \subsection{ESP-IDF}
 
-ESP-IDF es el entorno de desarrollo oficial para el ESP32 desarrollado por Espressif System, el cual mediante una serie de comandos específicos escritos en la terminal (para el caso de linux), permite realizar una configuración del ESP32 en cuanto a su funcionamiento, es decir, permite encender o apagar características como el WiFi, el Bluetooth o realizar particiones de memoria, ademas de esto, se puede cargar el código por el puerto USB al ESP32, al igual que se puede visualizar la información generada por el ESP32 por este mismo puerto. Este entorno se encuentra construido con diferentes características, algunas de ellas se meniconan a continuación.\\
+ESP-IDF es el entorno de desarrollo oficial para el ESP32 desarrollado por Espressif System, el cual mediante una serie de comandos específicos escritos en la terminal (para el caso de linux), permite realizar una configuración del ESP32 en cuanto a su funcionamiento, es decir, permite encender o apagar características como el WiFi, el Bluetooth o realizar particiones de memoria, ademas de esto, se puede cargar el código por el puerto USB al ESP32, al igual que se puede visualizar la información generada por el ESP32 por este mismo puerto. Este entorno se encuentra construido con diferentes características y APIs, algunas de ellas se meniconan a continuación. \cite{ES}\\
 
 \paragraph{FreeRTOS:}este framework esta desarrollado sobre este sistema operativo de tiempo real, tomando de este diferentes funcionalidades como la tareas y las colas.
 
@@ -272,3 +253,7 @@ ESP-IDF es el entorno de desarrollo oficial para el ESP32 desarrollado por Espre
 
 \subsection{Proteus}
 
+Proteus combina facilidad de uso con características de gran alcance para ayudar a diseñar, probar y el diseño de PCB profesionales. Con casi 800 variantes de microcontroladores listos para la simulación directamente desde el esquematico, además de contar con uno de los paquetes de diseño de PCB profesionales más intuitivas en el mercado y un autoruteo de clase mundial incluido como estándar. \cite{Prot1} \\
+
+Además es una herramienta muy completa y potente de simulación de circuitos y diseño de PCBs. Dentro de la simulación de circuitos admite componentes pasivos, digitales, analógicos y componentes más complejos como LCDs y motores. Por tanto, se puede hacer casi cualquier cosa, el programa está pensado para que una vez se tenga el circuito diseñado se pueda pasar a una PCB \cite{Prot2}.
+Adicionalmente los dispositivos que no se encuentren se pueden agregar, ya sea de la pagina oficial o construyendolos dentro de la herramienta.
