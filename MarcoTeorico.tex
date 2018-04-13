@@ -14,31 +14,24 @@ El problema es que la gente tiene tiempo, atención y precisión limitados, lo q
 
 \subsection{Plataforma Heroku}
 
-https://www.heroku.com/platform
-
-
-The Heroku Platform
-
-Heroku is a cloud platform based on a managed container system, with integrated data services and a powerful ecosystem, for deploying and running modern apps. The Heroku developer experience is an app-centric approach for software delivery, integrated with today’s most popular developer tools and workflows.
+``Heroku es una plataforma en la nube basada en un sistema gestionado por contenedores, con servicios de datos integrados y un potente ecosistema, para desarrollar y ejecutar aplicaciones modernas. La experiencia de los desarrolladores de Heroku es un enfoque centrado en aplicaciones para la entrega de software, integrado con las herramientas y flujos de trabajo de desarrollador más populares de la actualidad'' \cite{Hero}.\\
 
 
 \subsection{Framework Laravel}
 
-https://web.archive.org/web/20130929055257/http://laravel.com/docs/introduction
+``Laravel es un framework de aplicaciones web con una sintaxis expresiva y elegante. Laravel intenta aliviar el dolor del desarrollo al facilitar las tareas comunes que se utilizan en la mayoría de los proyectos web, como la autenticación, el enrutamiento, las sesiones y el almacenamiento en caché.\\
 
-https://www.arsys.es/blog/programacion/que-es-laravel/
-%Framework del profesor Cesar Alvarez
+Laravel tiene como objetivo hacer que el proceso de desarrollo sea agradable para el desarrollador sin sacrificar la funcionalidad de la aplicación. Con este fin, se ha intentado combinar lo mejor de lo que hemos visto en otros marcos web, incluidos los marcos implementados en otros lenguajes, como Ruby on Rails, ASP.NET MVC y Sinatra.\\
+
+Laravel es accesible, pero potente, y proporciona potentes herramientas necesarias para aplicaciones grandes y robustas. Una magnífica inversión de contenedores de control, un sistema de migración expresivo y un soporte de prueba de unidades estrechamente integrado le brindan las herramientas que necesita para construir cualquier aplicación'' \cite{Lara}.\\
 
 \subsection{HTTP}
 
-El protocolo de transferencia de hipertexto (HTTP) es un protocolo de la capa de aplicación en el modelo OSI, se usa para transmitir documentos hipermedia, como HTML. Fue diseñado para la comunicación entre navegadores web y servidores web, pero también se puede usar para otros propositos. HTTP sigue un modelo clasico de cliente-servidor, con un cliente que abre una conexión para realizar una petición, luego esperando la respuesta. HTTP es un protocolo sin estado, significa que el servidor no conserva ningun dato entre dos solicitudes. Para realizar las peticiones este protocolo cuenta con diferentes metodos.
-
-%https://developer.mozilla.org/en-US/docs/Web/HTTP
+El protocolo de transferencia de hipertexto (HTTP) es un protocolo de la capa de aplicación en el modelo OSI, se usa para transmitir documentos hipermedia, como HTML. Fue diseñado para la comunicación entre navegadores web y servidores web, pero también se puede usar para otros propositos. HTTP sigue un modelo clasico de cliente-servidor, con un cliente que abre una conexión para realizar una petición, luego esperando la respuesta. HTTP es un protocolo sin estado, significa que el servidor no conserva ningun dato entre dos solicitudes. Para realizar las peticiones este protocolo cuenta con diferentes metodos \cite{HTTP}.
 
 \paragraph{Metodos de solicitud HTTP:}
 
-HTTP define un conjunto de métodos de solicitudes para indicar la acción deseada que se realizará para un recurso determinado. Aunque pueden ser sustantivos, estos métodos algunas veces se denominan verbos HTTP. Cada uno de ellos implementa una semantica diferente, pero algunas caracteristicas comunes son compartidas por un grupo de ellos.\\
-
+HTTP define un conjunto de métodos de solicitudes para indicar la acción deseada que se realizará para un recurso determinado. Aunque pueden ser sustantivos, estos métodos algunas veces se denominan verbos HTTP. Cada uno de ellos implementa una semantica diferente, pero algunas caracteristicas comunes son compartidas por un grupo de ellos \cite{HTTPM}.\\
 
 \begin{itemize}
 	\item GET: este método solicita una representación del recurso especificado. Las peticiones que lo usan, solo deben regresar datos.
@@ -51,30 +44,12 @@ HTTP define un conjunto de métodos de solicitudes para indicar la acción desea
 	\item TRACE: realiza una prueba de mensaje loop-back a lo largo de la ruta del recurso de destino. 
 	\item PATCH: se usa para realizar modificaciones parciales a un recurso.
 \end{itemize}
-%The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
-
-%The HEAD method asks for a response identical to that of a GET request, but without the response body.
-
-%The POST method is used to submit an entity to the specified resource, often causing a change in state or side effects on the server
-
-%The PUT method replaces all current representations of the target resource with the request payload.
-
-%The CONNECT method establishes a tunnel to the server identified by the target resource.
-
-%The OPTIONS method is used to describe the communication options for the target resource.
-
-%The TRACE method performs a message loop-back test along the path to the target resource.
-
-%The PATCH method is used to apply partial modifications to a resource. 
-
-%https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
 
 \subsection{JSON}
 
-JSON (JavaScript Object Notation - Notación de Objetos de JavaScript) es un formato ligero de intercambio de datos. Leerlo y escribirlo es simple para humanos, mientras que para las máquinas es simple interpretarlo y generarlo. Está basado en un subconjunto del Lenguaje de Programación JavaScript, Standard ECMA-262 3rd Edition - Diciembre 1999. JSON es un formato de texto que es completamente independiente del lenguaje pero utiliza convenciones que son ampliamente conocidos por los programadores de la familia de lenguajes C, incluyendo C, C++, C\#, Java, JavaScript, Perl, Python, y muchos otros. Estas propiedades hacen que JSON sea un lenguaje ideal para el intercambio de datos.\\
+``JSON (JavaScript Object Notation - Notación de Objetos de JavaScript) es un formato ligero de intercambio de datos. Leerlo y escribirlo es simple para humanos, mientras que para las máquinas es simple interpretarlo y generarlo. Está basado en un subconjunto del Lenguaje de Programación JavaScript, Standard ECMA-262 3rd Edition - Diciembre 1999. JSON es un formato de texto que es completamente independiente del lenguaje pero utiliza convenciones que son ampliamente conocidos por los programadores de la familia de lenguajes C, incluyendo C, C++, C\#, Java, JavaScript, Perl, Python, y muchos otros. Estas propiedades hacen que JSON sea un lenguaje ideal para el intercambio de datos'' \cite{JSON}.\\
 
 JSON está constituído por dos estructuras:
-
 
 \begin{itemize}
 	\item Una colección de pares de nombre/valor. En varios lenguajes esto es conocido como un objeto, registro, estructura, diccionario, tabla hash, lista de claves o un arreglo asociativo.
@@ -82,9 +57,7 @@ JSON está constituído por dos estructuras:
 	\item Una lista ordenada de valores. En la mayoría de los lenguajes, esto se implementa como arreglos, vectores, listas o sequencias.
 \end{itemize}
 
-Estas son estructuras universales; virtualmente todos los lenguajes de programación las soportan de una forma u otra. Es razonable que un formato de intercambio de datos que es independiente del lenguaje de programación se base en estas estructuras.
-
-%https://json.org/json-es.html
+Estas son estructuras universales; virtualmente todos los lenguajes de programación las soportan de una forma u otra. Es razonable que un formato de intercambio de datos que es independiente del lenguaje de programación se base en estas estructuras \cite{JSON}.\\
 
 \section{Smart House}
 
@@ -95,36 +68,50 @@ Smart House es un entorno que tiene sistemas sofisticados a través de los cuale
 \section{Hardware}
 
 \subsection{ESP-WROOM-32}
-Es un potente módulo MCU Wi-Fi + BT + BLE que se dirige a una amplia variedad de aplicaciones, desde redes de sensores de baja potencia hasta las tareas más exigentes, como codificación de voz, transmisión de música y decodificación de MP3.\\
+
+Es un potente módulo MCU Wi-Fi + BT + BLE que se dirige a una amplia variedad de aplicaciones, desde redes de sensores de baja potencia hasta las tareas más exigentes, como codificación de voz, transmisión de música y decodificación de MP3, además de su reducido tamaño, como se observa en la figura \ref{fig:esp32-wroom-s32-00}.\\
 
 En el núcleo de este módulo está el chip ESP32-D0WDQ6. El chip integrado está diseñado para ser escalable y adaptable. Hay dos núcleos de CPU que se pueden controlar individualmente, y la frecuencia del reloj es ajustable de 80 MHz a 240 MHz. El usuario también puede apagar la CPU y utilizar el coprocesador de baja potencia para monitorear constantemente los periféricos en busca de cambios o cruces de umbrales. ESP32 integra un amplio conjunto de periféricos, que van desde sensores táctiles capacitivos, sensores Hall, interfaz de tarjeta SD, Ethernet, SPI de alta velocidad, UART, I2S e I2C.\\
 
 La integración de Bluetooth, Bluetooth LE y Wi-Fi garantiza que se pueda orientar una amplia gama de aplicaciones, el uso de Wi-Fi permite un gran alcance físico y conexión directa a Internet a través de Wi-Fi, mientras usa Bluetooth, le permite al usuario conectarse convenientemente al teléfono o transmitir balizas de baja energía para su detección. La corriente de reposo del chip ESP32 es inferior a 5 uA, lo que lo hace adecuado para aplicaciones de electrónica con batería y portátiles. ESP32 admite una velocidad de datos de hasta 150 Mbps y una potencia de salida de 20.5 dBm en la antena para garantizar el rango físico más amplio.\\
 
-El sistema operativo elegido para ESP32 es freeRTOS con LwIP; TLS 1.2 con aceleración de hardware está integrado también. También se admite la actualización segura (cifrada) a través del aire (OTA), de modo que los desarrolladores puedan actualizar continuamente sus productos incluso después de su lanzamiento.\cite{EW32}  \\
-
+El sistema operativo elegido para ESP32 es freeRTOS con LwIP; TLS 1.2 con aceleración de hardware está integrado también. También se admite la actualización segura (cifrada) a través del aire (OTA), de modo que los desarrolladores puedan actualizar continuamente sus productos incluso después de su lanzamiento.\cite{EW32}\\
 
 \begin{figure}
 	\centering
-	\caption{ESP WROOM 32}
+	\caption{ESP WROOM 32\cite{ESPIMG}}
 	\label{fig:esp32-wroom-s32-00}
 	\includegraphics{Imagenes/esp32-wroom-s32-00}
 \end{figure}
 
-%http://www.electrodragon.com/product/wroom-32/
+\subsection{Corriente Alterna (AC)}
 
+Es un tipo de corriente eléctrica, en la que la dirección del flujo de electrones va y viene a intervalos regulares o en ciclos. La corriente que fluye por las líneas eléctricas y la electricidad disponible normalmente en las casas procedente de los enchufes de la pared es corriente alterna. La corriente estándar utilizada en los EE.UU. es de 60 ciclos por segundo (es decir, una frecuencia de 60 Hz); en Europa y en la mayor parte del mundo es de 50 ciclos por segundo (es decir, una frecuencia de 50 Hz.).
+
+%https://www.greenfacts.org/es/glosario/abc/corriente-alterna.htm
+
+\subsection{Corriente Directa (DC)}
+
+Es la corriente eléctrica que fluye de forma constante en una dirección, como la que fluye en una linterna o en cualquier otro aparato con baterías es corriente continua.
+
+Una de las ventajas de la corriente alterna es su relativamente económico cambio de voltaje. Además, la pérdida inevitable de energía al transportar la corriente a largas distancias es mucho menor que con la corriente continua. 
+
+%https://www.greenfacts.org/es/glosario/abc/corriente-alterna.htm
 
 \subsection{Control de potencia AC por ángulo de fase}
 
-%Curso práctico de Electrónica Inductrial y Automatización, CEKIT, Marzo 2001.
+``Los SCR y los TRIAC, permiten aplicar una técnica muy conveniente y eficaz para controlar el voltaje promedio y por lo tanto la potencia aplicada a una carga, cambiando el ángulo de fase con el cual la fuente de voltaje se aplica a ésta. Esta técnica de control de voltaje es muy usada en las aplicaciones de regulación de motores, iluminación y temperatura, por ser el voltaje la variable principal en estos tres procesos''.\cite{CEKIT}\\
 
+``Para entender como se controla el ángulo de fase, por medio de un TRIAC conectado en serie con la carga, se puede asumir que el TRIAC se comporta idealmente como un interruptor controlador por la corriente de compuerta Ig que se cierra o se abre ante su presencia o ausencia. Observando la figura \ref{fig:triacgraph} puede verse el control de una onda seno de tensión con un período con un período de 360 grados; en la parte (a) de la figura se muestra la tensión a través del TRIAC, mientras que en la parte (b) se ve la tensión sobre la carga; allí puede verse que el TRIAC se comporta como un circuito abierto durante los primero 45 grados de cada semiciclo, y todo el voltaje cae en sus terminales eliminando el flujo de corriente por la carga. La porción del semiciclo durante la cual se presenta esta situación se conoce como ángulo de disparo''\cite{CEKIT}.\\
 
-%TRIACS, detector de cruce por cero, optoacopladores
-Los SCR y los TRIAC, permiten aplicar una técnica muy conveniente y eficaz para controlar el voltaje promedio y por lo tanto la potencia aplicada a una carga, cambiando el ángulo de fase con el cual la fuente de voltaje se aplica a ésta. Esta técnica de control de voltaje es muy usada en las aplicaciones de regulación de motores, iluminación y temperatura, por ser el voltaje la variable principal en estos tres procesos.\\
+``Una vez el TRIAC es disparado a través de su terminal de compuerta (G), éste se engancha y se comporta como un interruptor cerrado, permitiendo que todo el voltaje se aplique a la carga durante los 135 grados restantes de cada semiciclo. La porción del semiciclo durante la cual el TRIAC conduce se denomina ángulo de conducción''\cite{CEKIT}.\\
 
-Para entender como se controla el ángulo de fase, por medio de un TRIAC conectado en serie con la carga, se puede asumir que el TRIAC se comporta idealmente como un interruptor controlador por la corriente de compuerta Ig que se cierra o se abre ante su presencia o ausencia. Observando la figura XX puede verse el control de una onda seno de tensión con un período con un período de 360 grados; en la parte (a) de la figura se muestra la tensión a través del TRIAC, mientras que en la parte (b) se ve la tensión sobre la carga; allí puede verse que el TRIAC se comporta como un circuito abierto durante los primero 45 grados de cada semiciclo, y todo el voltaje cae en sus terminales eliminando el flujo de corriente por la carga. La porción del semiciclo durante la cual se presenta esta situación se conoce como ángulo de disparo.\\
-
-Una vez el TRIAC es disparado a través de su terminal de compuerta (G), éste se engancha y se comporta como un interruptor cerrado, permitiendo que todo el voltaje se aplique a la carga durante los 135 grados restantes de cada semiciclo. La porción del semiciclo durante la cual el TRIAC conduce se denomina ángulo de conducción.\\
+\begin{figure}
+	\centering
+	\caption{Representación gráfica del ángulo de disparo y de conducción del TRIAC y de la carga \cite{CEKIT}.}
+	\label{fig:triacgraph}
+	\includegraphics[width=0.3\linewidth]{Imagenes/TRIAC_graph}
+\end{figure}
 
 
 \subsection{Control de Cargas DC}
@@ -137,19 +124,30 @@ Una vez el TRIAC es disparado a través de su terminal de compuerta (G), éste s
 
 \subsubsection{Módulo GY-30}
 
-Sensor GY-30 BH1750FVI. Es un sensor digital de intensidad de luz ambiente, tiene un conversor ADC de 16bits interno y comunicación por I2C. Esta es una versión mejorada del típico sensor de luz a base de un LDR, el cual simplemente entrega un valor analógico. Compatible con Arduino, PIC, etc. 
+``Sensor GY-30 BH1750FVI. Es un sensor digital de intensidad de luz ambiente, tiene un conversor ADC de 16bits interno y comunicación por I2C como se observa en la figura \ref{fig:gy-30}. Esta es una versión mejorada del típico sensor de luz a base de un LDR, el cual simplemente entrega un valor analógico. Compatible con Arduino, PIC, etc. 
 
 El módulo BH1750 es un sensor de luz, que a diferencia del LDR es digital y nos entrega valores de medición en Lux ( lumen /m$^2$ ) que es una  unidad de medida estándar para el nivel de iluminación (iluminancia). Tiene alta precisión y un rango ente 1 – 65535 lx el cual es configurable.
 
-La interfaz de comunicación es I2C pudiéndolo implementar en la mayoría de micro controladores, el módulo aparte de los pines de alimentación y pines I2C tiene un pin para establecer la dirección.
+La interfaz de comunicación es I2C pudiéndolo implementar en la mayoría de micro controladores, el módulo aparte de los pines de alimentación y pines I2C tiene un pin para establecer la dirección''.\cite{GY30}
 
-%https://www.amgkits.com/home/113-sensor-de-intensidad-optica-sensor-de-luz-gy-30-bh1750fvi.html
+\begin{figure}
+	\centering
+	\caption{Modulo GY-30 \cite{GY30}}
+	\label{fig:gy-30}
+	\includegraphics[width=0.4\linewidth]{Imagenes/gy-30}
+\end{figure}
 
 \subsubsection{Temperatura y Humedad DHT11}
 
-El DHT11 es un sensor de temperatura y humedad digital de bajo costo. Utiliza un sensor capacitivo de humedad y un termistor para medir el aire circundante, y muestra los datos mediante una señal digital en el pin de datos (no hay pines de entrada analógica). Es bastante simple de usar, pero requiere sincronización cuidadosa para tomar datos. El único inconveniente de este sensor es que sólo se puede obtener nuevos datos una vez cada 2 segundos, así que las lecturas que se pueden realizar serán mínimo cada 2 segundos.
+``El DHT11 es un sensor de temperatura y humedad digital de bajo costo. Utiliza un sensor capacitivo de humedad y un termistor para medir el aire circundante, y muestra los datos mediante una señal digital en el pin de datos (no hay pines de entrada analógica). Es bastante simple de usar, pero requiere sincronización cuidadosa para tomar datos. El único inconveniente de este sensor es que sólo se puede obtener nuevos datos una vez cada 2 segundos, así que las lecturas que se pueden realizar serán mínimo cada 2 segundos''. \cite{DHT11}
 
-%https://electronilab.co/tienda/sensor-de-temperatura-y-humedad-dht11/
+\begin{figure}
+	\centering
+	\caption{Sensor de temperatura y humedad DHT11 \cite{DHT11}}
+	\label{fig:dht11}
+	\includegraphics[width=0.4\linewidth]{Imagenes/dht11}
+\end{figure}
+
 
 \subsubsection{Módulo sensor de calidad de aire MQ-135}
 
@@ -157,35 +155,76 @@ Los sensores de gas de la serie MQ son sensores analógicos por lo que son fáci
 
 Estos sensores son electroquímicos y varían su resistencia cuando se exponen a determinados gases, internamente posee un calentador encargado de aumentar la temperatura interna y con esto el sensor pueda reaccionar con los gases provocando un cambio en el valor de la resistencia. El calentador dependiendo del modelo puede necesitar un voltaje entre 5 y 2 voltios, el sensor se comporta como una resistencia y necesita una resistencia de carga (RL) para cerrar el circuito y con este hacer un divisor de tención y poder leerlo desde un microcontrolador:
 
+\begin{figure}
+	\centering
+	\caption{Estructura del sensor MQ \cite{MQ1}}
+	\label{fig:estructura-del-sensor-mq}
+	\includegraphics[width=0.7\linewidth]{Imagenes/Estructura_del_sensor_MQ}
+\end{figure}
+
 Debido al calentador es necesario esperar un tiempo de calentamiento para que la salida sea estable y tenga las características que el fabricante muestra en sus datasheet, dicho tiempo dependiendo del modelo puede ser entre 12 y 48 horas.
 
 En el mercado, generalmente los sensores MQ se encuentran en módulos, lo que nos simplifica la parte de conexiones y nos facilitan su uso, solo basta con alimentar el módulo y empezar a leer el sensor, estos módulos también tienen una salida digital la cual internamente trabaja con un comparador y con la ayuda de un potenciómetro podemos calibrar el umbral y así poder interpretar la salida digital como presencia o ausencia del gas.
 
 El Sensor Calidad Aire MQ135 se utilizan en equipos de control de calidad del aire para edificios y oficinas, son adecuados para la detección de NH3, NOx, alcohol, benceno, humo, CO2, etc.
 
+\begin{figure}
+	\centering
+	\caption{Modulo sendor de calidad de Aire MQ-135 \cite{MQ1}}
+	\label{fig:sensor-calidad-aire-mq135}
+	\includegraphics[width=0.35\linewidth]{Imagenes/sensor-calidad-aire-mq135}
+\end{figure}
+
+
 Este sensor es sensible en similar proporción a los gases mencionados, con lo que podemos determinar si el aire está limpio.
 
-%http://www.naylampmechatronics.com/blog/42_Tutorial-sensores-de-gas-MQ2-MQ3-MQ7-y-MQ13.html
-
-Este sensor no proporciona valores absolutos, sino que simplemente proporciona una salida analógica que debe ser monitoreado y se comparada con los valores de umbral.
-%http://www.geekbotelectronics.com/producto/mq-135-modulo-sensor-de-calidad-del-aire/
+Los valores de salida de este sensor no son valores absolutos, simplemente proporciona una salida analógica que se debe monitorear y ser comparada con los valores tipicos proporcionados en la hoja de datos.\cite{MQ2}
 
 \subsubsection{Sensores de Estado}
 
 Los sensores de estado describen si la variable esta en alto (1) o en bajo (0), para estos sensores se tienen diferentes variables tipicamente, como el estado de una puerta o una ventana (abierta o cerrada), la lluvia, el movimiento.
 
 \paragraph{Módulo detector de lluvia: }
-%http://panamahitek.com/modulo-yl-83-un-detector-de-lluvia/
+
+Este módulo consiste en una serie de pistas conductoras impresas sobre una placa de baquelita. La separación entre las pistas es muy pequeña. Lo que este módulo hace es crear un corto circuito cada vez que las pistas se mojan. El agua hace que se cree un camino de baja resistencia entre las pistas con polaridad positiva y las pistas conectadas al GND. La corriente que fluye a través de estas pistas se ve limitada por resistencias de 10K en cada conductor, lo que impide que el corto circuito que se genera cuando se moja la placa vaya a estropear el micro controlador.
+
+\begin{figure}
+	\centering
+	\caption{Sensor de Lluvia \cite{LLU}}
+	\label{fig:yl-83}
+	\includegraphics[width=0.35\linewidth]{Imagenes/YL-83}
+\end{figure}
+
+
+Este módulo consta de dos partes, la placa que se muestra en la imagen de arriba y un pequeño circuito de control.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{Imagenes/YL-831}
+	\caption{Modulo de sensor de lluviar \cite{LLU}}
+	\label{fig:yl-831}
+\end{figure}
+
+El circuito de control es el que posee las resistencias limitadoras de corriente y es el encargado de alimentar el módulo YL-83. Posee un amplificador operacional, específicamente el circuito integrado LM392. Este es el encargado de amplificar el pequeño diferencial de voltaje que se general cuando una gota de agua cae sobre las pistas del módulo. Aquí es donde se genera la señal de salida que puede ser del tipo analógica o digital. La señal digital oscilará entre los valores HIGH y LOW dependiendo de si hay agua o no sobre las pistas de la placa YL-83.
+
+La salida analógica entregará un nivel de voltaje que variará dependiendo de la cantidad de agua que haya sobre el módulo.\cite{LLU}
 
 \paragraph{Módulo PIR HC-SR501: }
 
-https://puntoflotante.net/MODULO-SENSOR-PASIVO-INFRARROJO-PIR-HC-SR501.htm
+Los sensores PIR tienen como función detector movimiento, normalmente se busca detector el movimiento de una persona dentro del rango del sensor. Son baratos, pequeños, de bajo consumo y fáciles de utilizar, además no se desgastan. Normalmente los podemos encontrar en electrodomésticos y gadgets para la oficina o el hogar. Son conocidos como PIR, “Sensores Infrarrojos” o “Sensores de movimiento”.
 
-http://www.naylampmechatronics.com/sensores-proximidad/55-modulo-de-deteccion-pir-hc-sr501.html
+Este módulo contiene un sensor Piroelectrico, el cual puede detectar niveles de radiación infrarroja. Todo objeto emite cierto nivel de radiación, y entre mayor temperatura tenga, mayor radiación emitirá. El sensor en un detector de movimientos está dividido en 2 mitades. La razón para esto es que estamos buscando la diferencia en el movimiento no el promedio. Las dos mitades están unidas por cables de modo que se cancelan una a otra. Si una mitad recibe más o menos radiación IR, la salida cambiará a Alto o Bajo.
 
-\subsection{Corriente Alterna (AC)}
+Los sensores PIR son perfectos para detectar cuando una persona ingresa o abandona un área, a partir de esto podemos programar muchas acciones como el encendido/apagado automático de luces, sonidos, alarmas, etc. Si bien son capaces de detectar personas, no nos pueden decir cuántas ni en qué dirección se encuentran y en algunos casos son activados por mascotas, la clave está en experimentar y encontrar los valores que funcionen adecuadamente.\cite{PIR1}
 
-\subsection{Corriente Directa (DC)}
+El módulo PIR modelo HC-SR501, es pequeño y de bajo costo como se observa en la figura , incorpotando la tecnología más reciente en sensores infrarrojos pasivos para detectar movimiento. La emisión infrarroja se da en personas por su temperatura comporal y en animales (mamíferos), ya que emiten una radiación similar a los humanos. \cite{PIR2}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\linewidth]{Imagenes/SENSOR-HC-SR501-1000-M}
+	\caption{Sensor HCSR501}
+	\label{fig:sensor-hc-sr501-1000-m}
+\end{figure}
 
 \section{Software}
 
@@ -194,7 +233,6 @@ http://www.naylampmechatronics.com/sensores-proximidad/55-modulo-de-deteccion-pi
 \cite{SO} Los sistemas operativos en tiempo real, tienen como parámetro clave al tiempo, ya que en gran variedad de situaciones, como por ejemplo, un proceso industrial, se requiere recolectar múltiples datos, los cuales son usados para el control de múltiples procesos, los cuales deben ser ejecutados en determinados instantes, de no ser así, podría causar desde la mala ejecución de una tarea, hasta un accidente según la delicadeza del proceso.\\ 
 
 Para procesos con nula tolerancia a fallos, se conoce como un sistema en tiempo real duro, muchos de estos sistemas se encuentran en el control de procesos industriales, en aeronáutica, en la milicia y en áreas de aplicación similares. el caso contrario, cuando se tiene cierta tolerancia a que muy ocasionalmente existan fallos, se conoce como sistema en tiempo real suave, los sistemas de audio digital o de multimedia están en esta categoría. Los teléfonos digitales también son ejemplos de sistema en tiempo real suave. \\
-
 
 %Otro tipo de sistema operativo es el sistema en tiempo real. Estos sistemas se caracterizan por tener el tiempo como un parámetro clave. Por ejemplo, en los sistemas de control de procesos industriales, las computadoras en tiempo real tienen que recolectar datos acerca del proceso de producción y utilizarlos para controlar las máquinas en la fábrica. A menudo hay tiempos de entrega estrictos que se deben cumplir. Por ejemplo, si un auto se desplaza sobre una línea de ensamblaje, deben lle- varse a cabo ciertas acciones en determinados instantes. Si un robot soldador realiza su trabajo de soldadura antes o después de tiempo, el auto se arruinará. Si la acción debe ocurrir sin excepción en cierto momento (o dentro de cierto rango), tenemos un sistema en tiempo real duro. Muchos de estos sistemas se encuentran en el control de procesos industriales, en aeronáutica, en la milicia y en áreas de aplicación similares. Estos sistemas deben proveer garantías absolutas de que cierta acción ocurrirá en un instante determinado. 
 
@@ -206,30 +244,31 @@ Los sistemas de computadoras de bolsillo y los sistemas integrados están diseñ
 
 \subsection{ESP-IDF}
 
-ESP-IDF es el entorno de desarrollo oficial para el ESP32 desarrollado por Espressif System, el cual mediante una serie de comandos específicos escritos en la terminal (para el caso de linux), permite realizar una configuración del ESP32 en cuanto a su funcionamiento, es decir, permite encender o apagar características como el WiFi, el Bluetooth o realizar particiones de memoria, ademas de esto, se puede cargar el código por el puerto USB al ESP32, al igual que se puede visualizar la información generada por el ESP32 por este mismo puerto.\\
+ESP-IDF es el entorno de desarrollo oficial para el ESP32 desarrollado por Espressif System, el cual mediante una serie de comandos específicos escritos en la terminal (para el caso de linux), permite realizar una configuración del ESP32 en cuanto a su funcionamiento, es decir, permite encender o apagar características como el WiFi, el Bluetooth o realizar particiones de memoria, ademas de esto, se puede cargar el código por el puerto USB al ESP32, al igual que se puede visualizar la información generada por el ESP32 por este mismo puerto. Este entorno se encuentra construido con diferentes características, algunas de ellas se meniconan a continuación.\\
 
-\subsubsection{FreeRTOS}
+\paragraph{FreeRTOS:}este framework esta desarrollado sobre este sistema operativo de tiempo real, tomando de este diferentes funcionalidades como la tareas y las colas.
 
 %http://esp-idf.readthedocs.io/en/latest/api-reference/system/freertos.html
 
-\subsubsection{Wi-Fi}
+\paragraph{Wi-Fi:}el modulo ESP-WROOM-32 posee la capacidad en el hardware para la conexión a una red Wi-Fi, y este software proporciona las librerias y las funcionalidades para realizar dicha conexion y enviar o recibir datos.
 
 %http://esp-idf.readthedocs.io/en/latest/api-reference/wifi/esp_wifi.html
 
-\subsubsection{Particiones}
+\paragraph{Particiones:}el MCU contiene una memoria flash, la cual por medio de este framework se le pueden realizar particiones de memoria, dedicadas a guardar el programa, y también para guardar ciertos archivos. Estas se configuran por medio de un fichero csv.
 
 %http://esp-idf.readthedocs.io/en/latest/api-guides/partition-tables.html
 
-\subsubsection{Consola}
+\paragraph{Consola:}el framework provee una libreria para realizar la programacion de una consola, para realizar diferentes tareas dentro del sistema, las cuales se pueden programar.
 
 %http://esp-idf.readthedocs.io/en/latest/api-guides/console.html
 
-\subsubsection{OTA}
+\paragraph{OTA:}este entorno permite ademas manejar la memoria, de tal forma que la aplicacion ya compilada se pueda enviar desde un servidor hacia el dispositvo, para que este se actualice.
 
 %http://esp-idf.readthedocs.io/en/latest/api-reference/system/ota.html
 
-\subsubsection{HTTP Request}
-\subsubsection{Timers}
+\paragraph{HTTP Request:}para realizar diferentes peticiones HTTP como las descritas anteriormente, el entorno de desarrollo cuenta con la libreria LWIP para realizarlas.
+
+\paragraph{Timers:}
 
 \subsection{Proteus}
 
