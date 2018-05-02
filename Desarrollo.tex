@@ -10,37 +10,41 @@ El firmware se desarrolla sobre el framework o SDK oficial de Espressif Systems,
 
 Sobre el firmware se desarrollan los siguientes temas:
 
-\subsubsection{Consola}
+\paragraph{GPIO:}
 
-Se usa para hacer pequeñas pruebas por medio de la construcción de comandos ligados a funciones ...
+el ESP-WROOM-32 posee diferentes GPIO, los cuales se usan para leer o escribir señales digitales, en cuanto a los sensores se pueden enviar señales para iniciar su lectura o simplemente tener el pin en modo entrada y leerlo cada cierto intervalo de tiempo para generar la lectura, o en modo salida para el control de los diferentes dispositivos que se han desarrollado en el hardware.
 
-\subsubsection{HTTP Request}
+\paragraph{ADC:}
 
-Para realizar las diferentes peticiones de HTTP se utiliza la libreria lwip ...
+se usan para leer los datos de algunos sensores que dan una salida analogica, por este motivo se hace la conversion de la señal analogica a un valor digital dentro de la tarjeta, para luego identificar el valor de la lectura del sensor. 
 
-\subsubsection{Tareas}
+\paragraph{Consola:}
 
-Las tareas son funciones propias de los sistemas operativos en tiempo real ...
+para realizar diferentes pruebas directamente desde la tarjeta, se usa la opción de la consola que se comunica por medio del puerto serie, para esto se crean las funciones y los comandos que estaran disponibles. Algunos comandos disponibles son \textit{http}, para realizar las peticiones http manualmente y observar su respuesta, pin para realizar la prueba de un pin digital como entrada o salida, \textit{help} para observar la lista de comandos, entre otros.
 
-\subsubsection{Timers}
+\paragraph{HTTP Request:}
 
-Son utilizados principalmente para el control de cargas AC ...
+las peticiones HTTP son indispensables en estas aplicaciones del campo IOT, por este motivo en el desarrollo del firmware se usan las librerias pertinentes para realizar peticiones y además leer las respuestas de estas desde el servidor, ya que este es el medio de comunicación tarjeta-servidor.
 
-\subsubsection{I2C}
+\paragraph{Tareas:}
 
-El protocolo I2C se activa por medio de la instalación del driver en algún par de pines ...
+se desarrollan diferentes tareas para la lectura y la escritura en los diferentes puerto de la tarjeta, la tareas son propias de los sistema operativos.
 
-\subsubsection{PWM}
+\paragraph{Timers:}
 
-Se usan para el control de cargas DC ...
+son utilizados principalmente para el control de cargas AC ...
 
-\subsubsection{GPIO}
+\paragraph{I2C:}
 
-El ESP-WROOM-32 posee diferentes GPIO, los cuales se usan para leer o escribir señales digitales a los sensores o ...
+el protocolo I2C se activa por medio de la instalación del driver en algún par de pines GPIO disponibles en la tarjeta, en esta ocasión se usan los pines 20 y 21 para realizar allí la conexión física del bus de datos de este protocolo, además de esto se crea una tarea la cuál se encarga de solicitar y leer los datos de los diferentes sensores conectados a este.
 
-\subsubsection{Interrupciones}
+\paragraph{PWM:}
 
-Las interrupciones se usan para no gastar recursos en un monitoreo constante de las entradas, solo cuando exista un cambio de nivel en la entrada el dispositivo desencadena una serie de instrucciones ...
+para controlar las cargas DC se usa una salida PWM, ya que al variar el ancho de pulso este
+
+\paragraph{Interrupciones:}
+
+las interrupciones se usan para no gastar recursos en un monitoreo constante de las entradas, solo cuando exista un cambio de nivel en la entrada el dispositivo desencadena una serie de instrucciones relacionas al tipo de interrupción y a diferentes funciones creadas para esta, la interrupción se usa por medio de los diferentes pines propuestos para esto en el hardware.
 
 \section{Software}
 
