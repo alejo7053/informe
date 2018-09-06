@@ -52,7 +52,7 @@ Para el software se utiliza una plataforma como servicio (Pass) el cuál es el s
 
 Por este motivo se usa el framework Laravel, el cual como se menciona anteriormente combina HTML5, PHP y un ORM, para realizar el manejo de toda la parte del servidor se usa PHP, este framework proporciona un mapeo de consultas para las bases de datos, así que las consultas se hacen como codigo de PHP y este se encarga de realizar los comando de SQL necesarios, lo que facilita que la aplicación use diferentes gestores de bases de datos como MySQL, SQLite, entre otras.\\
 
-Para el software se toman en cuenta dos tipos de vista, una vista pública y una privada, como se observa en la figura \ref{fig:index}. En la vista pública se encuentran los datos generados por los sensores, agrupados por el tipo de variable que estan midiendo, temperatura, humedad, entre otras. En la vista privada se encuentra la interacción de los usuarios y dueños de las casas, para controlar y ver sus datos.\\
+Para el software se toman en cuenta dos tipos de vista, una vista pública y una privada, como se observa en la figura \ref{fig:index}. En la vista pública se encuentran los datos de contacto, solicitudes de registro o productos y la cantidad de usuarios. En la vista privada se encuentra la interacción de los usuarios y dueños de las casas, para controlar y ver sus datos.\\
 
 \begin{figure}
 	\centering
@@ -68,22 +68,35 @@ Para el manejo de los diferentes sensores y usuarios todo se registra en la base
 
 \subsection{Parte Pública}
 
-En esta vista se encuentran los datos sin etiquetas que identifiquen la procedencia de estos, solamente se pueden observar los historicos de las variables medidas.\\
+En esta vista simplemente hay opciones para el contacto y solicitudes, como se menciona anteriormente, es una vista sencilla dada la poca información que contiene, como se observa en la figura \ref{fig:publicview}.
 
-IMAGEN DE LA VISTA
+\begin{figure}
+	\centering
+	\caption{Vista Pública}
+	\label{fig:publicview}
+	\includegraphics[width=0.9\linewidth]{Imagenes/Public_view}
+\end{figure}
+
+
 
 \subsection{Parte Privada}
 
-En esta sección es donde se encuentra el Panel de Control para un usuario administrador que son los dueños de la apliación, usuarios dueños de las diferentes casas que poseen el dispositivo y otro usuario dueño de la habitación donde se encuentra el dispositivo, este ultimo usuario está sujeto a un usuario dueño de la casa, ya que el usuario de la casa puede gestionar todas las habitaciones mientras que el usuario de habitación solamente le compete su habitación.\\
+En esta sección es donde se encuentra el Panel de Control para un usuario administrador que son los dueños de la aplicación, la vista se puede observar en la figura \ref{fig:adminview}, usuarios dueños de las diferentes casas que poseen el dispositivo y otro usuario dueño de la habitación donde se encuentra el dispositivo, este ultimo usuario está sujeto a un usuario dueño de la casa, ya que el usuario de la casa puede observar todas las habitaciones mientras que el usuario de habitación solamente le compete su habitación.\\
 
-IMAGEN DE LA VISTA ADMIN\\
-
-IMG VISTA CASA\\
-
-IMG VISTA CUARTO\\
+\begin{figure}
+	\centering
+	\caption{Vista del Usuario Administrador}
+	\label{fig:adminview}
+	\includegraphics[width=0.9\linewidth]{Imagenes/Admin_view}
+\end{figure}
 
 \subsection{Base de Datos}
 
-En la base de datos se crean las siguientes tablas, para guardar la información pertinente, se crea una tabla de usuarios, una tabla de sensores, de datos...\\
+Por medio del framework se crea en la base de datos las siguientes tablas, para guardar la información pertinente, se crea una tabla de usuarios, una tabla de casas, de habitaciones y de dispositivos con las siguientes relaciones como se observa en la figura \ref{fig:db}.\\
 
-IMAGEN CON LAS TABLAS Y LAS RELACIONES
+\begin{figure}
+	\centering
+	\caption{Base de datos SmartHouse}
+	\label{fig:db}
+	\includegraphics[width=0.7\linewidth]{Imagenes/DB}
+\end{figure}
