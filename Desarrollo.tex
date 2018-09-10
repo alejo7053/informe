@@ -48,65 +48,14 @@ las interrupciones se usan para no gastar recursos en un monitoreo constante de 
 
 \section{Software}
 
-Para el software se utiliza una plataforma como servicio (PaaS) el cuál es el servicio que ofrece la plataforma Heroku, en este caso se usa una cuenta gratuita para realizar las pruebas de la aplicación, allí en el servidor de la plataforma se aloja la aplicación desarrollada en HTML5 y PHP.\\
+En esta sección se desarrolla una aplicación web, la cual se encarga de hacer la gestión entre el usuario y la tarjeta. De este modo, se usa un patron de arquitectura Modelo-Vista-Controlador (MVC) para esta aplicación, este modelo es realmente util ya que separa la lógica de negocio de la interfaz de usuario, incrementando la reutilización y flexibilidad y además la escalabilidad de ambos aspectos por separado, dicho esto la aplicación cuenta con diferentes modelos, controladores y vistas. La función de cada parte de esta arquitectura se puede observar en la figura XXXXXX.\\
 
-Por este motivo se usa el framework Laravel, el cual como se menciona anteriormente combina HTML5, PHP y un ORM, para realizar el manejo de toda la parte del servidor se usa PHP, este framework proporciona un mapeo de consultas para las bases de datos, así que las consultas se hacen como codigo de PHP y este se encarga de realizar los comando de SQL necesarios, lo que facilita que la aplicación use diferentes gestores de bases de datos como MySQL, SQLite, entre otras.\\
+¡¡¡¡IMAGEN MVC!!!!
 
-Para el software se toman en cuenta dos tipos de vista, una vista pública y una privada, como se observa en la figura \ref{fig:index}. En la vista pública se encuentran los datos de contacto, solicitudes de registro o productos y la cantidad de usuarios. En la vista privada se encuentra la interacción de los usuarios y dueños de las casas, para controlar y ver sus datos.\\
+[https://si.ua.es/es/documentacion/asp-net-mvc-3/imagenes/introduccion/flujo-mvc.png]
 
-\begin{figure}
-	\centering
-	\caption{Página de Inicio}
-	\label{fig:index}
-	\includegraphics[width=0.9\linewidth]{Imagenes/Index}
-\end{figure}
+El flujo es el siguiente, primero el usuario realiza alguna acción en la interfaz (por ejemplo, presiona un boton, un enlace, etc), luego el controlador recibe (por parte de los objetos de la interfaz-vista) la notificación de la acción solicitada por el usuario. El controlador gestiona el evento que llega. Luego el controlador accede al modelo, actualizándolo, posiblemente modificándolo de forma adecuada a la acción solicitada por el usuario (por ejemplo, el controlador actualiza los datos del perfil del usuario) y despues la interfaz de usuario espera nuevas interacciones del usuario, comenzando el ciclo nuevamente.\\
 
+Este patron de diseño se usa en la programación orientada a objetos, por lo tanto se realiza la aplicación en el lenguaje de programación PHP, ya que es realmente util para realizar la gestion de peticiones y envios de formularios en dicha aplicación, además de que es imporatante también la gestión de las bases de datos de la aplicación, por este motivo se utiliza un framework basado en este lenguaje y esta arquitectura, el cual realiza diferentes trabajos en cuanto a la parte de la arquitectura, para gestionar las diferentes partes de la aplicación, en este caso se usa el framework Laravel el cual como se menciona anteriormente esta orientado a facilitar las tareas comunes de la mayoria de proyectos web, que utilizan HTML5 y PHP.\\
 
-Esta parte se garantiza por medio del framework, creando diferentes roles para cada usuario que se esta registrando y realizando la comprobación por parte del Middleware que provee este.\\
-
-Para el manejo de los diferentes sensores y usuarios todo se registra en la base de datos que facilita la plataforma Heroku.\\
-
-\subsection{Parte Pública}
-
-En esta vista simplemente hay opciones para el contacto y solicitudes, como se menciona anteriormente, es una vista sencilla dada la poca información que contiene, como se observa en la figura \ref{fig:publicview}.
-
-\begin{figure}
-	\centering
-	\caption{Vista Pública}
-	\label{fig:publicview}
-	\includegraphics[width=0.9\linewidth]{Imagenes/Public_view}
-\end{figure}
-
-
-
-\subsection{Parte Privada}
-
-En esta sección es donde se encuentra el Panel de Control para un usuario administrador que son los dueños de la aplicación, la vista se puede observar en la figura \ref{fig:adminview}, usuarios dueños de las diferentes casas que poseen el dispositivo y otro usuario dueño de la habitación donde se encuentra el dispositivo, este ultimo usuario está sujeto a un usuario dueño de la casa, ya que el usuario de la casa puede observar todas las habitaciones mientras que el usuario de habitación solamente le compete su habitación.\\
-
-\begin{figure}
-	\centering
-	\caption{Vista del Usuario Administrador}
-	\label{fig:adminview}
-	\includegraphics[width=0.9\linewidth]{Imagenes/Admin_view}
-\end{figure}
-
-Además de esto en la parte privada se encuentra la pagina encargada de la actualización Servidor-Tarjeta, la cual recibe una petición tipo GET y por medio de la URL añade un texto tipo JSON en el cual se encuentra toda la información de los sensores, y el servidor responde con un texto también tipo JSON con la información pertinente de los actuadores, como se observa la figura \ref{fig:updateview}, esto se identifica mediante un token que esta presente y es unico en los datos de cada habitación.\\
-
-\begin{figure}
-	\centering
-	\caption{Página de intercambio de datos}
-	\label{fig:updateview}
-	\includegraphics[width=0.9\linewidth]{Imagenes/Update_view}
-\end{figure}
-
-
-\subsection{Base de Datos}
-
-Por medio del framework se crea en la base de datos las siguientes tablas, para guardar la información pertinente, se crea una tabla de usuarios, una tabla de casas, de habitaciones y de dispositivos con las siguientes relaciones como se observa en la figura \ref{fig:db}.\\
-
-\begin{figure}
-	\centering
-	\caption{Base de datos SmartHouse}
-	\label{fig:db}
-	\includegraphics[width=0.7\linewidth]{Imagenes/DB}
-\end{figure}
+Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llamado Eloquent. Esta es una forma de mapear los datos que se encuentran en la base de datos a objetos de PHP y viceversa, esto facilita el uso de diferentes gestores de bases de datos como MySQL, SQLite, entre otras, ya que todas las consultas estan en PHP y el ORM ya se encarga del mapeo a los comandos SQL como se observa en la figura XXX. Eloquent usa los modelos para enviar y recibir la información de la base de datos.\\

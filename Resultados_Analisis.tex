@@ -2,4 +2,81 @@
 
 \section{Software}
 
-La aplicación web posee las siguientes vistas...
+Se desarrolla la aplicación web de manera local, y posteriormente se lanza a la web, esta compuesta por los siguientes sitios y las diferentes interacciones basadas en las funciones basicas, crear, leer, actualizar y borrar (CRUD).
+
+\begin{itemize}
+	\item Parte Pública
+	\item Parte Privada
+	\begin{itemize}
+		\item API
+		\item Panel de Control
+		\begin{itemize}
+			\item Crear
+			\item Ver
+			\item Editar
+			\item Eliminar 
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+De acuerdo a la lista anterior, se toman en cuenta dos partes para esta, una pública y una privada, como se observa en la figura \ref{fig:index}. En la parte pública se encuentra una vista con los datos de contacto, solicitudes de registro o productos y la cantidad de usuarios que actualmente estan registrados en la aplicación. En la parte privada se encuentra la interacción de los usuarios sea administrador, dueño de una casa o de una habitación, para controlar y ver sus datos.\\
+
+Las diferentes interacciones que tiene cada usuario en el panel de control se garantizan por medio del framework, creando diferentes roles para cada usuario que se esta registrando y realizando la comprobación por parte de los controladores y el middleware que este provee.
+
+\begin{figure}[H]
+\centering
+\caption{Página de Inicio}
+\label{fig:index}
+\includegraphics[width=0.9\linewidth]{Imagenes/Index}
+\end{figure}
+
+\subsection{Parte Pública}
+
+En esta vista unicamente hay opciones para el contacto y solicitudes, como se menciona anteriormente, es una vista sencilla dada la poca información que contiene, como se observa en la figura \ref{fig:publicview}.
+
+\begin{figure}[H]
+\centering
+\caption{Vista Pública}
+\label{fig:publicview}
+\includegraphics[width=0.9\linewidth]{Imagenes/Public_view}
+\end{figure}
+
+\subsection{Parte Privada}
+En esta sección es donde se encuentra el Panel de Control para los diferentes usuarios de la aplicación. En primera instancia, para un usuario administrador, que es el encargador de gestionar la aplicación, este usuario tiene la posibilidad de crear, ver, editar y eliminar los diferentes registros de la aplicación, la vista de este usuario se puede observar en la figura \ref{fig:adminview}. Por medio de este usuario es que se activan las cuentas de los demas, por esto en la parte pública estás las opciones de contacto y solicitud de registro.\\
+
+También existe el usuario dueño de la casa donde se encuentra el dispositivo, este usuario es opcional y es para gestionar los dispositivos presentes dentro de una misma casa, es un administrador de la casa, el cual puede ver y editar algunos campos de sus usuarios hijos o usuarios habitación y sus diferentes casas y habitaciones, unicamente las que esten registradas a su nombre, como se ve en la figura \ref{fig:userhview}, de este modo el rol de este usuario es administrar su casa y visualizar los datos de esta.\\
+
+Por último, otro rol es el de usuario habitación, el cuál es un usuario que solo visualiza sus propios datos, como la habitación y los dispositivos presentes en esta, como se observa en la figura \ref{fig:userrview}, a este solo le compete la información de lo que posee en su habitación, por tal motivo el panel de control muestra una vista general de los datos y el estado de sus dispositivos, además de tener la capacidad de editar partes básicas de su habitación y perfil. Este usuario puede o no estar sujeto a un usuario padre o usuario casa, ya que, solamente puede poseer una tarjeta para su habitación y ninguna otra en dicha casa.
+
+\begin{figure}[H]
+\centering
+\caption{Vistas de Usuarios}
+\label{fig:views}
+\subfigure[Usuario Administrador]{\includegraphics[width=0.9\linewidth]{Imagenes/Admin_view}
+\label{fig:adminview}}
+\subfigure[Usuario de Casa]{\includegraphics[width=0.45\linewidth]{Imagenes/UserH_view}
+\label{fig:userhview}}
+\subfigure[Usuario de Habitación]{\includegraphics[width=0.45\linewidth]{Imagenes/UserR_view}
+\label{fig:userrview}}
+\end{figure}
+
+Además de este panel de control, desde el cuál se realizan las operaciones sobre la aplicación, en la parte privada se encuentra la ruta encargada de la actualización Servidor-Tarjeta, es decir, en esta ruta es donde se da la comunicación. En esta ruta se realiza una petición tipo GET por parte de la tarjeta, esta contiene el id de la habitación en la cuál esta instalada la tarjeta y también el token correspondiente a esta, y además en la URL se añade un texto tipo JSON en el cual se encuentra toda la información de la lectura actual de los sensores, esta petición la responde el servidor con un texto, también tipo JSON que contiene la información pertinente de las cargas o actuadores, como se observa la figura \ref{fig:updateview}, para dar seguridad a esta transacción, se se utiliza el token mencionado anteriormente, el cual se verifica mediante el id de la habitación y que este coincida con los datos almacenados, de este modo se garantiza que lo que se envía este sometido a verificación.
+
+\begin{figure}[H]
+\centering
+\caption{Página de intercambio de datos}
+\label{fig:updateview}
+\includegraphics[width=0.9\linewidth]{Imagenes/Update_view}
+\end{figure}
+
+
+\subsection{Base de Datos}
+
+La estructura de la base de datos se puede observar en la figura \ref{fig:db}, aquí se observan los diferentes campos que posee cada tabla, además de las llaves y sus relaciones, las relaciones presentes en esta estructura son de tipo 1:N, es decir, por ejemplo por un usuario puede tener relacionadas N casas.
+
+\begin{figure}[H]
+\centering
+\caption{Base de datos SmartHouse}
+\label{fig:db}
+\includegraphics[width=0.7\linewidth]{Imagenes/DB}
+\end{figure}
