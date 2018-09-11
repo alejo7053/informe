@@ -48,14 +48,33 @@ las interrupciones se usan para no gastar recursos en un monitoreo constante de 
 
 \section{Software}
 
-En esta sección se desarrolla una aplicación web, la cual se encarga de hacer la gestión entre el usuario y la tarjeta. De este modo, se usa un patron de arquitectura Modelo-Vista-Controlador (MVC) para esta aplicación, este modelo es realmente util ya que separa la lógica de negocio de la interfaz de usuario, incrementando la reutilización y flexibilidad y además la escalabilidad de ambos aspectos por separado, dicho esto la aplicación cuenta con diferentes modelos, controladores y vistas. La función de cada parte de esta arquitectura se puede observar en la figura XXXXXX.\\
+En esta sección se desarrolla una aplicación web, la cual se encarga de hacer la gestión entre el usuario y la tarjeta. De este modo, se usa un patron de arquitectura Modelo-Vista-Controlador (MVC) para esta aplicación, este modelo es realmente util ya que separa la lógica de negocio de la interfaz de usuario, incrementando la reutilización y flexibilidad y además la escalabilidad de ambos aspectos por separado, dicho esto la aplicación cuenta con diferentes modelos, controladores y vistas. La función de cada parte de esta arquitectura se puede observar en la figura \ref{fig:mvc}.\\
 
-¡¡¡¡IMAGEN MVC!!!!
+%https://www.fdi.ucm.es/profesor/jpavon/poo/2.14.MVC.pdf
+%https://si.ua.es/es/documentacion/asp-net-mvc-3/1-dia/modelo-vista-controlador-mvc.html
 
-[https://si.ua.es/es/documentacion/asp-net-mvc-3/imagenes/introduccion/flujo-mvc.png]
+\begin{figure}
+	\centering
+	\caption{Modelo-Vista-Controlador}
+	\label{fig:mvc}
+	\includegraphics[width=0.7\linewidth]{Imagenes/MVC}
+\end{figure}
+
 
 El flujo es el siguiente, primero el usuario realiza alguna acción en la interfaz (por ejemplo, presiona un boton, un enlace, etc), luego el controlador recibe (por parte de los objetos de la interfaz-vista) la notificación de la acción solicitada por el usuario. El controlador gestiona el evento que llega. Luego el controlador accede al modelo, actualizándolo, posiblemente modificándolo de forma adecuada a la acción solicitada por el usuario (por ejemplo, el controlador actualiza los datos del perfil del usuario) y despues la interfaz de usuario espera nuevas interacciones del usuario, comenzando el ciclo nuevamente.\\
 
 Este patron de diseño se usa en la programación orientada a objetos, por lo tanto se realiza la aplicación en el lenguaje de programación PHP, ya que es realmente util para realizar la gestion de peticiones y envios de formularios en dicha aplicación, además de que es imporatante también la gestión de las bases de datos de la aplicación, por este motivo se utiliza un framework basado en este lenguaje y esta arquitectura, el cual realiza diferentes trabajos en cuanto a la parte de la arquitectura, para gestionar las diferentes partes de la aplicación, en este caso se usa el framework Laravel el cual como se menciona anteriormente esta orientado a facilitar las tareas comunes de la mayoria de proyectos web, que utilizan HTML5 y PHP.\\
 
-Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llamado Eloquent. Esta es una forma de mapear los datos que se encuentran en la base de datos a objetos de PHP y viceversa, esto facilita el uso de diferentes gestores de bases de datos como MySQL, SQLite, entre otras, ya que todas las consultas estan en PHP y el ORM ya se encarga del mapeo a los comandos SQL como se observa en la figura XXX. Eloquent usa los modelos para enviar y recibir la información de la base de datos.\\
+Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llamado Eloquent. Esta es una forma de mapear los datos que se encuentran en la base de datos a objetos de PHP y viceversa, esto facilita el uso de diferentes gestores de bases de datos como MySQL, SQLite, entre otras, ya que todas las consultas estan en PHP y el ORM ya se encarga del mapeo a los comandos SQL como se observa en la figura \ref{fig:orm}. Eloquent usa los modelos para enviar y recibir la información de la base de datos.
+
+\begin{figure}[H]
+	\centering
+	\caption{ORM}
+	\caption{}
+	\label{fig:orm}
+	\includegraphics[width=0.7\linewidth]{Imagenes/ORM}
+\end{figure}
+
+
+%https://richos.gitbooks.io/laravel-5/capitulos/chapter7.html
+%http://www.diva-portal.org/smash/get/diva2:1014983/FULLTEXT02
