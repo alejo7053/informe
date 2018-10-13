@@ -1,4 +1,4 @@
-\chapter{Desarrollo e Implementación}
+\chapter{Desarrollo}
 
 \section{Hardware}
 
@@ -6,17 +6,21 @@ El hardware se diseña por medio del software Proteus ...
 
 \section{Firmware}
 
-El firmware se desarrolla sobre el framework o SDK oficial de Espressif Systems, ESP-IDF el cual posee una documentación \cite{ES}, la cuál es muy útil a la hora de utilizar las diferentes APIs que este posee. Este firmware incluye un kernel de tiempo real llamado FreeRTOS, el cual da soporte al manejo de los diferentes recursos del sistema.\\
+El firmware se desarrolla sobre el framework o SDK oficial de Espressif Systems, ESP-IDF el cual posee una documentación \cite{ES}, la cuál es muy útil a la hora de utilizar las diferentes APIs que este posee. Este firmware incluye un kernel de tiempo real llamado FreeRTOS, el cual da soporte al manejo de los diferentes recursos del sistema. Como es un RTOS, las funciones se definen mediante las tareas, entonces para cada funcionalidad de la tarjeta o grupo de funcionalidades se desarrolla una o varias tareas para que realicen las acciones adecuadas, por ejemplo, en cuanto a los sensores cada uno tiene una tarea para su lectura, gestión de estos datos, así, como también en cuanto a las diferentes salidas de la tarjeta se han agrupado en las cargas que solo son de encendido/apagado y las de control, creando diferentes tareas para esta gestión.\\
 
 Sobre el firmware se desarrollan los siguientes temas:
 
+\paragraph{Tareas:}
+
+como se menciona anteriormente, estas cumplen las funciones principales en cuanto a toda la gestión de los diferentes periféricos y funcionalidades de la tarjeta, así que se desarrollan diferentes tareas para la lectura y escritura en los puertos de la tarjeta.
+
 \paragraph{GPIO:}
 
-el ESP-WROOM-32 posee diferentes GPIO, los cuales se usan para leer o escribir señales digitales, en cuanto a los sensores se pueden enviar señales para iniciar su lectura o simplemente tener el pin en modo entrada y leerlo cada cierto intervalo de tiempo para generar la lectura, o en modo salida para el control de los diferentes dispositivos que se han desarrollado en el hardware.
+el ESP-WROOM-32 posee diferentes GPIO, los cuales se usan para leer o escribir señales digitales, en cuanto a los sensores se pueden enviar señales para iniciar su lectura o simplemente tener el pin en modo entrada y leerlo cada cierto intervalo de tiempo para generar los datos de lectura, o en modo salida para el control de los diferentes dispositivos que se han desarrollado en el hardware.
 
-\paragraph{ADC:}
+\paragraph{ADC,DAC:}
 
-se usan para leer los datos de algunos sensores que dan una salida analógica, por este motivo se hace la conversión de la señal analógica a un valor digital dentro de la tarjeta, para luego identificar el valor de la lectura del sensor. 
+los ADC se usan para leer los datos de algunos sensores que proporcionan datos analógicos, por este motivo se hace la conversión de la señal analógica a un valor digital dentro de la tarjeta, para luego identificar el valor de la lectura del sensor. Los DAC se usan para realizar la operación contraria, teniendo valores digitales convertirlos a un valor analógico por ejemplo para generar audios o diferentes señales a partir del software.
 
 \paragraph{Consola:}
 
@@ -26,21 +30,21 @@ para realizar diferentes pruebas directamente desde la tarjeta, se usa la opció
 
 las peticiones HTTP son indispensables en estas aplicaciones del campo IOT, por este motivo en el desarrollo del firmware se usan las librerias pertinentes para realizar peticiones y además leer las respuestas de estas desde el servidor, ya que este es el medio de comunicación tarjeta-servidor.
 
-\paragraph{Tareas:}
+\paragraph{Hora de Red:}
 
-se desarrollan diferentes tareas para la lectura y la escritura en los diferentes puerto de la tarjeta, la tareas son propias de los sistema operativos.
+se obtiene la hora mediante el protocolo simple de tiempo de red (SNTP), este resulta de gran utilidad para la sincronización de los relojes de los sistemas informáticos.
 
 \paragraph{Timers:}
 
-son utilizados principalmente para el control de cargas AC ...
+la tarjeta posee dos grupos de timers, que cuenta cada uno con dos timers, un timer lo usa el sistema operativo, otro es configurado para realizar el control de potencia AC por ángulo de fase, para tener la sincronía necesaria con la señal de la red eléctrica.
 
 \paragraph{I2C:}
 
-el protocolo I2C se activa por medio de la instalación del driver en algún par de pines GPIO disponibles en la tarjeta, en esta ocasión se usan los pines 20 y 21 para realizar allí la conexión física del bus de datos de este protocolo, además de esto se crea una tarea la cuál se encarga de solicitar y leer los datos de los diferentes sensores conectados a este.
+el protocolo I2C se activa por medio de la instalación del driver en algún par de pines GPIO disponibles en la tarjeta. Se configura e inicia y posteriormente se crea una tarea la cuál se encarga de solicitar y leer los datos de los diferentes sensores conectados a este.
 
 \paragraph{PWM:}
 
-para controlar las cargas DC se usa una salida PWM, ya que al variar el ancho de pulso este
+se ha mencionado anteriormente que para controlar las cargas DC se usa una salida PWM, el esp32 proporciona esta funcionalidad en algunos de sus pines, para su uso se configura y asignan los valores de funcionamiento.
 
 \paragraph{Interrupciones:}
 

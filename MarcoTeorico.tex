@@ -63,7 +63,7 @@ Estas son estructuras universales; virtualmente todos los lenguajes de programac
 
 ``Se define una base de datos como una serie de datos organizados y relacionados entre sí, los cuales son recolectados y explotados por los sistemas de información de una empresa o negocio en particular.
 
-Cada base de datos se compone de una o más tablas que guarda un conjunto de datos. Cada tabla tiene una o más columnas y filas. Las columnas guardan una parte de la información sobre cada elemento que queramos guardar en la tabla, cada fila de la tabla conforma un registro''.\cite{DB}
+Cada base de datos se compone de una o más tablas que guarda un conjunto de datos. Cada tabla tiene una o más columnas y filas. Las columnas guardan una parte de la información sobre cada elemento que queramos guardar en la tabla, cada fila de la tabla conforma un registro'' \cite{DB}. Es muy común encontrar en la gestión de las bases de datos por parte del usuario las funciones básicas de crear, leer, actualizar y borrar (CRUD), estas se crean directamente en una interfaz para que el usuario pueda interactuar con la base de datos.
 
 \section{Smart House}
 
@@ -117,9 +117,11 @@ Una de las ventajas de la corriente alterna es su relativamente económico cambi
 
 \subsection{Control de Cargas DC}
 
-%Switch y control de cargas DC PWM
+Las cargas de corriente continuas típicas como los motores y LED's, a parte de poder funcionar en dos estados, encendido y apagado, pueden se controladas mediante la modulación por ancho de pulso (PWM), ya que esta%Switch y control de cargas DC PWM
 
 \subsection{I2C}
+
+El protocolo 
 
 \subsection{Sensores}
 
@@ -230,7 +232,7 @@ Los sistemas de computadoras de bolsillo y los sistemas integrados están diseñ
 
 \subsection{ESP-IDF}
 
-ESP-IDF es el entorno de desarrollo oficial para el ESP32 desarrollado por Espressif System, el cual mediante una serie de comandos específicos escritos en la terminal (para el caso de linux), permite realizar una configuración del ESP32 en cuanto a su funcionamiento, es decir, permite encender o apagar características como el WiFi, el Bluetooth o realizar particiones de memoria, ademas de esto, se puede cargar el código por el puerto USB al ESP32, al igual que se puede visualizar la información generada por el ESP32 por este mismo puerto. Este entorno se encuentra construido con diferentes características y APIs, algunas de ellas se meniconan a continuación. \cite{ES}
+ESP-IDF es el entorno de desarrollo oficial para el ESP32 desarrollado por Espressif System, el cual mediante una serie de comandos específicos escritos en la terminal (para el caso de linux), permite realizar una configuración del ESP32 en cuanto a su funcionamiento, es decir, permite encender o apagar características como el WiFi, el Bluetooth o realizar particiones de memoria, ademas de esto, se puede cargar el código por el puerto USB al ESP32, al igual que se puede visualizar la información generada por el ESP32 por este mismo puerto. Este entorno se encuentra construido con diferentes características y APIs, algunas de ellas se mencionan a continuación. \cite{ES}
 
 \paragraph{FreeRTOS:}este framework esta desarrollado sobre este sistema operativo de tiempo real, tomando de este diferentes funcionalidades como la tareas y las colas.
 
@@ -248,13 +250,9 @@ ESP-IDF es el entorno de desarrollo oficial para el ESP32 desarrollado por Espre
 
 %http://esp-idf.readthedocs.io/en/latest/api-guides/console.html
 
-\paragraph{OTA:}este entorno permite ademas manejar la memoria, de tal forma que la aplicacion ya compilada se pueda enviar desde un servidor hacia el dispositvo, para que este se actualice.
-
-%http://esp-idf.readthedocs.io/en/latest/api-reference/system/ota.html
-
 \paragraph{HTTP Request:}para realizar diferentes peticiones HTTP como las descritas anteriormente, el entorno de desarrollo cuenta con la libreria LWIP para realizarlas.
 
-\paragraph{Timers:}
+\paragraph{Timers:} estre framework provee funciones para disponer de los timers de 64 bits que posee el esp32 y además para configurar sea un timer periódico o de un solo disparo.
 
 \subsection{Proteus}
 

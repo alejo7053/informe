@@ -87,7 +87,7 @@ La estructura de la base de datos se puede observar en la figura \ref{fig:db}, a
 
 \section{Firmware}
 
-\subsection{Conexión a Internet}
+\subsection{Conexión a Internet vía Wi-Fi}
 
 Los sistemas IoT deben estar conectados siempre a Internet, por este motivo se debe brindar un canal para decirle al sistema como acceder a este, por lo tanto, se desarrolla una tarea que se encarga de esto, como se ha mencionado el módulo del esp32 es capaz de funcionar como Punto de Acceso (AP) y como Cliente o Estación (STA) al mismo tiempo, aprovechando esta capacidad se usa un servidor local, el cual se encarga de gestionar la conexión de la tarjeta con Internet.\\
 
@@ -97,6 +97,8 @@ De este modo, como se observa en la figura XXX esta es la pagina principal del s
 
 Los datos que esta leyendo la tarjeta provienen de los diferentes sensores que tiene conectados como se ha mencionado, se usan sensores de estado para sensar la presencia, sensor de calidad de aire entre otros presentes en esta. Para la escritura de los datos, en el firmware, se desarrollan diferentes tareas encargadas de leer y enviar los datos a una tarea central, los datos que están enviando contienen el id del dispositivo y la medida que lee en ese momento, estos datos se envian en forma de texto en formato JSON, de este modo, la tarea central los gestiona y envía a la aplicación con el mismo formato, organizandolos en la petición HTTP tipo GET que realiza. La aplicación ya se encarga de almacenarlos y mostrarlos al usuario como se menciona anteriormente.
 
-\subsection{Lectura de Datos de la Aplicación Web}
+\subsection{Lectura de Datos de Internet}
+
+Al inicio de la aplicación, se sincroniza y se almacena la hora actual de la red, por medio del protocolo SNTP, esto con el propósito de poder gestionar las diferentes reglas solicitadas por el usuario, por ejemplo, que encienda o apague un dispositivo a una hora dada, después de obtener este dato la aplicación continua con normalidad para realizar las diferentes peticiones a la aplicación web.\\
 
 La interacción del usuario se da con la aplicación web mencionada anteriormente, de este modo la tarjeta siempre se debe actualizar, para esto, cuando la tarjeta envía los datos de los sensores la aplicación responde con los datos necesarios para tarjeta, esta los recibe en una cadena texto en formato JSON, los procesa y los envía a las tareas pertinentes ya sea para encender o apagar algún dispositivo conectado a la tarjeta, además envía las reglas que el usuario ha definido.
