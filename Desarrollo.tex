@@ -142,7 +142,7 @@ En los siguientes ítems se resaltaran las características más importantes que
 	\subsubsection{Salida audible:}
 		La salida audible está diseñada para emitir desde sonidos a una sola frecuencia, o sonido mono estéreo, caso dado cuando se activa una regla programada desde la aplicación web, enfocada a las cargas de encendido y apagado, tanto de la etapa de potencia AC como la etapa DC; el sonido emitido por el prototipo corresponde a una voz con tonalidad femenina, pronunciando el estado en el cual se configura la carga según la regla (ya sea encendido, o apagado).\\
 		
-	\subsection{Corrección de errores:}
+\begin{comment}	\subsection{Corrección de errores:}
 	Durante la construcción del prototipo se corrigieron algunos fallos y errores que se presentaron, en esta sección se muestran estos contratiempos.\\
 	
 	\subsubsection{Creación de dispositivos en proteus:}
@@ -156,6 +156,7 @@ En los siguientes ítems se resaltaran las características más importantes que
 		
 	\subsubsection{Puente h en etapa DC:}
 		Al momento de seleccionar el transistor IRLZ44N, se pasó por alto el hecho de que el transistor presenta un voltaje umbral entre la compuerta y la fuente (Vgs), es decir, el voltaje necesario para activar el transistor usado como switch, esta entre 1V y 2V \cite{IRL}; este hecho representa un problema, pues la activación de cada par de transistores se realizaba con una compuerta lógica negadora 74ls04, poniendo un estado contrario al otro par de transistores. Esta negadora suministraba 5V a la compuerta del transistor, lo cual no permite la activación de los transistores, por esto decidió reemplazar la compuerta lógica por el puente h L293D, de esta manera, activar cada par de transistores con un voltaje en la compuerta de 12V como salida el circuito integrado L293D. Este cambio fue realizado en el prototipo y en el diseño.\\
+		\end{comment}
 		
 \section{Firmware}
 
