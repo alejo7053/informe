@@ -62,7 +62,7 @@ En los siguientes ítems se resaltaran las características más importantes que
 		\end{figure}		
 	
 	\subsubsection{Calibración de audio:}
-		Para calibrar la salida audible se hace uso de una resistencia variable (Potenciometro), el cual permite regular el voltaje de entrada al circuito de amplificación, mostrado en la figura \ref{fig:AUD}, el cual será descrito en el presente capitulo en la sección de salidas del hardware.\\
+		Para calibrar la salida audible se hace uso de una resistencia variable (Potenciometro), el cual permite regular el voltaje de entrada al circuito de amplificación, mostrado en la figura \ref{fig:AUD} y será descrito en el presente capitulo en la sección de salidas del hardware.\\
 		
 	\subsubsection{Botón enable:}
 		Presionando el botón enable se reinicia la tarjeta ESP32, junto con su firmware.\\
@@ -144,9 +144,8 @@ En los siguientes ítems se resaltaran las características más importantes que
 		
 		El circuito utilizado para la salida audible está basado en el amplificador de audio LM386, implementando el circuito típico de aplicación ilustrado en su datasheet  \cite{LM386}, en la figura \ref{fig:AUD} se observa este circuito implementado en proteus.\\
 		
-		Como se mencionó anteriormente, el circuito presenta un potenciómetro a la entrada para calibrar el 
-		.\\
-		
+		Como se mencionó anteriormente, el circuito presenta un potenciómetro a la entrada para calibrar el voltaje de esta, con el fin de no saturar la entrada para que el sonido a la salida sea lo mas fiel posible.
+				
 		\begin{figure}[H]
 			\centering
 			\caption{Circuito tipico para el LM386 [Imagen Propia]}
