@@ -4,7 +4,7 @@
 
 El prototipo para Smart House tiene como objetivo tanto monitorear el entorno de aplicación, como controlarlo por medio de mecanismos como motores o dispositivos de iluminación, para ello está equipada con etapas de potencia de corriente alterna y directa, etapa de adquisición de datos, entre otras características que permitan cumplir con los objetivos planteados.\\ 
 
-El prototipo fue diseñado en el software Proteus, desde el esquemático hasta la placa de circuito impreso (PCB), en la figura \ref{fig:esp32} se observa el esquematico de la tarjeta ESP32 construido en Proteus junto con su distribución de pines, además de sus conexiones correspondientes dentro del hardware. El prototipo está separado en dos secciones, la etapa de potencia AC y la etapa DC, en la última, se encuentra la mayor parte de circuitos que funcionan con corriente directa.\\
+El prototipo fue diseñado en el software Proteus versión 8, desde el esquemático hasta el PCB, en la figura \ref{fig:esp32} se observa el ESP32 diseñado en Proteus junto con su distribución de pines, además de sus conexiones correspondientes dentro del hardware. El prototipo está separado en dos secciones, la etapa de potencia AC y la etapa DC, en la última, se encuentra la mayor parte de circuitos que funcionan con corriente directa.\\
 
 \begin{figure}[H]
 	\centering
@@ -23,7 +23,7 @@ En los siguientes ítems se resaltaran las características más importantes que
 	\subsubsection{Corriente directa (DC):}
 		Para la alimentación DC del circuito se hace uso de un conversor AC-DC que regula el voltaje de la red eléctrica a 12V DC, con los cuales se manejara la etapa de potencia DC, además de ser usados por dos modulos conversores DC-DC, mostrados en la figura \ref{fig:DCDC}, ambos con entradas de 12V DC y con salidas a los niveles lógicos comunes, tales como 5V y 3.3V, empleados para alimentar dispositivos como opto acopladores,  transistores BJT o relevadores con activación de 5V, así como también la tarjeta de 	prototipo ESP32.\\
 		
-		Cabe resaltar que la tarjeta permite una entrada externa de 12VDC a 5A si se desean controlar cargas a un máximo de 50W.\\
+		Cabe resaltar que la tarjeta permite una entrada externa de 12V a 5A si se desean controlar cargas a un máximo de 60W.\\
 			
 		\begin{figure}[H]
 			\centering
@@ -62,13 +62,13 @@ En los siguientes ítems se resaltaran las características más importantes que
 		\end{figure}		
 	
 	\subsubsection{Calibración de audio:}
-		Para calibrar la salida audible se hace uso de una resistencia variable (Potenciometro).\\
+		Para calibrar la salida audible se hace uso de una resistencia variable (Potenciometro), el cual permite regular el voltaje a la entrada al circuito para la salida audible, mostrado en la figura \ref{fig:AUD}, el cual será descrito en el presente capitulo en la seccion de salidas del hardware.\\
 		
 	\subsubsection{Botón enable:}
 		Presionando el botón enable se reinicia la tarjeta ESP32, junto con su firmware.\\
 		
 	\subsubsection{Botón reset:}
-		Presionando el botón reset se reinician las credenciales ingresadas posteriormente para la conexión del ESP32 a la red wifi.\\
+		Presionando el botón reset se reinician las credenciales ingresadas para la conexión correcta del ESP32 a la red wifi.\\
 		
 	\subsection{Salidas:}
 	\subsubsection{Etapa de potencia AC:}
@@ -88,7 +88,7 @@ En los siguientes ítems se resaltaran las características más importantes que
 			\includegraphics[width=0.35\linewidth]{Imagenes/TRIAC}
 		\end{figure}
 	
-		Las dos cargas restantes corresponden a un sistema de encendido y apagado, cuyo funcionamiento se basa en un relevador SRA-05VDC-CL activado a 5V por medio de un transistor BJT como switch, este relevador tiene capacidad de 20A para cargas de 200W cada una, en la figura \ref{fig:ONOFAC} se observa el circuito diseñado en proteus. Para proteger el ESP32 el prototipo se vale del relevador, puesto que presenta un aislamiento magnético por la naturaleza de su funcionamiento.
+		Las dos cargas restantes corresponden a un sistema de encendido y apagado, cuyo funcionamiento se basa en un relevador SRA-05VDC-CL activado a 5V por medio de un transistor BJT como switch, gracias a este relevador, la salida tiene capacidad para cargas de 200W cada una, en la figura \ref{fig:ONOFAC} se observa el circuito diseñado en proteus. Para proteger el ESP32 el prototipo se vale del relevador, puesto que presenta un aislamiento magnético por la naturaleza de su funcionamiento.\\
 	
 		\begin{figure}[H]
 			\centering
@@ -97,7 +97,7 @@ En los siguientes ítems se resaltaran las características más importantes que
 			\includegraphics[width=0.7\linewidth]{Imagenes/ONOFAC}
 		\end{figure}
 	
-		Dentro de la etapa AC se encuentra el detector de cruce por cero, el cual se vale de un fototransistor 4N25, debido a su alta capacidad de aislamiento, soportando más de 2500VAC, tomando la onda rectificada completa y pasándola a un nivel lógico de 5V, esta parte del circuito se observa en la figura \ref{fig:DC01}; para que la señal sea más confiable se hace uso de un Schmitt-Trigger CD40106 mostrado en la figura \ref{fig:DC02}, valiéndose de la histéresis de voltaje para garantizar que su señal de salida sea poco susceptible al ruido \cite{DC0}.\\
+		Dentro de la etapa AC se encuentra el detector de cruce por cero, el cual se vale de un fototransistor 4N25, debido a su alta capacidad de aislamiento, soportando más de 2500VAC, tomando la onda rectificada completa y pasándola a un nivel lógico de 3.3V, esta parte del circuito se observa en la figura \ref{fig:DC01}; para que la señal sea más confiable se hace uso de un Schmitt-Trigger CD40106 mostrado en la figura \ref{fig:DC02}, valiéndose de la histéresis de voltaje para garantizar que su señal de salida sea poco susceptible al ruido \cite{DC0}.\\
 		
 		\begin{figure}[H]
 			\centering
@@ -114,9 +114,9 @@ En los siguientes ítems se resaltaran las características más importantes que
 		\end{figure}
 	
 	\subsubsection{Etapa DC:}
-		La etapa DC cuenta con cuatro salidas de control, de las cuales, dos de ellas están diseñadas con enfoque a motores, puesto que está equipada con control de velocidad a base de PWM e inversión de giro con un puente h usando transistores mosfet IRLZ44N, los cuales soportan una corriente de hasta 47A; este puente h está controlado por un circuito integrado L293D, que garantiza un voltaje Vgs adecuado para la correcta activación del los transistores del puente h; este circuito se muestra en la figura \ref{fig:L293D} y \ref{fig:CDC}.\cite{IRL}.\\
+		La etapa DC cuenta con cuatro salidas de control diseñadas para cargas de 12V, de las cuales, dos de ellas están diseñadas con enfoque a motores, puesto que está equipada con control de velocidad a base de PWM e inversión de giro con un puente h usando transistores mosfet IRLZ44N; este puente h está controlado por un circuito integrado L293D, que garantiza un voltaje Vgs adecuado para la correcta activación del los transistores del puente h; este circuito se muestra en la figura \ref{fig:L293D} y \ref{fig:CDC}.\cite{IRL}.\\
 		
-		Las dos salidas restantes también cuentan con mosfet IRLZ44N, y su control también es a base de PWM, mas no permite hacer inversión de giro, por lo cual se enfoca a dispositivos como lámparas LEDs, el diseño en proteus se muestra en la figura \ref{fig:ONOFDC}.\\
+		Las dos salidas restantes también cuentan con mosfet IRLZ44N, y su control también es a base de PWM, mas no permite hacer inversión de giro, por lo cual se enfoca a dispositivos como lámparas LEDs y motores con un solo sentido de giro, siempre y cuando estos tengan protección como un diodo; el diseño en proteus se muestra en la figura \ref{fig:ONOFDC}.\\
 		
 		\begin{figure}[H]
 			\centering
@@ -140,27 +140,22 @@ En los siguientes ítems se resaltaran las características más importantes que
 		\end{figure}
 	
 	\subsubsection{Salida audible:}
-		La salida audible está diseñada para emitir desde sonidos a una sola frecuencia, o sonido mono estéreo, caso dado cuando se activa una regla programada desde la aplicación web, enfocada a las cargas de encendido y apagado, tanto de la etapa de potencia AC como la etapa DC; el sonido emitido por el prototipo corresponde a una voz con tonalidad femenina, pronunciando el estado en el cual se configura la carga según la regla (ya sea encendido, o apagado).\\
+		La salida audible está diseñada para emitir sonidos a una sola frecuencia, o sonido mono estéreo, caso dado cuando se activa una regla programada desde la aplicación web, enfocada a las cargas de encendido y apagado, tanto de la etapa de potencia AC como la etapa DC; el sonido emitido por el prototipo corresponde a una voz con tonalidad femenina, pronunciando el estado en el cual se configura la carga según la regla (ya sea encendido, o apagado).\\
 		
-\begin{comment}	\subsection{Corrección de errores:}
-	Durante la construcción del prototipo se corrigieron algunos fallos y errores que se presentaron, en esta sección se muestran estos contratiempos.\\
-	
-	\subsubsection{Creación de dispositivos en proteus:}
-		 Durante la construcción del prototipo en el software proteus, fue necesaria la creación de dispositivos o componentes dentro del software, tanto la apariencia en el esquemático como el package en el diseño del PCB; durante la creación del package, se enumeraron dos pines incorrectos para dos dispositivos, los conversores del nivel DC-DC y los Triacs. Este error fue detectado al realizar la revisión del PCB una vez cumplió su proceso de construcción, por ende fue corregido sobre el prototipo y sobre el diseño.\\
-		 
-	\subsubsection{Sensores:}
-		Al definir los pines correspondientes para los sensores conectados a la tarjeta ESP32, se cometió el error de conectar el sensor de calidad de aire (el cual presenta salida analógica de 0 a 5V) a uno de los pines correspondientes al ADC2 de la tarjeta, el cual no puede ser utilizado mientras que se utiliza la función de wifi, por ello se corrigió sobre el prototipo y sobre el diseño, dejando esa entrada de sensor en el pin GPIO34, correspondiente al ADC1 de la tarjeta.\\
+		El circuito utilizado para la salida audible está basado en el amplificador de audio LM386, implementando el circuito típico de aplicación ilustrado en su datasheet  \cite{LM386}, en la figura \ref{fig:AUD} se observa este circuito implementado en proteus.\\
 		
-	\subsubsection{Boton enable:}
-		El circuito cerrado por el botón enable conecta el pin EN de la tarjeta a 3.3V debido a una confusión en el diseño, por ello se realizaron las correcciones en el prototipo y en el diseño, dejando el circuito cerrando con tierra.\\
+		Como se mencionó anteriormente, el circuito presenta un potenciómetro a la entrada para calibrar el voltaje de salida del LM386 regulando su voltaje de entrada, de tal manera que pueda ser ajustado dentro de los valores en los que presenta un comportamiento normal y así evitar saturación en la señal audible.\\
 		
-	\subsubsection{Puente h en etapa DC:}
-		Al momento de seleccionar el transistor IRLZ44N, se pasó por alto el hecho de que el transistor presenta un voltaje umbral entre la compuerta y la fuente (Vgs), es decir, el voltaje necesario para activar el transistor usado como switch, esta entre 1V y 2V \cite{IRL}; este hecho representa un problema, pues la activación de cada par de transistores se realizaba con una compuerta lógica negadora 74ls04, poniendo un estado contrario al otro par de transistores. Esta negadora suministraba 5V a la compuerta del transistor, lo cual no permite la activación de los transistores, por esto decidió reemplazar la compuerta lógica por el puente h L293D, de esta manera, activar cada par de transistores con un voltaje en la compuerta de 12V como salida el circuito integrado L293D. Este cambio fue realizado en el prototipo y en el diseño.\\
-		\end{comment}
-		
+		\begin{figure}[H]
+			\centering
+			\caption{Circuito tipico para el LM386 [Imagen Propia]}
+			\label{fig:AUD}
+			\includegraphics[width=0.7\linewidth]{Imagenes/AUD}
+		\end{figure}		
+				
 \section{Firmware}
 
-El firmware se desarrolla sobre el framework o SDK oficial de Espressif Systems, ESP-IDF el cual posee una documentación \cite{ES} muy útil a la hora de utilizar las diferentes APIs que este posee, para el desarrollo de la aplicación como se observa en la figura \ref{fig:what-you-need} es necesario contar con los diferentes requisitos. Este firmware incluye un kernel de tiempo real llamado FreeRTOS, el cual da soporte al manejo de los diferentes recursos del sistema. Como es un RTOS, las funciones se definen mediante las tareas, entonces para cada funcionalidad de la tarjeta o grupo de funcionalidades se desarrolla una o varias tareas para que realicen las acciones adecuadas, por ejemplo, en cuanto a los sensores cada uno tiene una tarea para su lectura, gestión de estos datos, así, como también en cuanto a las diferentes salidas de la tarjeta se han agrupado en las cargas que solo son de encendido/apagado y las de control, creando diferentes tareas para esta gestión.\\
+El firmware se desarrolla sobre el framework o SDK oficial de Espressif Systems, ESP-IDF el cual posee una documentación \cite{ES} muy útil a la hora de utilizar las diferentes APIs que este posee; para el desarrollo de la aplicación es necesario contar con los diferentes requisitos tal como se observa en la figura \ref{fig:what-you-need}. Este firmware incluye un kernel de tiempo real llamado FreeRTOS, el cual da soporte al manejo de los diferentes recursos del sistema; Al ser este  un RTOS, las funciones se definen mediante las tareas, entonces para cada funcionalidad de la tarjeta o grupo de funcionalidades se desarrolla una o varias tareas para que realicen las acciones adecuadas, por ejemplo, en el caso de los sensores, cada uno tiene una tarea para lectura y para gestión de datos, así como también ocurre de manera similar  con las diferentes salidas de la tarjeta, pues cuentan con tareas para la gestión de encendido y apagado así como también para el control de cargas, ya sea por ángulo de fase o PWM.\\
 
 \begin{figure}[H]
 	\centering
@@ -186,7 +181,7 @@ los ADC se usan para leer los datos de algunos sensores que proporcionan datos a
 
 \paragraph{Consola:}
 
-para realizar diferentes pruebas directamente desde la tarjeta, se usa la opción de la consola que se comunica por medio del puerto serie, para esto se crean las funciones y los comandos que estaran disponibles. Algunos comandos disponibles son \textit{http}, para realizar las peticiones http manualmente y observar su respuesta, pin para realizar la prueba de un pin digital como entrada o salida, \textit{help} para observar la lista de comandos, entre otros.
+para realizar diferentes pruebas directamente desde la tarjeta, se usa la opción de la consola, la cual se comunica por medio del puerto serie, para esto se crean las funciones y los comandos que estaran disponibles; Algunos comandos disponibles son \textit{http}, para realizar las peticiones http manualmente y observar su respuesta, \textit{pin} para realizar la prueba de un pin digital como entrada o salida, \textit{help} para observar la lista de comandos, entre otros.
 
 \paragraph{HTTP Request:}
 
@@ -229,7 +224,7 @@ En esta sección se desarrolla una aplicación web, la cual se encarga de hacer 
 
 Su funcionamiento es el siguiente, primero el usuario realiza alguna acción en la interfaz (por ejemplo, presiona un botón, un enlace, etc), luego el controlador recibe (por parte de los objetos de la interfaz-vista) la notificación de la acción solicitada por el usuario. El controlador gestiona el evento que llega. Luego el controlador accede al modelo, actualizándolo, posiblemente modificándolo de forma adecuada a la acción solicitada por el usuario (por ejemplo, el controlador actualiza los datos del perfil del usuario) y después la interfaz de usuario espera nuevas interacciones del usuario, comenzando el ciclo nuevamente.\\
 
-Este patrón de diseño se usa en la programación orientada a objetos, por lo tanto se realiza la aplicación en el lenguaje de programación PHP, ya que es realmente útil para realizar la gestión de peticiones y envíos de formularios en dicha aplicación, además de que es importante también la gestión de las bases de datos de la aplicación, por este motivo se utiliza un framework basado en este lenguaje y esta arquitectura, el cual realiza diferentes trabajos en cuanto a la parte de la arquitectura, para gestionar las diferentes partes de la aplicación, en este caso se usa el framework Laravel el cual como se menciona anteriormente esta orientado a facilitar las tareas comunes de la mayoría de proyectos web, que utilizan HTML5 y PHP.\\
+Este patrón de diseño se usa en la programación orientada a objetos, por lo tanto se realiza la aplicación en el lenguaje de programación PHP, ya que es realmente útil para realizar la gestión de peticiones y envíos de formularios en dicha aplicación, además de que es importante también la gestión de las bases de datos de la aplicación, por este motivo se utiliza un framework basado en este lenguaje y esta arquitectura, el cual realiza diferentes trabajos en cuanto a la parte de la arquitectura. Para gestionar las diferentes partes de la aplicación, en este caso se usa el framework Laravel, el cual como se menciona anteriormente está orientado a facilitar las tareas comunes de la mayoría de proyectos web que utilizan HTML5 y PHP.\\
 
 Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llamado Eloquent. Esta es una forma de mapear los datos que se encuentran en la base de datos a objetos de PHP y viceversa, esto facilita el uso de diferentes gestores de bases de datos como MySQL, SQLite, entre otras, ya que todas las consultas estan en PHP y el ORM ya se encarga del mapeo a los comandos SQL como se observa en la figura \ref{fig:orm}. Eloquent usa los modelos para enviar y recibir información de la base de datos.
 

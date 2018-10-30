@@ -1,14 +1,6 @@
 \chapter{Resultados y Análisis}
 
-Para este capitulo se propone una habitación modelo, con la cual se describen ciertos pasos y funcionamientos de la solución en general. En la figura \ref{fig:iot} esta el esquema de la solución IoT, para esto se supone una habitación con un sensor de temperatura, un ventilador y un bombillo led, las cuales el usuario va a visualizar y gestionar desde la aplicación web.
-
-\begin{figure}[H]
-	\centering
-	\caption{Esquema Solución SmartHouse}
-	\label{fig:iot}
-	\includegraphics[width=0.6\linewidth]{Imagenes/IOT}
-\end{figure}
-
+Para este capitulo se propone una habitación modelo, con la cual se describen ciertos pasos y funcionamientos de la solución en general. En la figura XXXX esta el esquema de la solución IoT, para esto se supone una habitación con un sensor de temperatura, un ventilador y un bombillo led, las cuales el usuario va a visualizar y gestionar desde la aplicación web.
 
 \section{Software}
 
@@ -37,7 +29,7 @@ Las diferentes interacciones que tiene cada usuario en el panel de control se ga
 \centering
 \caption{Página de Inicio}
 \label{fig:index}
-\includegraphics[width=0.5\linewidth]{Imagenes/Index}
+\includegraphics[width=0.9\linewidth]{Imagenes/Index}
 \end{figure}
 
 \subsection{Parte Pública}
@@ -48,7 +40,7 @@ En esta vista unicamente hay opciones para el contacto y solicitudes, como se me
 \centering
 \caption{Vista Pública}
 \label{fig:publicview}
-\includegraphics[width=0.5\linewidth]{Imagenes/Public_view}
+\includegraphics[width=0.9\linewidth]{Imagenes/Public_view}
 \end{figure}
 
 \subsection{Parte Privada}
@@ -80,7 +72,7 @@ Además de este panel de control, desde el cuál se realizan las operaciones sob
 	\centering
 	\caption{Página de intercambio de datos}
 	\label{fig:updateview}
-	\includegraphics[width=0.7\linewidth]{Imagenes/Update_view}
+	\includegraphics[width=0.85\linewidth]{Imagenes/Update_view}
 \end{figure}
 
 De este modo, el usuario interactuando con la aplicación genera modificaciones en el texto con que responde la aplicación web a la petición de la tarjeta. Si el usuario desea encender el ventilador, como se observa en la figura \ref{fig:userhview} esta presente un botón en la información del dispositivo, el cual con presionarlo lo enciende o apaga, esto es valido para cualquiera de los dos dispositivos, sea el ventilador o el bombillo led.\\
@@ -109,19 +101,7 @@ La estructura de la base de datos se puede observar en la figura \ref{fig:db}, a
 
 \section{Firmware}
 
-El firmware se encuentra compuesto, como se ha mencionado anteriormente, de tareas, en la figura \ref{fig:tareas} se observa un bosquejo de como funcionan las diferentes tareas de las que se compone este, tomando como función principal la encargada de gestionar la conexión a Wi-Fi y almacenar sus credenciales, dependiendo del estado de si encuentra o no estas, el sistema se comporta de una u otra forma. Si existen credenciales almacenadas en la tarjeta, el sistema se trata de conectar, si la conexión es exitosa comienza el proceso de actualización de la hora del sistema y también de las diferentes ordenes de la aplicación web. En cambio si no existen credenciales el dispositivo inicia un servidor web local para que el usuario pueda proporcionarle estas credenciales como se menciona en \ref{sub:wifi}.\\
-
-En cada caso se crean tareas diferentes, para el caso de no existir credenciales únicamente se configura la tarea del servidor http local, y para el otro caso se lanzan todas la demás tareas encargadas de la escritura y lectura de datos, como se menciona en las siguientes secciones.
-
-\begin{figure}[H]
-	\centering
-	\caption{}
-	\label{fig:tareas}
-	\includegraphics[width=0.7\linewidth]{Imagenes/tareas}
-\end{figure}
-
-
-\subsection{Conexión a Internet vía Wi-Fi}\label{sub:wifi}
+\subsection{Conexión a Internet vía Wi-Fi}
 
 Los sistemas IoT deben estar conectados siempre a Internet, por este motivo se debe brindar una forma para conectar al sistema a este, por lo tanto, se desarrolla un servidor local en la tarjeta que se encarga de esto, como se ha mencionado el módulo del esp32 funciona como Punto de Acceso (AP) y como Cliente o Estación (STA) al mismo tiempo, aprovechando esta capacidad se usa el servidor local y esta encargado de gestionar la conexión de la tarjeta vía Wi-Fi como se observa en la figura \ref{fig:conexion}.\\
 
@@ -162,12 +142,3 @@ Los datos que esta leyendo la tarjeta provienen de los diferentes sensores que t
 Para la configuración y comparación de las reglas que suministra el usuario a el dispositivo que dese controlar es necesario contar con la hora actual y que se siga actualizando localmente gracias al RTC que posee internamente el esp32, así, al inicio de la aplicación, se sincroniza y almacena la hora actual de la red, por medio del protocolo SNTP. Estas reglas actúan en cuanto a que encienda o apague un dispositivo a una hora dada, después de obtener este dato la aplicación continua con normalidad para realizar las diferentes peticiones a la aplicación web.\\
 
 La interacción del usuario se da con la aplicación web mencionada anteriormente, de este modo la tarjeta siempre se debe actualizar, para esto, cuando la tarjeta envía los datos de los sensores la aplicación responde con los datos necesarios para tarjeta, esta los recibe en una cadena texto en formato JSON como se observa en la figura \ref{fig:updateview}, los procesa y envía a las tareas pertinentes ya sea para encender o apagar algún dispositivo conectado a la tarjeta, además envía las reglas que el usuario ha definido.
-
-\section{Hardware}
-
-\subsection{Entradas}
-\subsection{Salidas}
-
-\section{Prueba Beta Cerrada}
-
-Se realiza la prueba beta del software y también del funcionamiento del hardware con XXX personas los resultados obtenidos 
