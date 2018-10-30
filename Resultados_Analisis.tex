@@ -111,7 +111,7 @@ La estructura de la base de datos se puede observar en la figura \ref{fig:db}, a
 
 El firmware se encuentra compuesto, como se ha mencionado anteriormente, de tareas, en la figura \ref{fig:tareas} se observa un bosquejo de como funcionan las diferentes tareas de las que se compone este, tomando como función principal la encargada de gestionar la conexión a Wi-Fi y almacenar sus credenciales, dependiendo del estado de si encuentra o no estas, el sistema se comporta de una u otra forma. Si existen credenciales almacenadas en la tarjeta, el sistema se trata de conectar, si la conexión es exitosa comienza el proceso de actualización de la hora del sistema y también de las diferentes ordenes de la aplicación web. En cambio si no existen credenciales el dispositivo inicia un servidor web local para que el usuario pueda proporcionarle estas credenciales como se menciona en \ref{sub:wifi}.\\
 
-En cada caso se crean tareas diferentes, para el caso de no existir credenciales únicamente se configura la tarea del servidor http local, y para el otro caso se lanzan todas la demás tareas encargadas de la escritura y lectura de datos, como se menciona en las siguientes secciones.
+En cada caso se crean tareas diferentes, para el caso de no existir credenciales únicamente se configura la tarea del servidor http local, y para el otro caso se lanzan todas la demás tareas encargadas de la escritura y lectura de datos, como se menciona en las siguientes secciones. Cabe resaltar que la tarjeta tiene disponible en promedio 160KB de memoria heap para realizar otras operaciones o implementar más funcionalidades en esta.
 
 \begin{figure}[H]
 	\centering
@@ -120,6 +120,7 @@ En cada caso se crean tareas diferentes, para el caso de no existir credenciales
 	\includegraphics[width=0.7\linewidth]{Imagenes/tareas}
 \end{figure}
 
+Además de esto, se mide el promedio del tiempo en que se demora la ejecución de la tarea, en dos casos, cuando realiza la primera petición después de conectado a la red, es decir, cuánto se demora realizando las peticiones necesarias, como obtener el tiempo de la red y realizar la petición a la aplicación web, obteniendo un tiempo promedio de aproximadamente de 2.7s, este tiempo depende de la disponibilidad de los diferentes servidores en la web además de la velocidad y el tráfico de la red, ya que la tarjeta espera hasta que obtiene la hora y luego continua con la petición HTTP también esperando que el servidor responda. El otro caso es el tiempo que se demora la tarea en leer los datos de los sensores, enviar la petición HTTP a la aplicación web, recibirlos y enviarlos a los diferentes actuadores, este tiempo es de 1 s en promedio con un total de 3056 muestras.
 
 \subsection{Conexión a Internet vía Wi-Fi}\label{sub:wifi}
 
@@ -161,7 +162,15 @@ Los datos que esta leyendo la tarjeta provienen de los diferentes sensores que t
 
 Para la configuración y comparación de las reglas que suministra el usuario a el dispositivo que dese controlar es necesario contar con la hora actual y que se siga actualizando localmente gracias al RTC que posee internamente el esp32, así, al inicio de la aplicación, se sincroniza y almacena la hora actual de la red, por medio del protocolo SNTP. Estas reglas actúan en cuanto a que encienda o apague un dispositivo a una hora dada, después de obtener este dato la aplicación continua con normalidad para realizar las diferentes peticiones a la aplicación web.\\
 
-La interacción del usuario se da con la aplicación web mencionada anteriormente, de este modo la tarjeta siempre se debe actualizar, para esto, cuando la tarjeta envía los datos de los sensores la aplicación responde con los datos necesarios para tarjeta, esta los recibe en una cadena texto en formato JSON como se observa en la figura \ref{fig:updateview}, los procesa y envía a las tareas pertinentes ya sea para encender o apagar algún dispositivo conectado a la tarjeta, además envía las reglas que el usuario ha definido.
+La interacción del usuario se da con la aplicación web mencionada anteriormente, de este modo la tarjeta siempre se debe actualizar, para esto, cuando la tarjeta envía los datos de los sensores la aplicación responde con datos de cabecera HTTP y además la información de los dispositivos que controla la tarjeta, esta los recibe en una cadena texto en formato JSON como se observa en la figura \ref{fig:httprqstesp}, los procesa y envía a las tareas pertinentes ya sea para encender o apagar algún dispositivo conectado a la tarjeta, además envía las reglas que el usuario ha definido.
+
+\begin{figure}
+	\centering
+	\caption{Respues del la APP Web a la Tarjeta}
+	\label{fig:httprqstesp}
+	\includegraphics[width=0.5\linewidth]{Imagenes/HTTPRqstesp}
+\end{figure}
+
 
 \section{Hardware}
 
