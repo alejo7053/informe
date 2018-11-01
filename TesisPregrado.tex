@@ -1,32 +1,36 @@
 \input{EncabezadoTesis}
 \input{formulario}
+\raggedbottom
 \begin{document}
 \pagenumbering{roman}
 \input{HojaTitulo/HojaTitulo}
 
 \renewcommand{\tablename}{\textbf{Tabla}}
 \renewcommand{\figurename}{\textbf{Figura}}
-\renewcommand{\listtablename}{Lista de Taesp-idf connect to a website\renewcommand{\tablename}{\textbf{Tabla}} \renewcommand{\figurename}{\textbf{Figura}} \renewcommand{\listtablename}{Lista de Tablas} \renewcommand{\listfigurename}{Lista de Figuras\renewcommand{\tablename}{\textbf{Tabla}} \renewcommand{\figurename}{\textbf{Figura}} \renewcommand{\listtablename}{Lista de Tablas} \renewcommand{\listfigurename}{Lista de Figuras\renewcommand{\tablename}{\textbf{Tabla}} \renewcommand{\figurename}{\textbf{Figura}} \renewcommand{\listtablename}{Lista de Tablas} \renewcommand{\listfigurename}{Lista de Figuras\renewcommand{\tablename}{\textbf{Tabla}} \renewcommand{\figurename}{\textbf{Figura}} \renewcommand{\listtablename}{Lista de Tablas} \renewcommand{\listfigurename}{Lista de Figuras\renewcommand{\tablename}{\textbf{Tabla}} \renewcommand{\figurename}{\textbf{Figura}} \renewcommand{\listtablename}{Lista de Tablas} \renewcommand{\listfigurename}{Lista de Figuras} \renewcommand{\contentsname}{Contenido}} \renewcommand{\contentsname}{Contenido}} \renewcommand{\contentsname}{Contenido}} \renewcommand{\contentsname}{Contenido}} \renewcommand{\contentsname}{Contenido}blas}
-\renewcommand{\listfigurename}{Lista de Figuras}
+\renewcommand{\listtablename}{Lista de Tablas}   \renewcommand{\listfigurename}{Lista de Figuras} 
 \renewcommand{\contentsname}{Contenido}
 
 \tableofcontents
-\input{Objetivos}
+\listoffigures
 \include{Tab_Simbolos/TabSimbolos}
+\include{Resumen}
 \pagenumbering{arabic}
 \input{Introduccion}
+\input{Objetivos}
 \input{MarcoTeorico}
 \input{Desarrollo}
-%\input{EstadoArte}
 \input{Resultados_Analisis}
 \input{Conclusiones}
 \input{Trabajos_Futuros}
-%\input{DescripcionProblema}
-%\input{Justificacion}
-%\input{AlcanceDelimitacion}
+\clearpage
+\addcontentsline{toc}{chapter}{\numberline{}Glosario}
+\markboth{Glosario}{Glosario}
 \include{Glosario}
-\include{Anexos/Anexos}
 \addcontentsline{toc}{chapter}{\numberline{}Bibliograf\'{\i}a}
 \bibliographystyle{unsrt}
 \bibliography{BibliMSc}
+\clearpage
+\addcontentsline{toc}{chapter}{\numberline{}Anexos}
+\include{Anexos/Anexos}
+\markboth{Anexos}{Anexos}
 \end{document}
