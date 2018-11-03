@@ -174,9 +174,17 @@ La interacción del usuario se da con la aplicación web mencionada anteriorment
 
 \section{Hardware}
 
-De acuerdo a los circuitos diseñados en la sección \ref{sec:hw} donde se propone el desarrollo de hardware de la solución IoT, en la figura XXXX se observan las diferentes tarjetas ya ensambladas en una caja eléctrica para probar el funcionamiento del prototipo. Las salidas y entradas están están distribuidas por la caja eléctrica como se observa en la figura XXXX de acuerdo a lo propuesto, para las salidas AC se usan toma corrientes para conectar allí los diferentes dispositivos, para las salidas DC se utilizan conectores hembra tipo banana para facilitar la conexión de estos dispositivos.\\
+De acuerdo a los circuitos diseñados en la sección \ref{sec:hw} donde se propone el desarrollo de hardware de la solución IoT, en la figura \ref{fig:tarjeta} se observan las diferentes tarjetas ya ensambladas en una caja eléctrica para probar el funcionamiento del prototipo. Las salidas y entradas están están distribuidas por la caja eléctrica de acuerdo a lo propuesto, para las salidas AC se usan toma corrientes para conectar allí los diferentes dispositivos, para las salidas DC se utilizan conectores hembra tipo banana para facilitar la conexión de estos dispositivos.\\
 
-La distribución de las diferentes salidas que posee la tarjeta se organizo en pegatinas y se colocaron sobre la caja eléctrica, la figura \ref{fig:labels} muestra esta información, tanto para la parte interna como externa de la caja.
+\begin{figure}[H]
+	\centering
+	\caption{Tarjeta SmartHouse}
+	\label{fig:tarjeta}
+	\includegraphics[width=0.6\linewidth]{Imagenes/Tarjeta}
+\end{figure}
+
+
+La distribución de las diferentes salidas que posee la tarjeta se organizo en pegatinas y se colocaron sobre la caja eléctrica, la figura \ref{fig:labels} muestra esta información, tanto para la parte interna como externa de la caja.\\
 
 \begin{figure}
 	\centering
@@ -186,8 +194,32 @@ La distribución de las diferentes salidas que posee la tarjeta se organizo en p
 \end{figure}
 
 
-De acuerdo a lo mencionado anteriormente, el sistema se ha probado con cargas AC como bombillos LED entre 7W y 20W, de filamento de 100W, probando funcionalidades como el control de potencia AC por ángulo de fase, obteniendo los resultados esperados, como se observa en las figuras XXX, el voltaje de alimentación viene dado por la red eléctrica, la tarjeta simplemente conmuta el estado de la alimentación o controla la potencia entregada. Para las salidas DC se realizan pruebas con un motor DC de X W, además de una tira LED de X W, la cual se le varia la energía entrega, como se observa en las figuras XXX, estas cargas se alimentan con 12VDC directamente desde la fuente o convertidor AC-DC, los circuitos que se implementan simplemente conmutan el estado de encendido/apagado o por medio de PWM variar la energía entregada.
+De acuerdo a lo mencionado anteriormente, el sistema se ha probado con cargas AC como bombillos LED entre 7W y 20W, de filamento de 100W, probando funcionalidades como el control de potencia AC por ángulo de fase, obteniendo los resultados esperados, como se observa en la figura \ref{fig:AC1} donde la carga tiene el 100\% de la potencia y en la figura \ref{fig:AC0} con el 20\% de esta. El voltaje de alimentación viene dado por la red eléctrica, la tarjeta simplemente conmuta el estado de la alimentación o controla la potencia entregada. 
+
+\begin{figure}[H]
+	\centering
+	\caption{Control de potencia AC por ángulo de fase}
+	\label{fig:ACc}
+	\subfigure[Potencia al 100\%]{\includegraphics[width=0.45\linewidth]{Imagenes/AC1}
+		\label{fig:AC1}}
+	\subfigure[Potencia al 20\%]{\includegraphics[width=0.43\linewidth]{Imagenes/AC0}
+		\label{fig:AC0}}
+\end{figure}
+
+Para las salidas DC se realizan pruebas con un motor DC de 1W, además de una tira LED de 1W, la cual se le varia la energía entrega, como se observa en la figura \ref{fig:DC1} la carga tiene el 100\% de la energía y en la figura \ref{fig:DC0} solamente el 10\%. Estas cargas se alimentan con 12VDC directamente desde la fuente o convertidor AC-DC, los circuitos que se implementan simplemente conmutan el estado de encendido/apagado o por medio de PWM variar la energía entregada.
+
+\begin{figure}[H]
+	\centering
+	\caption{Control de Cargas DC}
+	\label{fig:DCc}
+	\subfigure[Potencia al 100\%]{\includegraphics[width=0.45\linewidth]{Imagenes/DC1}
+		\label{fig:DC1}}
+	\subfigure[Potencial al 10\%]{\includegraphics[width=0.45\linewidth]{Imagenes/DC0}
+		\label{fig:DC0}}
+\end{figure}
 
 \section{Prueba Beta Cerrada}
 
-Para la prueba beta se escoge un grupo de personas, las cuales interactuan directamente con la apliación web y el prototipo de la tarjeta SmartHouse, se detallan diferentes items para evaluar, como el ingreso a la aplicación y visualización de los datos almacenados en esta,
+Para la prueba beta se escoge un grupo de personas, las cuales interactuan directamente con la aplicación web y el prototipo de la tarjeta SmartHouse, se detallan los diferentes items a evaluar mencionados anteriormente, como el ingreso a la aplicación, visualización de los datos almacenados en esta y el control de los dispositivos.
+
+Así, para evaluar estas características se formulan las siguientes preguntas, que se califican de acuerdo a una escala tipo likert \cite{lik} de uno a cinco en la cual, cinco es la calificación máxima y uno la mínima. Las preguntas se formulan para evidenciar la postura del cliente en cuanto a las funcionalidades de la aplicación, de acuerdo a esto la encuesta que se diseña esta presente en el Anexo \ref{AnexoB}.
