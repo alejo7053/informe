@@ -1,7 +1,59 @@
 \begin{appendix}
 \chapter{Anexo: Tabla de Funciones en el Firmware}\label{AnexoA}
 
-
+\begin{table}[H]
+	\begin{center}
+		\caption{Lista de Interrupciones programadas.}
+		\label{table:inte}
+		\begin{tabular}{|c|p{5cm}|}
+			\hline 
+			Nombre & Descripción \\ 
+			\hline 
+			detector & Señal de detección de cruce por cero para sincronizar con la red eléctrica y el control de las cargas AC \\ 
+			\hline 
+			gpio\_wifi\_rst & Para borrar las credenciales wifi, habilitando un semáforo\\ 
+			\hline 
+			gpio\_states\_sensors & Leer los sensores de estado, habilitando una cola, con la información del pin que la genera. \\ 
+			\hline 
+		\end{tabular} 
+	\end{center}
+\end{table}
+	
+\begin{table}[H]
+	\begin{center}
+		\caption{Lista de Tareas programadas.}
+		\label{table:tasks}
+		\begin{tabular}{|c|c|c|p{5cm}|}
+			\hline 
+			Nombre & Tiempo Suspendida [s] & Prioridad & Descripción \\ 
+			\hline 
+			wifi\_manager & 0 & 4 & Esta tarea se encarga de gestionar las conexiones wi-fi. \\ 
+			\hline 
+			http\_server & 0.1 & 5 & Encargada de servir una interfaz para seleccionar la red wi-fi a conectar la tarjeta \\ 
+			\hline 
+			http\_get\_task & 1 & 5 & Realiza la petición a la aplicación web, enviando y recibiendo datos de esta. \\ 
+			\hline 
+			air\_sensor\_read& 60 & 3 & Lectura del sensor de calidad de aire. \\ 
+			\hline 
+			simple\_loads\_task& 1 & 4 & Controla las cargas AC-On/Off  y las DC sin inversión de giro. \\ 
+			\hline 
+			PWM\_task& 1 & 5 & Controla las cargas con inversión de giro. \\ 
+			\hline 
+			ControlLoad\_task& 1.5 & 7 & Controla las cargas AC por ángulo de fase. \\ 
+			\hline 
+			i2c\_task& 1 & 2 & Lectura de los dispositivos I2C. \\ 
+			\hline 
+			gpio\_task& - & 7 & Lectura de los dispositivos de estado por medio de una interrupción qué se comunica con esta a través de una cola. \\ 
+			\hline 
+			dht\_task& 60 & 3 & Lectura del sensor de temperatura y humedad. \\ 
+			\hline 
+			ResetWifi& - & 5 & Por medio de una interrupción que librea un semáforo, elimina las credenciales de wifi ingresadas. \\ 
+			\hline 
+			Audio\_task& - & 3 & Sincronizado con un grupo de eventos, se activa cuanto se utilizan las reglas. \\ 
+			\hline 
+		\end{tabular} 
+	\end{center}
+\end{table}
 
 \chapter{Anexo: Encuesta de la Prueba Beta}\label{AnexoB}
 \markboth{Anexo: Encuesta de la Prueba Beta}{Encuesta de la Prueba Beta}
@@ -39,7 +91,7 @@ Califique del 1 al 5, siendo 5 la calificación máxima y 1 la mínima.\\
 	(1)\>(2)  \>(3)  \>(4)  \>(5) 
 \end{tabbing} 
 
-	\item Los datos de los sensores y estados de las salidas se presentan de una manera clara y entendible.
+	\item En la aplicación web, los datos de los sensores y estados de las salidas se presentan de una manera clara y entendible.
 
 \begin{tabbing}
 	\hspace{2cm}\=\hspace{2cm}\=\hspace{2cm}\=\hspace{2cm}\=\kill
@@ -90,29 +142,10 @@ Califique del 1 al 5, siendo 5 la calificación máxima y 1 la mínima.\\
 
 \end{enumerate}
 
-\chapter{Anexo: Nombrar el anexo C de acuerdo con su contenido}
-MANEJO DE LA BIBLIOGRAF\'{I}A: la bibliograf\'{\i}a es la relaci\'{o}n de las fuentes documentales consultadas por el investigador para sustentar sus trabajos. Su inclusi\'{o}n es obligatoria en todo trabajo de investigaci\'{o}n. Cada referencia bibliogr\'{a}fica se inicia contra el margen izquierdo.\\
+\chapter{Anexo: CD}
 
-La NTC 5613 establece los requisitos para la presentaci\'{o}n de referencias bibliogr\'{a}ficas citas y notas de pie de p\'{a}gina. Sin embargo, se tiene la libertad de usar cualquier norma bibliogr\'{a}fica de acuerdo con lo acostumbrado por cada disciplina del conocimiento. En esta medida es necesario que la norma seleccionada se aplique con rigurosidad.\\
+Se anexa un CD con los códigos de la aplicación web y el firmware, una versión digital de este documento y un manual de usuario explicando el uso de toda la solución IoT.\\
 
-Es necesario tener en cuenta que la norma ISO 690:1987 (en Espa\~{n}a, UNE 50-104-94) es el marco internacional que da las pautas m\'{\i}nimas para las citas bibliogr\'{a}ficas de documentos impresos y publicados. A continuaci\'{o}n se lista algunas instituciones que brindan par\'{a}metros para el manejo de las referencias bibliogr\'{a}ficas:\\
-
-\begin{center}
-\centering%
-\begin{tabular}{|p {7.5 cm}|p {7.5 cm}|}\hline
-\arr{Instituci\'{o}n}&Disciplina de aplicaci\'{o}n\\\hline%
-Modern Language Association (MLA)&Literatura, artes y humanidades\\\hline%
-American Psychological Association (APA)&Ambito de la salud (psicolog\'{\i}a, medicina) y en general en todas las ciencias sociales\\\hline
-Universidad de Chicago/Turabian &Periodismo, historia y humanidades.\\\hline
-AMA (Asociaci\'{o}n M\'{e}dica de los Estados Unidos)&Ambito de la salud (psicolog\'{\i}a, medicina)\\\hline
-Vancouver &Todas las disciplinas\\\hline
-Council of Science Editors (CSE)&En la actualidad abarca diversas ciencias\\\hline
-National Library of Medicine (NLM) (Biblioteca Nacional de Medicina)&En el \'{a}mbito m\'{e}dico y, por extensi\'{o}n, en ciencias.\\\hline
-Harvard System of Referencing Guide &Todas las disciplinas\\\hline
-JabRef y KBibTeX &Todas las disciplinas\\\hline
-\end{tabular}
-\end{center}
-
-Para incluir las referencias dentro del texto y realizar lista de la bibliograf\'{\i}a en la respectiva secci\'{o}n, puede utilizar las herramientas que Latex suministra o, revisar el instructivo desarrollado por el Sistema de Bibliotecas de la Universidad Nacional de Colombia\footnote{Ver: www.sinab.unal.edu.co}, disponible en la secci\'{o}n "Servicios", opci\'{o}n "Tr\'{a}mites" y enlace "Entrega de tesis".
+Además el enlace a la página principal del servidor: http://smarthouseuq.herokuapp.com/
 
 \end{appendix}
