@@ -1,10 +1,9 @@
 \chapter{Trabajos Futuros}
 
-Se propone añadir más funcionalidades, en cuanto al ahorro de energía, manejo de otros dispositivos por medio de infrarrojo, actualizaciones remotas, una aplicación web local y agregar diferentes funcionalidades de administración y control parental a los usuarios dueños de la casa que poseen mas de un dispositivo en cada habitación. Además se pueden implementar algunos circuitos usando componentes de montaje superficial para reducir su tamaño.
+Como trabajo futuro en cuanto al hardware se propone integrar todo el sistema en una sola board, migrando la mayoría de componentes de montaje through hole a montaje superficial (SMD) y también realizar un board de más capas, por ejemplo de cuatro capas, para reducir el tamaño de esta e integrar todas las funcionalidades en una sola, además de añadir mas características a este, como el manejo de otros dispositivos por medio de infrarrojo, poder actualizar su firmware remotamente y funciones de ahorro de energía.\\
 
-\begin{itemize}
-	\item El ahorro de energía permite mejorar el consumo del sistema en cuanto a la gestión de los datos, generar un modo ``stand by'' que lo activa, desactiva o programa el usuario.
-	\item Implementar la funcionalidad por firmware y hardware para la memorización de comandos infrarrojos y su emisión para controlar diferentes dispositivos por este medio.
-	\item Activar las actualizaciones remotas o sobre el aire, las cuales permiten al fabricante tener actualizado o realizar diferentes modificaciones al firmware sin la necesidad de estar conectado directamente en la tarjeta.
-	\item La aplicación web local actúa como espejo de la que se encuentra en Internet. Sus funcionalidades son en caso de mantenimiento de la aplicación principal o de cualquier problema relativo a la conexión a Internet, esta daría soporte local hasta que entre de nuevo en funcionamiento la que se encuentra en la nube.
-\end{itemize}
+Para el software es importante agregar funcionalidades de acuerdo a los otros roles presentes en este, por ejemplo para el rol usuario administrador de casa crear reglas de control parental y de seguridad para poder ampliar el control sobre sus propios dispositivos.\\
+
+En la parte de prueba se pueden realizar otros tipos de prueba como alfa, de aceptación, entre otras más que existen para probar los diferentes software diseñados. Además ampliar la muestra en la que se aplican estas pruebas.\\
+
+Para mejorar la solución IoT es posible crear servidores espejo localmente en la tarjeta incluyendolo en el firmware y realizando copias de la información constantemente. Sus funcionalidades son en caso de mantenimiento de la aplicación principal o de cualquier problema relativo a la conexión a Internet, esta daría soporte local hasta que entre de nuevo en funcionamiento la que se encuentra en la nube.\\
