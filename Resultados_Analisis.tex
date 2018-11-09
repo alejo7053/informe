@@ -1,6 +1,6 @@
 \chapter{Resultados y Análisis}
 
-Para este capitulo se propone una habitación modelo, con la cual se describen ciertos pasos y funcionamientos de la solución en general. En la figura \ref{fig:iot} esta el esquema de la solución IoT, para esto se supone una habitación con un sensor de temperatura, un ventilador y un bombillo led, las cuales el usuario va a visualizar y gestionar desde la aplicación web.
+En este capitulo se propone una habitación modelo, con la cual se describen ciertos pasos y funcionamientos de la solución en general. En la figura \ref{fig:iot} esta el esquema del sistema IoT, para esto se supone una habitación con un sensor de temperatura, un ventilador y un bombillo led, las cuales el usuario va a visualizar y gestionar desde la aplicación web.
 
 \begin{figure}[H]
 	\centering
@@ -28,9 +28,9 @@ Se desarrolla la aplicación web de manera local y posteriormente se lanza a un 
 	\end{itemize}
 \end{itemize}
 
-De acuerdo a la lista anterior, se toman en cuenta dos partes para esta, una pública y una privada, como se observa en la figura \ref{fig:index}. En la parte pública se encuentra una vista con los datos de contacto, solicitudes de registro o productos y la cantidad de usuarios que actualmente estan registrados en la aplicación. En la parte privada se encuentra la interacción de los usuarios sea administrador, dueño de una casa o de una habitación, para controlar y ver sus datos.\\
+De acuerdo con la lista anterior, se toman en cuenta dos partes, una pública y una privada, como se observa en la figura \ref{fig:index}. En la parte pública se encuentra una vista con la información de contacto del fabricante, solicitudes de registro o productos y la cantidad de usuarios que actualmente estan registrados en la aplicación. En la parte privada se encuentra la interacción de los usuarios sea administrador, dueño de una casa o de una habitación, para controlar y observar sus datos.\\
 
-Las diferentes interacciones que tiene cada usuario en el panel de control se garantizan por medio del framework, creando diferentes roles para cada usuario que se esta registrando y realizando la comprobación por parte de los controladores y el middleware que este provee.\\
+Las diversas interacciones que tiene cada usuario en el panel de control se garantizan por medio del framework, creando diferentes roles para cada tipo de usuario que se esta registrando y realizando la comprobación por parte de los controladores y el middleware que este provee.\\
 
 \begin{figure}[H]
 \centering
@@ -41,7 +41,7 @@ Las diferentes interacciones que tiene cada usuario en el panel de control se ga
 
 \subsection{Parte Pública}
 
-En esta vista unicamente hay opciones para el contacto y solicitudes, como se menciona anteriormente, es una vista sencilla dada la poca información que contiene, como se observa en la figura \ref{fig:publicview}.
+En esta vista únicamente hay opciones para el contacto y solicitudes, como se menciona anteriormente, es sencilla debido a la poca información que contiene, según se observa en la figura \ref{fig:publicview}.
 
 \begin{figure}[H]
 \centering
@@ -52,13 +52,13 @@ En esta vista unicamente hay opciones para el contacto y solicitudes, como se me
 
 \subsection{Parte Privada}
 
-En esta sección es donde se encuentra el Panel de Control para los diferentes usuarios de la aplicación. En primera instancia, para un usuario administrador, que es el encargado de gestionar la aplicación, este usuario tiene la posibilidad de crear, ver, editar y eliminar los diferentes registros de la aplicación, la vista de este usuario se puede observar en la figura \ref{fig:views}\textbf{(a)}. Por medio de este usuario es que se activan las cuentas de los demás, por esto en la parte pública estás las opciones de contacto y solicitud de registro.\\
+En esta sección es donde se encuentra el Panel de Control para los diferentes usuarios de la aplicación. En primera instancia, para un usuario administrador, el cual esta encargado de gestionar la aplicación, este tiene la posibilidad de crear, ver, editar y eliminar los registros de la aplicación, la vista de este usuario se puede observar en la figura \ref{fig:views}\textbf{(a)}. Por medio de este usuario se activan las cuentas de los demás, por esto en la parte pública están las opciones de contacto y solicitud de registro.\\
 
-También existe el usuario dueño de la casa donde se encuentra el dispositivo, este usuario es opcional y es para gestionar los dispositivos presentes dentro de una misma casa, es un administrador de la casa, el cual puede ver y editar algunos campos de sus usuarios hijos o usuarios habitación y sus diferentes casas y habitaciones, unicamente las que esten registradas a su nombre, como se ve en la figura \ref{fig:views}\textbf{(b)}, de este modo el rol de este usuario es administrar su casa y visualizar los datos de esta.\\
+También existe el usuario dueño de la vivienda donde se encuentra el dispositivo, este usuario es opcional y es para gestionar los dispositivos presentes dentro de un mismo domicilio, es un administrador de la casa, el cual puede revisar y editar algunos campos de sus usuarios hijos o usuarios habitación y sus diferentes casas y habitaciones, únicamente las que estén registradas a su nombre, como se ve en la figura \ref{fig:views}\textbf{(b)}, de este modo el rol de dicho usuario es administrar su hogar y visualizar los datos de esta.\\
 
-Por último, otro rol es el de usuario habitación, el cuál es un usuario que solo visualiza sus propios datos, como la habitación y los dispositivos presentes en esta, como se observa en la figura \ref{fig:views}\textbf{(c)}, a este solo le compete la información de lo que posee en su habitación, por tal motivo el panel de control muestra una vista general de los datos y el estado de sus dispositivos, además de tener la capacidad de editar partes básicas de su habitación y perfil. Este usuario puede o no estar sujeto a un usuario padre o usuario casa, ya que, solamente puede poseer una tarjeta para su habitación y ninguna otra en dicha casa.\\
+Por último, otro rol es el de usuario habitación, el cuál únicamente visualiza sus propios datos, como la habitación y los dispositivos presentes en esta, según se observa en la figura \ref{fig:views}\textbf{(c)}, a este solo le compete la información de lo que posee en su cuarto, por tal motivo el panel de control muestra una vista general de los datos y el estado de sus dispositivos, además de tener la capacidad de editar partes básicas de su habitación y perfil. Dicho usuario puede o no estar sujeto a un usuario padre o usuario casa, ya que, solamente posee una tarjeta para su habitación y ninguna otra en dicha casa.\\
 
-Continuando con este usuario y la habitación modelo propuesta al inicio del capitulo, luego de que el usuario accede a la aplicación web e inicia sesión con los datos que ha registrado en el sistema, al ser un usuario de una habitación, este se encuentra con un panel de control como el de la figura \ref{fig:views}\textbf{(c)}, allí puede gestionar los dispositivos presentes en su habitación, así pues, puede visualizar la temperatura que se ha sensado y también encender o apagar los dispositivos conectados a la tarjeta.\\
+Continuando con este usuario y la habitación modelo propuesta al inicio del capitulo, luego de que accede a la aplicación web e inicia sesión con los datos que ha registrado en el sistema, al ser un usuario de una habitación, este se encuentra con un panel de control como el de la figura \ref{fig:views}\textbf{(c)}, allí gestiona los dispositivos presentes en su habitación, así como también puede visualizar la temperatura que se ha sensado y encender o apagar los dispositivos conectados a la tarjeta.\\
 
 \begin{figure}[H]
 	\centering
@@ -213,9 +213,9 @@ Para las salidas DC se realizan pruebas con un motor DC de 1W, además de una ti
 
 Para la prueba beta se escoge un grupo de personas, las cuales interactuan directamente con la aplicación web y el prototipo de la tarjeta SmartHouse, se detallan los diferentes items a evaluar mencionados anteriormente, como el ingreso a la aplicación, visualización de los datos almacenados en esta y el control de los dispositivos.\\
 
-Así, para evaluar estas características se formulan las siguientes preguntas, que se califican de acuerdo a una escala tipo likert \cite{lik} de uno a cinco en la cual, cinco es la calificación máxima y uno la mínima. Las preguntas se formulan para evidenciar la postura del cliente en cuanto a las funcionalidades de la aplicación, de acuerdo a esto la encuesta que se diseña esta presente en el Anexo \ref{AnexoB}.
+Así, para evaluar estas características se formulan las siguientes preguntas, que se califican de acuerdo a una escala tipo likert \cite{lik} de uno a cinco en la cual, cinco es la calificación máxima y uno la mínima. Estas se formulan para evidenciar la postura del cliente en cuanto a las funcionalidades de la aplicación, de acuerdo a esto la encuesta que se diseña esta presente en el Anexo \ref{AnexoB}, como se ha mencionado en la sección de desarrollo.
 
-Los resultados de la prueba realizada a cinco personas se consignan en la tabla \ref{table:enc}, realizando el promedio de cada pregunta y presentando un resultado total.
+La prueba se realiza a quince personas, entre los cuales algunos son estudiantes de ingería electrónica y personas ajenas a este tipo de escenarios, los resultados de la prueba se consignan en la tabla \ref{table:enc} y también en el Anexo \ref{AnexoC} en forma digital, realizando el promedio de cada pregunta y presentando un resultado total. Además en los anexos se encuentra el documento que cada persona respondió.
 
 \begin{table}[H]
 	\begin{center}
@@ -223,28 +223,32 @@ Los resultados de la prueba realizada a cinco personas se consignan en la tabla 
 		\label{table:enc}
 		\begin{tabular}{|c|c|}
 			\hline 
-			Número de la Pregunta & Promedio \\ 
+			\textbf{Número de la Pregunta} & \textbf{Promedio} \\ 
 			\hline 
-			1 & 4.4\\ 
+			1 & 4.5\\ 
 			\hline 
-			2 & 5\\ 
+			2 & 4.8\\ 
 			\hline 
-			3 & 4.6\\ 
+			3 & 4.5\\ 
 			\hline 
-			4 & 5\\ 
+			4 & 5.0\\ 
 			\hline 
-			5 & 5\\ 
+			5 & 4.9\\ 
 			\hline 
-			6 & 5\\ 
+			6 & 4.9\\ 
 			\hline 
-			7 & 5\\ 
+			7 & 4.3\\ 
 			\hline 
-			8 & 5\\ 
+			8 & 4.3\\ 
 			\hline 
-			9 & 4.6\\ 
+			9 & 4.8\\ 
+			\hline 
+			\textbf{Total} & \textbf{4.7}\\ 
 			\hline 
 		\end{tabular} 
 	\end{center}
 \end{table}
 
-En general la aplicación recibe una calificación de 4.9, por lo tanto se puede decir que las funcionalidades requeridas están programadas de una manera adecuada y simple para que el usuario disponga de ellas.
+De acuerdo con los resultados obtenidos para cada pregunta se pueden analizar individualmente y en su totalidad, por lo tanto, con respecto al método para conectar la tarjeta a Internet se obtiene un promedio de 4.5, indicando que 
+
+En general la aplicación recibe una calificación de 4.7, por lo tanto se puede decir que las funcionalidades requeridas están programadas de una manera adecuada y simple para que el usuario disponga de ellas, pero es posible mejorarlas para que sean mucho más intuitivas para el usuario y que no se le presenten dudas al momento de usarla.
