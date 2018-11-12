@@ -21,7 +21,7 @@ En los siguientes ítems se resaltaran las características más importantes que
 		El prototipo recibe el voltaje directamente de la red eléctrica a la que se encuentra conectado el entorno de aplicación, el cual está pensado para una habitación dentro de una Smart House; en el caso de Colombia, la red doméstica comúnmente otorga 110V AC, los cuales son regulados para el funcionamiento adecuado del prototipo, como la etapa de potencia AC y el detector de cruce por cero con el fin de sincronizar la tarjeta a dicha red eléctrica.\\
 		
 	\paragraph{Corriente directa (DC):}
-		Para la alimentación DC del circuito se hace uso de un conversor AC-DC que regula el voltaje de la red eléctrica a 12V DC, con los cuales se manejara la etapa de potencia DC, además de ser usados por dos modulos conversores DC-DC, mostrados en la figura \ref{fig:DCDC}, ambos con entradas de 12V DC y con salidas a los niveles lógicos comunes, 5V y 3.3V, empleados con el fin de alimentar dispositivos como opto acopladores, transistores BJT o relevadores con activación de 5V, así como también la tarjeta de prototipo ESP32.\\
+		Para la alimentación DC del circuito, se hace uso de un conversor AC-DC que regula el voltaje de la red eléctrica a 12V DC, con los cuales se manejara la etapa de potencia DC, además de ser usados por dos modulos conversores DC-DC, mostrados en la figura \ref{fig:DCDC}, ambos con entradas de 12V DC y con salidas a los niveles lógicos comunes, 5V y 3.3V, empleados con el fin de alimentar dispositivos como optoacopladores, transistores BJT o relevadores con activación de 5V, así como también la tarjeta de prototipo ESP32.\\
 		
 		Cabe resaltar que la tarjeta permite una entrada externa de 12VDC a 5A si se desean controlar cargas a un máximo de 50W.\\
 			
@@ -34,9 +34,9 @@ En los siguientes ítems se resaltaran las características más importantes que
 	
 	\subsection{Entradas}
 	\paragraph{Sensores:}
-		el prototipo viene equipado con una etapa de adquisición de datos con capacidad entre 7 a 134 sensores, pues posee una entrada I2C, ampliando el número de dispositivos conectados, lo cual también permitiría adicionar tareas más específicas en escenarios que lo requieran.\\
+		El prototipo viene equipado con una etapa de adquisición de datos con capacidad entre 7 a 134 sensores, pues posee una entrada I2C, ampliando el número de dispositivos conectados, lo cual también permitiría adicionar tareas más específicas en escenarios que lo requieran.\\
 		
-		Con la finalidad de realizar pruebas del prototipo, se hacen uso de 5 sensores para medir magnitudes y situaciones en el entorno tal como calidad del aire, temperatura, humedad, luz visible, movimiento y presencia de lluvia, debido a que estas medidas o estados se encuentran en casi cualquier ambiente. Teniendo en cuenta que el ESP32 funciona en voltajes lógicos de 3.3V, se tienen 4 entradas de sensores directamente conectados a los pines de la tarjeta, con la capacidad de cambiar el voltaje de alimentación para 3 de ellos, como se muestra en la figura \ref{fig:SVS}, pues en el mercado se encuentran sensores que manejan voltajes de alimentación ya sea de 3.3V o 5V, mientras que la cuarta entrada se encuentra alimentada con 5V, ya que tiene un uso específico en las pruebas para el sensor de calidad de aire, esta viene acondicionada con un diodo zener en contraposición, para evitar que la tarjeta ESP32 tenga un voltaje de entrada superior a 3.3V, según se observa en la figura \ref{fig:S1Aire}.\\
+		Con la finalidad de realizar pruebas del prototipo, se hacen uso de 5 sensores para medir magnitudes y situaciones en el entorno, tal como calidad del aire, temperatura, humedad, luz visible, movimiento y presencia de lluvia, debido a que estas medidas o estados se encuentran en casi cualquier ambiente. Teniendo en cuenta que el ESP32 funciona en voltajes lógicos de 3.3V, se tienen 4 entradas de sensores directamente conectados a los pines de la tarjeta, con la capacidad de cambiar el voltaje de alimentación para 3 de ellos, como se muestra en la figura \ref{fig:SVS}, pues en el mercado se encuentran sensores que manejan voltajes de alimentación ya sea de 3.3V o 5V, mientras que la cuarta entrada se encuentra alimentada con 5V, ya que tiene un uso específico en las pruebas para el sensor de calidad de aire, esta viene acondicionada con un diodo zener en contraposición, para evitar que la tarjeta ESP32 tenga un voltaje de entrada superior a 3.3V, según se observa en la figura \ref{fig:S1Aire}.\\
 		
 		Las tres entradas para sensores de estado (ST1, ST2, ST3), a diferencia de las demás, se encuentran conectadas a pines de la tarjeta que no presentan resistencia de pull down por software, por ello se agregan estas al sistema, tal como se observa en la figura \ref{fig:ST}.\\
 		
@@ -62,17 +62,17 @@ En los siguientes ítems se resaltaran las características más importantes que
 		\end{figure}		
 	
 	\paragraph{Calibración de audio:}
-		para calibrar la salida audible se hace uso de una resistencia variable (Potenciometro), el cual permite regular el voltaje de entrada al circuito de amplificación, mostrado en la figura \ref{fig:AUD} y será descrito en el presente capitulo en la sección de salidas del hardware.\\
+		Para calibrar la salida audible se hace uso de una resistencia variable (Potenciometro), el cual permite regular el voltaje de entrada al circuito de amplificación mostrado en la figura \ref{fig:AUD}; este será descrito en el presente capitulo en la sección de salidas del hardware.\\ 
 		
 	\paragraph{Botón enable:}
-		presionando el botón enable se reinicia la tarjeta ESP32, junto con su firmware.\\
+		Presionando el botón enable se reinicia la tarjeta ESP32, junto con su firmware.\\
 		
 	\paragraph{Botón reset:}
-		presionando el botón reset se borran las credenciales ingresadas para la conexión del ESP32 a la red wifi.\\
+		Presionando el botón reset se borran las credenciales ingresadas para la conexión del ESP32 a la red wifi.\\
 		
 	\subsection{Salidas:}
 	\paragraph{Etapa de potencia AC:}
-		se encuentra diseñada a una potencia de 2000W en un total de seis cargas, cuatro de ellas cuentan con un circuito para el control por ángulo de fase, como se observa en la figura \ref{fig:CAC1}, con una capacidad individual de 500W, gracias a el TRIAC BTA26600, mostrado en la figura \ref{fig:TRIAC}, el cual soporta una corriente máxima de 25A; con el fin de proteger el ESP32, se hace uso de optoacopladores MOC3021, debido a su funcionalidad de aislar circuitos de forma óptica.\\
+		Se encuentra diseñada a una potencia de 2000W en un total de seis cargas, cuatro de ellas cuentan con un circuito para el control por ángulo de fase, como se observa en la figura \ref{fig:CAC1}, con una capacidad individual de 500W, gracias a el TRIAC BTA26600, mostrado en la figura \ref{fig:TRIAC}, el cual soporta una corriente máxima de 25A. Con el fin de proteger el ESP32, se hace uso de optoacopladores MOC3021, debido a su funcionalidad para aislar circuitos de forma óptica.\\
 		
 		\begin{figure}[H]
 			\centering
@@ -97,7 +97,7 @@ En los siguientes ítems se resaltaran las características más importantes que
 			\includegraphics[width=0.7\linewidth]{Imagenes/ONOFAC}
 		\end{figure}
 	
-		Dentro de la etapa AC se encuentra el detector de cruce por cero, el cual se vale de un fototransistor 4N25, debido a su alta capacidad de aislamiento, tomando la onda rectificada completa y pasándola a un nivel lógico de 3.3V, esta parte del circuito se observa en la figura \ref{fig:DC01}; para que la señal sea más confiable se hace uso de un Schmitt-Trigger CD40106 mostrado en la figura \ref{fig:DC02}, valiéndose de la histéresis de voltaje garantizando que la señal de salida sea poco susceptible al ruido \cite{DC0}.\\
+		Dentro de la etapa AC se encuentra el detector de cruce por cero, el cual cuenta con un fototransistor 4N25, debido a su alta capacidad de aislamiento, tomando la onda rectificada completa y pasándola a un nivel lógico de 3.3V, esta parte del circuito se observa en la figura \ref{fig:DC01}; para que la señal sea más confiable se hace uso de un Schmitt-Trigger CD40106 mostrado en la figura \ref{fig:DC02}, valiéndose de la histéresis de voltaje garantizando que la señal de salida sea poco susceptible al ruido \cite{DC0}.\\
 		
 		\begin{figure}[H]
 			\centering
@@ -114,7 +114,7 @@ En los siguientes ítems se resaltaran las características más importantes que
 		\end{figure}
 	
 	\paragraph{Etapa DC:}
-		esta etapa cuenta con cuatro salidas de control diseñadas para cargas de 12V, de las cuales, dos de ellas tienen un enfoque enfoque a motores, puesto que está equipada con control de velocidad a base de PWM e inversión de giro con un puente h usando transistores mosfet IRLZ44N; el puente h se encuentra controlado por un circuito integrado L293D, que garantiza un voltaje Vgs adecuado para la correcta activación del los transistores del puente h; este circuito se muestra en la figura \ref{fig:L293D} y \ref{fig:CDC}.\cite{IRL}.\\
+		Esta etapa cuenta con cuatro salidas de control diseñadas para cargas de 12V, de las cuales, dos de ellas tienen un enfoque a motores, puesto que está equipada con control de velocidad a base de PWM e inversión de giro con un puente h usando transistores mosfet IRLZ44N; el puente h se encuentra controlado por un circuito integrado L293D, que garantiza un voltaje Vgs adecuado para la correcta activación del los transistores; este circuito se muestra en la figura \ref{fig:L293D} y \ref{fig:CDC}.\cite{IRL}.\\
 		
 		Las dos salidas restantes también cuentan con mosfet IRLZ44N, y su control igualmente es a base de PWM, mas no permite realizar la inversión de giro, por lo cual se enfoca a dispositivos como lámparas LEDs, el diseño en proteus se muestra en la figura \ref{fig:ONOFDC}.\\
 		
@@ -140,11 +140,11 @@ En los siguientes ítems se resaltaran las características más importantes que
 		\end{figure}
 	
 	\paragraph{Salida audible:}
-		está diseñada para emitir desde sonidos a una sola frecuencia, o sonido mono estéreo, caso dado cuando se activa una regla programada en la aplicación web, enfocada a las cargas de encendido y apagado, tanto de la etapa de potencia AC como la etapa DC; el sonido emitido por el prototipo corresponde a una voz con tonalidad femenina, pronunciando el estado en el cual se configura la carga según la regla (ya sea encendido, o apagado).\\
+		Está diseñada para emitir sonidos a una sola frecuencia, o sonido mono estéreo, caso dado cuando se activa una regla programada en la aplicación web, enfocada a las cargas de encendido y apagado, tanto de la etapa de potencia AC como la etapa DC; el sonido emitido por el prototipo corresponde a una voz con tonalidad femenina, pronunciando el estado en el cual se configura la carga según la regla (ya sea encendido, o apagado).\\
 		
 		El circuito utilizado para la salida audible está basado en el amplificador de audio LM386, implementando el esquema típico de aplicación ilustrado en su datasheet \cite{LM386}, en la figura \ref{fig:AUD} se observa implementado en el software proteus.\\
 		
-		Como se mencionó anteriormente, el circuito presenta un potenciómetro a la entrada para calibrar el voltaje de esta, con el obejtivo de no saturarla a fin de que el sonido a la salida sea lo mas fiel posible.\\
+		Como se mencionó anteriormente, el circuito presenta un potenciómetro a la entrada para calibrar el voltaje de esta, con el obejtivo de no saturarla y que la salida sea lo mas fiel posible.\\
 		
 		\begin{figure}[H]
 			\centering
@@ -155,7 +155,7 @@ En los siguientes ítems se resaltaran las características más importantes que
 				
 \section{Firmware}
 
-El firmware se desarrolla sobre el framework o SDK oficial de Espressif Systems, ESP-IDF el cual posee una documentación \cite{ES} muy útil a la hora de utilizar las diferentes APIs presentes en este; para el desarrollo de la aplicación es necesario contar con los requisitos que se observan en la figura \ref{fig:what-you-need}. El framework incluye un kernel de tiempo real llamado FreeRTOS, el cual da soporte al manejo de los diversos recursos del sistema; al ser un RTOS, las funciones se definen mediante tareas, entonces cada funcionalidad de la tarjeta o grupo de funcionalidades se desarrolla en una o varias tareas que realicen las acciones adecuadas, por ejemplo, en el caso de los sensores, cada uno tiene una tarea para la lectura y gestión de datos, así como también ocurre de manera similar con las salidas de la tarjeta, pues cuentan con tareas encargadas la gestión de encendido y apagado, asimismo para el control de cargas, ya sea por ángulo de fase o PWM.\\
+El firmware se desarrolla sobre el framework o SDK oficial de Espressif Systems ESP-IDF, el cual posee una documentación \cite{ES} muy útil a la hora de utilizar las diferentes APIs presentes en este; para el desarrollo de la aplicación es necesario contar con los requisitos que se observan en la figura \ref{fig:what-you-need}. Esta característica del sistema incluye un kernel de tiempo real llamado FreeRTOS, el cual da soporte al manejo de los diversos recursos del sistema; al ser un RTOS, las funciones se definen mediante tareas, entonces cada funcionalidad de la tarjeta o grupo de funcionalidades se desarrolla en una o varias tareas que realicen las acciones adecuadas, por ejemplo, en el caso de los sensores, cada uno tiene una tarea para la lectura y gestión de datos, así como también ocurre de manera similar con las salidas de la tarjeta, pues cuentan con tareas encargadas de la gestión del encendido y apagado, asimismo para el control de cargas, ya sea por ángulo de fase o PWM.\\
 
 \begin{figure}[H]
 	\centering
@@ -169,45 +169,45 @@ Sobre el firmware se desarrollan los siguientes temas:
 
 \paragraph{Tareas:}
 
-se ejecutan constantemente en el sistema operativo, realizando diferentes funciones para lectura, escritura y control.
+Se ejecutan constantemente en el sistema operativo, realizando diferentes funciones para lectura, escritura y control.
 
 \paragraph{GPIO:}
 
-el ESP-WROOM-32 posee diferentes GPIO, los cuales se usan para leer o escribir señales digitales, en cuanto a los sensores se pueden enviar señales con el fin de iniciar su lectura o simplemente tener el pin en modo entrada y leerlo cada cierto intervalo de tiempo generando datos de lectura, o en modo salida para el control de los diversos dispositivos que se han desarrollado en el hardware.
+El ESP-WROOM-32 posee diferentes GPIO, los cuales se usan para leer o escribir señales digitales; en cuanto a los sensores, se pueden enviar señales con el fin de iniciar su lectura o simplemente tener el pin en modo entrada y leerlo cada cierto intervalo de tiempo generando datos de lectura, o en modo salida para el control de los diversos dispositivos que se han desarrollado en el hardware.
 
 \paragraph{ADC,DAC:}
 
-los ADC se usan para leer los datos de algunos sensores que proporcionan señales analógicos, por este motivo se hace la conversión de la señal analógica a un valor digital dentro de la tarjeta, así luego identificar el dato de la lectura del sensor. Los DAC son usados para realizar la operación contraria, es decir, teniendo valores digitales convertirlos a un valor analógico por ejemplo generar audios o diferentes señales a partir del software.
+Los ADC se usan para leer los datos de algunos sensores que proporcionan señales analógicos, por este motivo se hace la conversión de la señal analógica a un valor digital dentro de la tarjeta, así luego identificar el dato de la lectura del sensor. Los DAC son usados para realizar la operación contraria, es decir, teniendo valores digitales convertirlos a un valor analógico por ejemplo generar audios o diferentes señales a partir del software.
 
 %\paragraph{Consola:}para realizar diferentes pruebas directamente desde la tarjeta, se usa la opción de la consola, la cual se comunica por medio del puerto serie, para esto se crean las funciones y los comandos que estaran disponibles; algunos son \textit{http}, para ejecutar las peticiones http manualmente y observar su respuesta, \textit{pin} para realizar la prueba de un pin digital como entrada o salida, \textit{help} para observar la lista de comandos, entre otros.
 
 \paragraph{HTTP Request:}
 
-las peticiones HTTP son indispensables en estas aplicaciones del campo IOT, por tal motivo en el desarrollo del firmware se usan las librerias pertinentes para realizarlas y además leer las respuestas de estas desde el servidor, ya que este es el medio de comunicación tarjeta-servidor.
+Las peticiones HTTP son indispensables en estas aplicaciones del campo IOT, por tal motivo en el desarrollo del firmware se usan las librerias pertinentes para realizarlas y además leer las respuestas de estas desde el servidor, ya que este es el medio de comunicación tarjeta-servidor.
 
 \paragraph{Hora de Red:}
 
-se obtiene la hora mediante el protocolo simple de tiempo de red (SNTP), este resulta de gran utilidad para la sincronización de los relojes de los sistemas informáticos. Se mantiene actualizada con el objetivo de realizar diferentes acciones respecto a esta.
+Se obtiene la hora mediante el protocolo simple de tiempo de red (SNTP), este resulta de gran utilidad para la sincronización de los relojes de los sistemas informáticos. Se mantiene actualizada con el objetivo de realizar diferentes acciones respecto a esta.
 
 \paragraph{Timers:}
 
-la tarjeta posee dos grupos de timers y cada uno tiene dos timers, un timer lo usa el sistema operativo, otro es configurado con el fin de realizar el control de potencia AC por ángulo de fase, para tener la sincronía necesaria con la señal de la red eléctrica.
+La tarjeta posee dos grupos de timers y cada uno tiene dos timers, un timer lo usa el sistema operativo, otro es configurado con el fin de realizar el control de potencia AC por ángulo de fase, para tener la sincronía necesaria con la señal de la red eléctrica.
 
 \paragraph{I2C:}
 
-el protocolo I2C se activa por medio de la instalación del driver en algún par de pines GPIO disponibles en la tarjeta. Se configura e inicia y posteriormente se crea una tarea la cuál se encarga de solicitar y leer los datos de los diferentes sensores conectados a este.
+El protocolo I2C se activa por medio de la instalación del driver en algún par de pines GPIO disponibles en la tarjeta. Se configura e inicia y posteriormente se crea una tarea la cuál se encarga de solicitar y leer los datos de los diferentes sensores conectados a este.
 
 \paragraph{PWM:}
 
-se ha mencionado anteriormente que con el propósito de controlar las cargas DC se usa una salida PWM, el ESP32 proporciona esta funcionalidad en algunos de sus pines, para su uso se configura y asignan los valores de funcionamiento.
+Se ha mencionado anteriormente que con el propósito de controlar las cargas DC se usa una salida PWM, el ESP32 proporciona esta funcionalidad en algunos de sus pines, para su uso se configura y asignan los valores de funcionamiento.
 
 \paragraph{Interrupciones:}
 
-las interrupciones se usan para no gastar recursos en un monitoreo constante de las entradas, solo cuando exista un cambio de nivel en la entrada el dispositivo desencadena una serie de instrucciones relacionadas con el tipo de interrupción y diversas funciones creadas para esta, la interrupción se usa por medio de los diferentes pines con este propósito en el hardware.
+Las interrupciones se usan para no gastar recursos en un monitoreo constante de las entradas, solo cuando exista un cambio de nivel en la entrada el dispositivo desencadena una serie de instrucciones relacionadas con el tipo de interrupción y diversas funciones creadas para esta, la interrupción se usa por medio de los diferentes pines con este propósito en el hardware.
 
 \section{Software}
 
-En esta sección se desarrolla una aplicación web, la cual se encarga de ejecutar la gestión entre el usuario y la tarjeta. De este modo, se usa un patrón de arquitectura Modelo-Vista-Controlador (MVC). Aquel modelo es realmente útil ya que separa la lógica de negocio de la interfaz de usuario, incrementando la reutilización y flexibilidad, además la escalabilidad de ambos aspectos por separado, dicho esto la aplicación cuenta con diferentes modelos, controladores y vistas \cite{MVC1}. La función de cada parte de esta arquitectura se puede observar en la figura \ref{fig:mvc}.\\
+En esta sección se desarrolla una aplicación web, la cual se encarga de ejecutar la gestión entre el usuario y la tarjeta. De este modo, se usa un patrón de arquitectura Modelo-Vista-Controlador (MVC), siendo este realmente útil ya que separa la lógica de negocio de la interfaz de usuario, incrementando la reutilización y flexibilidad, además de la escalabilidad de ambos aspectos por separado, dicho esto, la aplicación cuenta con diferentes modelos, controladores y vistas \cite{MVC1}. La función de cada parte de esta arquitectura se puede observar en la figura \ref{fig:mvc}.\\
 
 \begin{figure}[H]
 	\centering
@@ -217,9 +217,9 @@ En esta sección se desarrolla una aplicación web, la cual se encarga de ejecut
 \end{figure}
 
 
-Su funcionamiento es el siguiente, primero el usuario realiza alguna acción en la interfaz (por ejemplo, presiona un botón, un enlace, etc), luego el controlador recibe (por parte de los objetos de la interfaz-vista) la notificación de la acción solicitada por el usuario. El controlador gestiona el evento que llega. Luego el controlador accede al modelo, actualizándolo, posiblemente modificándolo de forma adecuada a la acción solicitada por el usuario (por ejemplo, el controlador actualiza los datos del perfil del usuario) y después la interfaz de usuario espera nuevas interacciones del usuario, comenzando el ciclo nuevamente \cite{MVC2}.\\
+Su funcionamiento es el siguiente, primero el usuario realiza alguna acción en la interfaz (por ejemplo, presiona un botón, un enlace, etc), luego el controlador recibe (por parte de los objetos de la interfaz-vista) la notificación de la acción solicitada por el usuario. El controlador gestiona el evento que llega, accediendo al modelo y actualizándolo, posiblemente modificándolo de forma adecuada a la acción solicitada por el usuario (por ejemplo, el controlador actualiza los datos del perfil del usuario) y después la interfaz de usuario espera nuevas interacciones del usuario, comenzando el ciclo nuevamente \cite{MVC2}.\\
 
-Este patrón de diseño se usa en la programación orientada a objetos, por lo tanto se realiza la aplicación en el lenguaje de programación PHP, ya que es realmente útil para realizar la gestión de peticiones y envíos de formularios en dicha aplicación, además de que es importante también la gestión de las bases de datos de la aplicación, por este motivo se utiliza un framework basado en este lenguaje y esta arquitectura, el cual realiza diferentes trabajos en cuanto a la parte de la arquitectura. Para gestionar las diferentes partes de la aplicación, en este caso se usa el framework Laravel, el cual como se menciona anteriormente está orientado a facilitar las tareas comunes de la mayoría de proyectos web que utilizan HTML5 y PHP.\\
+Este patrón de diseño se usa en la programación orientada a objetos, por lo tanto se realiza la aplicación en el lenguaje de programación PHP, ya que es realmente útil para realizar la gestión de peticiones y envíos de formularios en dicha aplicación, además de que es importante también la gestión de las bases de datos de la aplicación, por este motivo se utiliza un framework basado en este lenguaje y esta arquitectura. Para gestionar las diferentes partes de la aplicación, en este caso se usa el framework Laravel, pues como se menciona anteriormente, está orientado a facilitar las tareas comunes de la mayoría de proyectos web que utilizan HTML5 y PHP.\\
 
 Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llamado Eloquent. Esta es una forma de mapear los datos que se encuentran en la base de datos a objetos de PHP y viceversa, esto facilita el uso de diferentes gestores de bases de datos como MySQL, SQLite, entre otras, ya que todas las consultas estan en PHP y el ORM ya se encarga del mapeo a los comandos SQL como se observa en la figura \ref{fig:orm}. Eloquent usa los modelos para enviar y recibir información de la base de datos\cite{Eloq}.\\
 
@@ -232,14 +232,14 @@ Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llam
 
 \section{Prueba Beta}
 
-Esta prueba se desarrolla en el entorno del cliente o usuario, arrojando resultados sobre las funcionalidades provistas para el software, además de dar la aceptación por parte del cliente si el producto funciona de manera adecuada o esperada \cite{PB}. Con el fin de realizar dicha vereficación se analizan los objetivos a cumplir y los alcances, por lo tanto se separan los casos de prueba con el propósito de formular las preguntas que deben contestar las personas.\\
+Esta prueba se desarrolla en el entorno del cliente o usuario, arrojando resultados sobre las funcionalidades provistas para el software, además de dar la aceptación por parte del cliente si el producto funciona de manera adecuada o esperada \cite{PB}. Con el fin de realizar dicha verificación se analizan los objetivos a cumplir y los alcances, por lo tanto se separan los casos de prueba con el propósito de formular las preguntas que deben contestar las personas.\\
 
 En general se ha propuesto el desarrollo de una solución IoT, con alcances como controlar cargas AC o DC y visualizar el estado del entorno de aplicación por medio de la pagina web desarrollada, por este motivo se presentan los diferentes casos de prueba a realizar y se menciona a continuación; las preguntas formuladas para estos se encuentran en el Anexo \ref{AnexoB}.
 
-\paragraph{Prueba de conectividad de la tarjeta:} en la cual la persona que participa en esta prueba debe realizar los primeros pasos para conectar la tarjeta con internet como se expone más adelante en resultados y se explica en Anexos en el manual de usuario.\\
+\paragraph{Prueba de conectividad de la tarjeta:} La persona que participa en esta prueba debe realizar los primeros pasos para conectar la tarjeta con internet como se expone más adelante en resultados y se explica en Anexos en el manual de usuario.\\
 
-De acuerdo con esto se califica la forma en que el cliente realiza este procedimiento, con la finalidad analizar si es adecuada la manera en que conecta la tarjeta SmartHouse a Internet por medio de Wi-Fi y también como reiniciar la conexión de la tarjeta para configurar nuevamente la red a la que se va a conectar. Las preguntas del número uno a la tres califican esta funcionalidad.\\
+De acuerdo con esto se califica la forma en que el cliente realiza este procedimiento, con la finalidad de analizar si es adecuada la manera en que se conecta la tarjeta SmartHouse a Internet por medio de Wi-Fi y también como reiniciar la conexión de la tarjeta para configurar nuevamente la red a la que se va a conectar. Las preguntas del número uno a la tres califican esta funcionalidad.\\
 
-\paragraph{Prueba de la Aplicación Web:} en la cual se evalúan diferentes aspectos y la mas extensa, ya que se evalúa el inicio de sesión, el monitoreo y control de todos los dispositivos que se encuentra conectados en tarjeta SmartHouse, además de las funcionalidades que posee el sistema en general.\\
+\paragraph{Prueba de la Aplicación Web:} Evalúa el inicio de sesión, el monitoreo y control de todos los dispositivos que se encuentra conectados en tarjeta SmartHouse, además de las funcionalidades que posee el sistema en general.\\
 
 Para esta prueba se deben realizar diferentes procedimientos, como iniciar sesión en la aplicación, encender o apagar un dispositivo, visualizar los datos de los sensores y configurar las reglas para los dispositivos. Las preguntas de la número cuatro en adelante califican estos aspectos y funcionalidades.\\
