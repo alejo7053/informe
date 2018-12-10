@@ -1,5 +1,14 @@
 \chapter{Desarrollo}
 
+El sistema IoT propuesto para una habitación de un entorno Smart House, pretende ser fácil de visualizar y manipular para el usuario, para ello se desarrolla una aplicación web (software) que permite la cómoda navegación a través de ella y que las interacciones humano-maquina sean de manera intuitiva.\\
+
+La aplicación web está conectada con la tarjeta Smart House (Hardware), ya que esta cuenta con conexión wifi, la cual es gestionada por el Firmware del dispositivo, generando así la interacción máquina-máquina, con el fin de realizar la conexión entre software y hardware de manera adecuada. Además de esto, el firmware gestiona las múltiples tareas que realiza la tarjeta, como lo son la lectura de datos y modificación de estado de cargas, entre otras.\\
+
+Para la construcción del hardware se tomaron como referencia valores de operación presentes en el mercado, de este modo las salidas para cargas DC fueron definidas para un voltaje de 12V, ya que se comercializan dispositivos como lámparas LEDs o mecanismos capaces de abrir y cerrar ventanas o persianas con este nivel de voltaje, entre otros. Por otra parte, para las cargas AC se define en base a la red eléctrica domestica de Colombia, siendo esta 110V. Para las entradas del dispositivo se tiene los sensores ya mencionados en la sección (marco teórico sensores), los cuales funcionan a voltajes lógicos de 5V y 3.3V.\\
+
+Para el funcionamiento del Firmware y el Hardware se hace uso del ESP32 como unidad central de mando, ya que este cuenta con un procesador de 32 bits de dos núcleos, de los cuales uno de ellos se encarga de la conexión wifi y el manejo del protocolo IP, mientras que el otro se encarga de los demás procesos del sistema, los cuales en este caso serán descritos en este capítulo. Adicionalmente, el ESP32 tiene DAC, lo cual permite manejar salidas de audio analógicas, tales como la voz.\\
+
+
 \section{Hardware}\label{sec:hw}
 
 El prototipo para Smart House tiene por objetivo monitorear el entorno de aplicación y controlarlo por medio de mecanismos como motores o dispositivos de iluminación, razón por la cual está equipada con etapas de potencia de corriente alterna y directa, etapa de adquisición de datos, entre otras características que permitan cumplir con los objetivos planteados.\\ 
