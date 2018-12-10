@@ -64,9 +64,9 @@ Continuando con este usuario y la habitación modelo propuesta al inicio del cap
 	\centering
 	\caption{Vistas de Usuarios [Imagen Propia]}
 	\label{fig:views}
-	\subfigure[Usuario Administrador]{\includegraphics[width=0.9\linewidth]{Imagenes/Admin_view}}
-	\subfigure[Usuario de Casa]{\includegraphics[width=0.45\linewidth]{Imagenes/UserH_view}}
-	\subfigure[Usuario de Habitación]{\includegraphics[width=0.45\linewidth]{Imagenes/UserR_view}}
+	\subfigure[Usuario Administrador]{\includegraphics[width=0.95\linewidth]{Imagenes/Admin_view}}
+	\subfigure[Usuario de Casa]{\includegraphics[width=0.49\linewidth]{Imagenes/UserH_view}}
+	\subfigure[Usuario de Habitación]{\includegraphics[width=0.49\linewidth]{Imagenes/UserR_view}}
 \end{figure}
 
 Además de este panel de control, desde el cuál se realizan las operaciones sobre la aplicación, en la parte privada se encuentra la ruta encargada de la actualización Servidor-Tarjeta, es decir, en esta ruta es donde se intercambia la información. Allí se realiza una petición HTTP tipo GET por parte de la tarjeta, incluyendo en su contenido el id de la habitación en la que está instalada, junto con el token correspondiente a esta, además en la URL se añade un texto tipo JSON en el cual se ubican todas los datos de la lectura actual de los sensores; esta petición la responde el servidor con un texto también tipo JSON que contiene la información pertinente de las cargas o actuadores como se observa la Figura \ref{fig:updateview}. Para dar seguridad a dicha transacción, se utiliza el token mencionado anteriormente, el cual se verifica mediante el id de la habitación comparando el recibido con el almacenado.\\
@@ -75,7 +75,7 @@ Además de este panel de control, desde el cuál se realizan las operaciones sob
 	\centering
 	\caption{Página de intercambio de datos [Imagen Propia]}
 	\label{fig:updateview}
-	\includegraphics[width=0.7\linewidth]{Imagenes/Update_view}
+	\includegraphics[width=1\linewidth]{Imagenes/Update_view}
 \end{figure}
 
 De este modo, el usuario interactuando con la aplicación genera modificaciones en el texto con que responde el servidor a la petición de la tarjeta. Si el usuario desea encender el ventilador, como se observa en la Figura \ref{fig:views}\textbf{(c)} esta presente un botón en la información del dispositivo, el cual con presionarlo lo enciende o apaga, esto es valido para cualquiera de los dos dispositivos, sea el ventilador o el bombillo led.\\
