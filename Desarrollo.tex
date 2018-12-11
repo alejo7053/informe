@@ -1,17 +1,37 @@
 \chapter{Desarrollo}
 
-El sistema IoT propuesto para una habitación de un entorno Smart House, pretende ser fácil de visualizar y manipular por el usuario, por este motivo se desarrolla una aplicación web (software) que permite la cómoda navegación a través de ella y que las interacciones humano-máquina sean de manera intuitiva.\\
+El sistema IoT propuesto para una habitación de un entorno Smart House representado por el esquema de la Figura \ref{fig:diagramas}, pretende ser fácil de visualizar y manipular por el usuario, por este motivo se desarrolla una aplicación web (software) que permite la cómoda navegación a través de ella y que las interacciones humano-máquina sean de manera intuitiva. Esta característica del sistema está diseñada de tal manera que solo los usuarios puedan ver el estado de la habitación, ya que para hacerlo es necesario ingresar las credenciales oficiales otorgadas por el Usuario Administrador, el cual es uno de los tres roles de usuario existentes en el sistema, junto con el rol de Usuario Casa y Usuario Habitación.\\
 
+Como se mencionó anteriormente, el Usuario Administrador es quien otorga las credenciales a los demás usuarios, ya que este tiene la facultad de crear, editar y eliminar los registros de la aplicación, lo cual a su vez lo hace exclusivo, es decir, no esta abierto para el público o los clientes.\\ 
+
+En ese orden de ideas, los demás usuarios tienen privilegios limitados a las necesidades de cada rol, es decir, los Usuarios Casa tienen acceso a la revisión y edición de algunos campos de las viviendas registradas a su nombre y de los usuarios Habitación vinculados a él, además de poder gestionar los dispositivos en el hogar. Cabe resaltar que este usuario es opcional, puesto que un Usuario Habitación puede operar de manera independiente, teniendo esta la simple vista de los dispositivos conectados, es decir, tiene acceso a el panel de control que representa la habitación en cuestión.\\
+ 
 La aplicación web está conectada con la tarjeta Smart House (Hardware), ya que esta cuenta con conexión a Internet vía WiFi, la cual es gestionada por el Firmware del dispositivo, con el fin de realizar el vínculo entre software y hardware de manera adecuada. Además, el firmware gestiona las múltiples tareas que realiza la tarjeta, como lo son la lectura de datos y la gestión de las cargas conectadas a las diferentes salidas AC o DC, entre otras funcionalidades.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Imagenes/Diagramas}
+	\caption{Esquema del sistema IoT [Imagen Propia]}
+	\label{fig:diagramas}
+\end{figure}
 
 Para la construcción del hardware se tomaron como referencia valores de operación presentes en el mercado, de modo que las salidas para cargas DC fueron definidas a un voltaje de 12V, ya que se comercializan dispositivos como lámparas LEDs o mecanismos capaces de abrir y cerrar ventanas o persianas con este nivel de tensión, entre otros. Por otra parte, el voltaje para las cargas AC se define con base en la red eléctrica doméstica de Colombia, siendo esta 110VAC. Para las entradas del dispositivo se cuenta con los sensores mencionados anteriormente en la Sección \ref{sec:sensors}, los cuales funcionan con voltajes lógicos de 5V y 3.3V. Estos sensores se eligen por ser los más usados en dicho ámbito además de que se acomodan a las necesidades de una habitación, como sensar presencia, temperatura, calidad del aire y demás.\\
 
-Además, para el funcionamiento del Firmware y el Hardware se hace uso del ESP32 como unidad central de mando, ya que cuenta con un procesador de 32 bits de dos núcleos, de los cuales uno de ellos se encarga de la conexión WiFi, mientras que el otro se encarga de los demás procesos del sistema, los cuales en este caso serán descritos en el presente capítulo. Adicionalmente, el ESP32 cuenta con múltiples salidas y entradas como DACs y ADCs, lo cual permite manejar salidas de audio, entradas analógicas y demás. La ventaja del ESP32 es su integración del WiFi, Bluetooth y otras capacidades en un solo chip en comparación con las distintas tarjetas presentes en el mercado; también su precio con respecto a las funcionalidades que este ofrece.\\
+Además, para el funcionamiento del Firmware y el Hardware se hace uso del ESP32 como unidad central de mando, ya que cuenta con un procesador de 32 bits de dos núcleos, de los cuales uno de ellos se encarga de la conexión WiFi, mientras que el otro se encarga de los demás procesos del sistema descritos en el presente capítulo. Adicionalmente, el ESP32 cuenta con múltiples salidas y entradas como DACs y ADCs, lo cual permite manejar salidas de audio, entradas analógicas y demás. La ventaja del ESP32 es su integración del WiFi, Bluetooth y otras capacidades en un solo chip en comparación con las distintas tarjetas presentes en el mercado; también su precio con respecto a las funcionalidades que este ofrece.\\
+
 
 
 \section{Hardware}\label{sec:hw}
 
-El prototipo para Smart House tiene por objetivo monitorear el entorno de aplicación y controlarlo por medio de mecanismos como motores o dispositivos de iluminación, razón por la cual está equipada con etapas de potencia de corriente alterna y directa, etapa de adquisición de datos, entre otras características que permitan cumplir con los objetivos planteados.\\ 
+El prototipo para Smart House tiene por objetivo monitorear el entorno de aplicación y controlarlo por medio de mecanismos como motores o dispositivos de iluminación, razón por la cual está equipada con etapas de potencia de corriente alterna y directa como se muestra en el diagrama de la Figura \ref{fig:tar}, etapa de adquisición de datos, entre otras características que permitan cumplir con los objetivos planteados.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Imagenes/Tarjeta}
+	\caption{Diagrama de la tarjeta Smart House [Imagen Propia]}
+	\label{fig:tar}
+\end{figure}
+
 
 El prototipo fue diseñado en el software Proteus, desde el esquemático hasta la placa de circuito impreso (PCB). En la Figura \ref{fig:esp32} se observa el diagrama esquemático de la tarjeta ESP32 construido junto con su distribución de pines, además de sus conexiones correspondientes dentro de este programa. El prototipo está separado en dos secciones, la etapa de potencia AC y la etapa DC, en la última, se encuentra la mayor parte de circuitos que funcionan con corriente directa.\\
 
