@@ -10,28 +10,55 @@ La aplicación web está conectada con la tarjeta Smart House (Hardware), ya que
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Imagenes/Diagramas}
 	\caption{Esquema del sistema IoT [Imagen Propia]}
 	\label{fig:diagramas}
+	\includegraphics[width=0.7\linewidth]{Imagenes/Diagramas}
 \end{figure}
 
 Para la construcción del hardware se tomaron como referencia valores de operación presentes en el mercado, de modo que las salidas para cargas DC fueron definidas a un voltaje de 12V, ya que se comercializan dispositivos como lámparas LEDs o mecanismos capaces de abrir y cerrar ventanas o persianas con este nivel de tensión, entre otros. Por otra parte, el voltaje para las cargas AC se define con base en la red eléctrica doméstica de Colombia, siendo esta 110VAC. Para las entradas del dispositivo se cuenta con los sensores mencionados anteriormente en la Sección \ref{sec:sensors}, los cuales funcionan con voltajes lógicos de 5V y 3.3V. Estos sensores se eligen por ser los más usados en dicho ámbito además de que se acomodan a las necesidades de una habitación, como sensar presencia, temperatura, calidad del aire y demás.\\
 
 Además, para el funcionamiento del Firmware y el Hardware se hace uso del ESP32 como unidad central de mando, ya que cuenta con un procesador de 32 bits de dos núcleos, de los cuales uno de ellos se encarga de la conexión WiFi, mientras que el otro se encarga de los demás procesos del sistema descritos en el presente capítulo. Adicionalmente, el ESP32 cuenta con múltiples salidas y entradas como DACs y ADCs, lo cual permite manejar salidas de audio, entradas analógicas y demás. La ventaja del ESP32 es su integración del WiFi, Bluetooth y otras capacidades en un solo chip en comparación con las distintas tarjetas presentes en el mercado; también su precio con respecto a las funcionalidades que este ofrece.\\
 
-
-
 \section{Hardware}\label{sec:hw}
 
-El prototipo para Smart House tiene por objetivo monitorear el entorno de aplicación y controlarlo por medio de mecanismos como motores o dispositivos de iluminación, razón por la cual está equipada con etapas de potencia de corriente alterna y directa como se muestra en el diagrama de la Figura \ref{fig:tar}, etapa de adquisición de datos, entre otras características que permitan cumplir con los objetivos planteados.\\
+El prototipo para Smart House tiene por objetivo monitorear el entorno de aplicación y controlarlo por medio de mecanismos como motores o dispositivos de iluminación, razón por la cual está equipada con etapas de potencia de corriente alterna y directa, etapa de adquisición de datos, entre otras características, como se muestra en el diagrama de la Figura \ref{fig:tar} y en la Tabla \ref{fig:tar}, que permitan cumplir con los objetivos planteados.\\
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{Imagenes/Tarjeta}
 	\caption{Diagrama de la tarjeta Smart House [Imagen Propia]}
 	\label{fig:tar}
+	\includegraphics[width=0.7\linewidth]{Imagenes/Tarjeta}
 \end{figure}
 
+\begin{table}[H]
+	\begin{center}
+		\caption{Características Hardware.}
+		\label{table:carac}
+		\begin{tabular}{|c|c|c|}
+			\hline 
+			\textbf{Características Tarjeta SH} & \textbf{Cualidad/Cantidad} & \textbf{Métrica} \\ 
+			\hline 
+			Unidad central de mando & ESP32 & 1\\ 
+			\hline 
+			Entrada Sensores & 7 & 5VDC; 3.3VDC\\
+			\hline 
+			I2C & Si & 1\\
+			\hline 
+			Salidas/Cargas DC & 4 & 12VDC\\
+			\hline 
+			Salidas/Cargas AC & 6 & 110VAC\\
+			\hline 
+			Salida Audible & Si & 1\\
+			\hline 
+			WiFi & Si & 1\\ 
+			\hline 
+			Fuente Interna & 1 & 12VDC-2A\\
+			\hline
+			Conector Fuente Externa & 1 & 12VDC-5A Máx.\\
+			\hline
+		\end{tabular} 
+	\end{center}
+\end{table}
 
 El prototipo fue diseñado en el software Proteus, desde el esquemático hasta la placa de circuito impreso (PCB). En la Figura \ref{fig:esp32} se observa el diagrama esquemático de la tarjeta ESP32 construido junto con su distribución de pines, además de sus conexiones correspondientes dentro de este programa. El prototipo está separado en dos secciones, la etapa de potencia AC y la etapa DC, en la última, se encuentra la mayor parte de circuitos que funcionan con corriente directa.\\
 
@@ -263,7 +290,27 @@ Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llam
 	\includegraphics[width=0.7\linewidth]{Imagenes/ORM}
 \end{figure}
 
-Adicionalmente, para la aplicación web se definen tres roles que comprenden los tipos de usuarios de esta solución, un usuario administrador, un usuario casa y un usuario habitación. El usuario administrador es el encargado de gestionar todo en la aplicación, leer, crear, editar y borrar cualquier característica; como los otros usuarios, casas, habitaciones o dispositivos. El usuario casa se refiere a un administrador de la casa donde se tengan instaladas más de una tarjeta SmartHouse, es decir, que un hogar cuente con tres habitaciones en las cuales todas cuentan con tarjetas de SmartHouse, este usuario tiene la capacidad de leer, editar y controlar las habitaciones de su casa. Por último el usuario habitación es la mínima unidad, ya que es el cliente que posee una tarjeta SmartHouse instalada en su habitación, este puede gestionar sus dispositivos, leer y editar algunas características propias de su habitación. Dichos roles se gestionan a través del framework Laravel para asegurar que los propósitos de cada uno se cumplan, cabe resaltar que el usuario administrador no puede gestionar de ningún modo los estados de las salidas que poseen los dispositivos de casa usuario. El desarrollo de estos roles se enfoca en el usuario habitación y el usuario administrador, siendo el usuario casa un ítem adicional para asegurar la escalabilidad de la solución sin tener cambios en la base de datos.\\
+Adicionalmente, para la aplicación web se definen tres roles que comprenden los tipos de usuarios de esta solución, un usuario administrador, un usuario casa y un usuario habitación. El usuario administrador es el encargado de gestionar todo en la aplicación, leer, crear, editar y borrar cualquier característica; como los otros usuarios, casas, habitaciones o dispositivos. El usuario casa se refiere a un administrador de la casa donde se tengan instaladas más de una tarjeta SmartHouse, es decir, que un hogar cuente con tres habitaciones en las cuales todas cuentan con tarjetas de SmartHouse, este usuario tiene la capacidad de leer, editar y controlar las habitaciones de su casa. Por último el usuario habitación es la mínima unidad, ya que es el cliente que posee una tarjeta SmartHouse instalada en su habitación, este puede gestionar sus dispositivos, leer y editar algunas características propias de su habitación. En la tabla \ref{table:roles} se puede encontrar un resumen de cada rol.\\
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Roles en la aplicación web.}
+		\label{table:roles}
+		\begin{tabular}{|c|p{8cm}|}
+			\hline 
+			\textbf{Rol} & \textbf{Descripción} \\ 
+			\hline 
+			Usuario Administrador & Gestiona toda la aplicación web. Puede crear, leer, editar y eliminar diferentes componentes dentro de esta.\\ 
+			\hline 
+			Usuario Casa & Gestiona su propia casa registrada en la aplicación web. Puede leer y editar características de su propia casa y habitaciones.\\ 
+			\hline 
+			Usuario Habitación & Gestiona su propia habitación registrada en la aplicación web. Puede leer y editar características de su propia habitación.\\ 
+			\hline 
+		\end{tabular} 
+	\end{center}
+\end{table}
+
+Dichos roles se gestionan a través del framework Laravel para asegurar que los propósitos de cada uno se cumplan, cabe resaltar que el usuario administrador no puede gestionar de ningún modo los estados de las salidas que poseen los dispositivos de casa usuario. El desarrollo de estos roles se enfoca en el usuario habitación y el usuario administrador, siendo el usuario casa un ítem adicional para asegurar la escalabilidad de la solución sin tener cambios en la base de datos.\\
 
 Asimismo, por medio de funcionalidades incluidas en el framework como Bootstrap y JavaScript se desarrollan las diferentes vistas que cada usuario posee, así como un panel de control encargado de la gestión de la habitación para el usuario habitación o de la gestión de las casas y habitaciones para el usuario casa y la gestión general para el usuario administrador. De este modo al usar Bootstrap se tiene un diseño responsivo, lo que permite la correcta visualización de la aplicación web en cualquier tamaño de pantalla.\\
 
