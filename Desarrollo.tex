@@ -206,17 +206,21 @@ El ESP-WROOM-32 posee diferentes GPIO, los cuales se usan para leer o escribir s
 
 \paragraph{ADC,DAC:}
 
-Los ADC se usan para leer los datos de algunos sensores que proporcionan señales analógicos, por este motivo se hace la conversión de la señal analógica a un valor digital dentro de la tarjeta, así luego identificar el dato de la lectura del sensor. Los DAC son usados para realizar la operación contraria, es decir, teniendo valores digitales convertirlos a un valor analógico por ejemplo generar audios o diferentes señales a partir del software.
+Los ADC se usan para leer los datos de algunos sensores que proporcionan señales analógicos, por este motivo se hace la conversión de la señal analógica a un valor digital dentro de la tarjeta, así luego identificar el dato de la lectura del sensor. Los DAC son usados para realizar la operación contraria, es decir, teniendo valores digitales convertirlos a un valor analógico por ejemplo generar audios o diferentes señales a partir del software. Para esto se usa el driver correspondiente que provee el ESP-IDF para cada funcionalidad, sea para ADC o DAC o para salidas de audio por medio de I2S.
 
 %\paragraph{Consola:}para realizar diferentes pruebas directamente desde la tarjeta, se usa la opción de la consola, la cual se comunica por medio del puerto serie, para esto se crean las funciones y los comandos que estaran disponibles; algunos son \textit{http}, para ejecutar las peticiones http manualmente y observar su respuesta, \textit{pin} para realizar la prueba de un pin digital como entrada o salida, \textit{help} para observar la lista de comandos, entre otros.
 
 \paragraph{HTTP Request:}
 
-Las peticiones HTTP son indispensables en estas aplicaciones del campo IOT, por tal motivo en el desarrollo del firmware se usan las librerías pertinentes para realizarlas y además leer las respuestas de estas desde el servidor, ya que este es el medio de comunicación tarjeta-servidor.
+Las peticiones HTTP son indispensables en estas aplicaciones del campo IOT, por tal motivo en el desarrollo del firmware se usan las librerías pertinentes para realizarlas como LwIP que se encarga de la gestión del protocolo TCP/IP, cJSON para la gestión de los datos recibidos del servidor. Asimismo leer las respuestas de estas peticiones desde el servidor, ya que por medio de dichas peticiones se encuentra la comunicación tarjeta-servidor.
+
+\paragraph{Servidor HTTP Local:}
+
+El servidor local se desarrolla para proporcionar las credenciales de la red WiFi a la cual se debe conectar la tarjeta, para este servidor se adicionan las paginas en HTML y las librerías de JavaScript y hojas de estilo para su visualización por medio de diferentes APIs de la librería LwIP y hace uso de algunas peticiones HTTP como GET y POST para garantizar el correcto funcionamiento. La tarjeta solo puede gestionar máximo 4 hosts conectados al mismo tiempo.
 
 \paragraph{Hora de Red:}
 
-Se obtiene la hora mediante el protocolo simple de tiempo de red (SNTP), este resulta de gran utilidad para la sincronización de los relojes de los sistemas informáticos. Se mantiene actualizada con el objetivo de realizar diferentes acciones respecto a esta.
+Se obtiene la hora mediante el protocolo simple de tiempo de red (SNTP), este resulta de gran utilidad para la sincronización de los relojes de los sistemas informáticos. Se mantiene actualizada con el objetivo de realizar diferentes acciones respecto a esta. Además, se usan librerías propias de un sistema operativo como time, sys para almacenar y acceder a dicho dato luego de la sincronización con la hora de la red.
 
 \paragraph{Timers:}
 
@@ -228,11 +232,11 @@ El protocolo I2C se activa por medio de la instalación del driver en algún par
 
 \paragraph{PWM:}
 
-Se ha mencionado anteriormente que con el propósito de controlar las cargas DC se usa una salida PWM, el ESP32 proporciona esta funcionalidad en algunos de sus pines, para su uso se configura y asignan los valores de funcionamiento.
+Se ha mencionado anteriormente que con el propósito de controlar las cargas DC se usa una salida PWM, el ESP32 proporciona esta funcionalidad en algunos de sus pines, para su uso se configura y asignan los valores de funcionamiento por medio de la librería Ledc, la cual proporciona diferentes características para cada canal de PWM que se usa.
 
 \paragraph{Interrupciones:}
 
-Las interrupciones se usan para no gastar recursos en un monitoreo constante de las entradas, solo cuando exista un cambio de nivel en la entrada el dispositivo desencadena una serie de instrucciones relacionadas con el tipo de interrupción y diversas funciones creadas para esta, la interrupción se usa por medio de los diferentes pines con este propósito en el hardware.
+Las interrupciones se usan para no gastar recursos en un monitoreo constante de las entradas, sólo cuando exista un cambio de nivel en la entrada el dispositivo desencadena una serie de instrucciones relacionadas con el tipo de interrupción y diversas funciones creadas para esta, la interrupción se usa por medio de los diferentes pines con este propósito en el hardware. Adicionalmente, se deben iniciar estas interrupciones en ciertos puntos del sistema para que no lo saturen antes de arrancar todas sus funcionalidades.
 
 \section{Software}
 
@@ -258,6 +262,10 @@ Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llam
 	\label{fig:orm}
 	\includegraphics[width=0.7\linewidth]{Imagenes/ORM}
 \end{figure}
+
+Adicionalmente, para la aplicación web se definen tres roles que comprenden los tipos de usuarios de esta solución, un usuario administrador, un usuario casa y un usuario habitación. El usuario administrador es el encargado de gestionar todo en la aplicación, leer, crear, editar y borrar cualquier característica; como los otros usuarios, casas, habitaciones o dispositivos. El usuario casa se refiere a un administrador de la casa donde se tengan instaladas más de una tarjeta SmartHouse, es decir, que un hogar cuente con tres habitaciones en las cuales todas cuentan con tarjetas de SmartHouse, este usuario tiene la capacidad de leer, editar y controlar las habitaciones de su casa. Por último el usuario habitación es la mínima unidad, ya que es el cliente que posee una tarjeta SmartHouse instalada en su habitación, este puede gestionar sus dispositivos, leer y editar algunas características propias de su habitación. Dichos roles se gestionan a través del framework Laravel para asegurar que los propósitos de cada uno se cumplan, cabe resaltar que el usuario administrador no puede gestionar de ningún modo los estados de las salidas que poseen los dispositivos de casa usuario. El desarrollo de estos roles se enfoca en el usuario habitación y el usuario administrador, siendo el usuario casa un ítem adicional para asegurar la escalabilidad de la solución sin tener cambios en la base de datos.\\
+
+Asimismo, por medio de funcionalidades incluidas en el framework como Bootstrap y JavaScript se desarrollan las diferentes vistas que cada usuario posee, así como un panel de control encargado de la gestión de la habitación para el usuario habitación o de la gestión de las casas y habitaciones para el usuario casa y la gestión general para el usuario administrador. De este modo al usar Bootstrap se tiene un diseño responsivo, lo que permite la correcta visualización de la aplicación web en cualquier tamaño de pantalla.\\
 
 \section{Prueba Beta}
 
