@@ -47,7 +47,7 @@ En esta vista únicamente hay opciones para el contacto y solicitudes, como se m
 	\centering
 	\caption[Vista Pública.]{Vista Pública. [Imagen Propia]}
 	\label{fig:publicview}
-	\includegraphics[width=0.5\linewidth]{Imagenes/Public_view}
+	\includegraphics[width=0.25\linewidth]{Imagenes/Public_view}
 \end{figure}
 
 \subsection{Parte Privada}
@@ -60,13 +60,13 @@ Por último, otro rol es el de usuario habitación, el cuál únicamente visuali
 
 Continuando con este usuario y la habitación modelo propuesta al inicio del capítulo, luego de que accede a la aplicación web e inicia sesión con los datos que ha registrado en el sistema, al ser un usuario de una habitación, este se encuentra con un panel de control como el de la Figura \ref{fig:views}\textbf{(c)}. Allí gestiona los dispositivos presentes en su habitación, así como también puede visualizar la temperatura que se ha sensado y encender o apagar los dispositivos conectados a la tarjeta.\\
 
-\begin{figure}[H]
+\begin{figure}[p]
 	\centering
 	\caption[Vistas de Usuarios.]{Vistas de Usuarios. [Imagen Propia]}
 	\label{fig:views}
-	\subfigure[Usuario Administrador]{\includegraphics[width=0.95\linewidth]{Imagenes/Admin_view}}
-	\subfigure[Usuario de Casa]{\includegraphics[width=0.49\linewidth]{Imagenes/UserH_view}}
-	\subfigure[Usuario de Habitación]{\includegraphics[width=0.49\linewidth]{Imagenes/UserR_view}}
+	\subfigure[Usuario Administrador]{\includegraphics[width=0.9\linewidth]{Imagenes/Admin_view}}
+	\subfigure[Usuario de Casa]{\includegraphics[width=0.9\linewidth]{Imagenes/UserH_view}}
+	\subfigure[Usuario de Habitación]{\includegraphics[width=0.9\linewidth]{Imagenes/UserR_view}}
 \end{figure}
 
 Además de este panel de control, desde el cuál se realizan las operaciones sobre la aplicación, en la parte privada se encuentra la ruta encargada de la actualización Servidor-Tarjeta, es decir, en esta ruta es donde se intercambia la información. Allí se realiza una petición HTTP tipo GET por parte de la tarjeta, incluyendo en su contenido el id de la habitación en la que está instalada, junto con el token correspondiente a esta, además en la URL se añade un texto tipo JSON en el cual se ubican todas los datos de la lectura actual de los sensores; esta petición la responde el servidor con un texto también tipo JSON que contiene la información pertinente de las cargas o actuadores como se observa la Figura \ref{fig:updateview}. Para dar seguridad a dicha transacción, se utiliza el token mencionado anteriormente, el cual se verifica mediante el id de la habitación comparando el recibido con el almacenado.\\
@@ -75,7 +75,7 @@ Además de este panel de control, desde el cuál se realizan las operaciones sob
 	\centering
 	\caption[Página de intercambio de datos.]{Página de intercambio de datos. [Imagen Propia]}
 	\label{fig:updateview}
-	\includegraphics[width=1\linewidth]{Imagenes/Update_view}
+	\includegraphics[width=\linewidth]{Imagenes/Update_view}
 \end{figure}
 
 De este modo, el usuario interactuando con la aplicación genera modificaciones en el texto con que responde el servidor a la petición de la tarjeta. Si el usuario desea encender el ventilador, como se observa en la Figura \ref{fig:views}\textbf{(c)} esta presente un botón en la información del dispositivo, el cual con presionarlo lo enciende o apaga, esto es valido para cualquiera de los dos dispositivos, sea el ventilador o el bombillo led.\\
@@ -88,7 +88,7 @@ Adicional a esto, si el usuario desea añadir, modificar o eliminar una regla, p
 	\centering
 	\caption[Vista para añadir reglas.]{Vista para añadir reglas. [Imagen Propia]}
 	\label{fig:rulesview}
-	\includegraphics[width=0.6\linewidth]{Imagenes/rules_view}
+	\includegraphics[width=0.25\linewidth]{Imagenes/rules_view}
 \end{figure}
 
 \subsection{Base de Datos}
@@ -225,6 +225,22 @@ En esta sección se evidencia tanto el hardware implementado, como su correcto f
 Se observa que el hardware quedo dividido en dos tarjetas, esto para facilitar la construcción y distribución de los diferentes elementos utilizados, si se usan componentes superficiales y se aumentan las capas de la tarjeta es posible reducir el tamaño y hasta integrarlas en una sola board. En la construcción de estas tarjetas se comprende diferentes funcionamientos en cuanto a los triac y los transistores mosfet, reforzando conocimientos que se habían adquirido.\\
 
 \section{Prueba Beta Cerrada}
+
+%%%%%%%%%%%%%%%Parte de Desarrollo%%%%%%%%%%%%%%%%%
+
+Esta prueba se desarrolla en el entorno del cliente o usuario, arrojando resultados sobre las funcionalidades provistas para el software, además de dar la aceptación por parte del cliente si el producto funciona de manera adecuada o esperada \cite{PB}. Con el fin de realizar dicha verificación se analizan los objetivos a cumplir y los alcances, por lo tanto se separan los casos de prueba con el propósito de formular las preguntas que deben contestar las personas.\\
+
+En general se ha propuesto el desarrollo de una solución IoT, con alcances como controlar cargas AC o DC y visualizar el estado del entorno de aplicación por medio de la página web desarrollada, además de que esta aplicación web sea fácil de usar para el usuario, por este motivo se presentan los diferentes casos de prueba a realizar y se mencionan a continuación; las preguntas formuladas para estos se encuentran en el Anexo \ref{AnexoB}.
+
+\paragraph{Prueba de conectividad de la tarjeta:} La persona que participa en esta prueba debe realizar los primeros pasos para conectar la tarjeta con internet como se expone más adelante en resultados y se explica en Anexos en el manual de usuario.\\
+
+De acuerdo con esto se califica la forma en que el cliente realiza este procedimiento, con la finalidad de analizar si es adecuada la manera en que se conecta la tarjeta SmartHouse a Internet por medio de Wi-Fi y también como reiniciar la conexión de la tarjeta para configurar nuevamente la red a la que se va a conectar. Las preguntas del número uno a la tres califican esta funcionalidad.\\
+
+\paragraph{Prueba de la Aplicación Web:} Evalúa el inicio de sesión, el monitoreo y control de todos los dispositivos que se encuentra conectados en tarjeta SmartHouse, además de las funcionalidades que posee el sistema en general.\\
+
+Para esta prueba se deben realizar diferentes procedimientos, como iniciar sesión en la aplicación, encender o apagar un dispositivo, visualizar los datos de los sensores y configurar las reglas para los dispositivos. Las preguntas presentes en el Anexo \ref{AnexoB} de la número cuatro en adelante califican estos aspectos y funcionalidades.\\
+
+%%%%%%%%%%%%%%%FIN%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Para la prueba beta se escoge un grupo de personas, las cuales interactuan directamente con la aplicación web y el prototipo de la tarjeta SmartHouse, se detallan los diferentes items a evaluar mencionados anteriormente, como el ingreso a la aplicación, visualización de los datos almacenados en esta y el control de los dispositivos.\\
 
