@@ -4,7 +4,7 @@ En este capítulo se describen ciertos pasos y funcionamientos de la solución e
 
 \begin{figure}[H]
 	\centering
-	\caption{Esquema Solución SmartHouse [Imagen Propia]}
+	\caption[Esquema Solución SmartHouse.]{Esquema Solución SmartHouse. [Imagen Propia]}
 	\label{fig:iot}
 	\includegraphics[width=0.6\linewidth]{Imagenes/IOT}
 \end{figure}
@@ -33,10 +33,10 @@ De acuerdo con la lista anterior, se toman en cuenta dos partes, una pública y 
 Las diversas interacciones que tiene cada usuario en el panel de control se garantizan por medio del framework, creando diferentes roles para cada tipo de usuario que se esta registrando y realizando la comprobación por parte de los controladores y el middleware que este provee.\\
 
 \begin{figure}[H]
-\centering
-\caption{Página de Inicio. [Imagen Propia]}
-\label{fig:index}
-\includegraphics[width=0.5\linewidth]{Imagenes/Index}
+	\centering
+	\caption[Página de Inicio.]{Página de Inicio. [Imagen Propia]}
+	\label{fig:index}
+	\includegraphics[width=0.5\linewidth]{Imagenes/Index}
 \end{figure}
 
 \subsection{Parte Pública}
@@ -44,10 +44,10 @@ Las diversas interacciones que tiene cada usuario en el panel de control se gara
 En esta vista únicamente hay opciones para el contacto y solicitudes, como se menciona anteriormente, es sencilla debido a la poca información que contiene, según se observa en la Figura \ref{fig:publicview}.
 
 \begin{figure}[H]
-\centering
-\caption{Vista Pública. [Imagen Propia]}
-\label{fig:publicview}
-\includegraphics[width=0.5\linewidth]{Imagenes/Public_view}
+	\centering
+	\caption[Vista Pública.]{Vista Pública. [Imagen Propia]}
+	\label{fig:publicview}
+	\includegraphics[width=0.5\linewidth]{Imagenes/Public_view}
 \end{figure}
 
 \subsection{Parte Privada}
@@ -62,7 +62,7 @@ Continuando con este usuario y la habitación modelo propuesta al inicio del cap
 
 \begin{figure}[H]
 	\centering
-	\caption{Vistas de Usuarios [Imagen Propia]}
+	\caption[Vistas de Usuarios.]{Vistas de Usuarios. [Imagen Propia]}
 	\label{fig:views}
 	\subfigure[Usuario Administrador]{\includegraphics[width=0.95\linewidth]{Imagenes/Admin_view}}
 	\subfigure[Usuario de Casa]{\includegraphics[width=0.49\linewidth]{Imagenes/UserH_view}}
@@ -73,7 +73,7 @@ Además de este panel de control, desde el cuál se realizan las operaciones sob
 
 \begin{figure}[H]
 	\centering
-	\caption{Página de intercambio de datos [Imagen Propia]}
+	\caption[Página de intercambio de datos.]{Página de intercambio de datos. [Imagen Propia]}
 	\label{fig:updateview}
 	\includegraphics[width=1\linewidth]{Imagenes/Update_view}
 \end{figure}
@@ -86,7 +86,7 @@ Adicional a esto, si el usuario desea añadir, modificar o eliminar una regla, p
 
 \begin{figure}[H]
 	\centering
-	\caption{Vista para añadir reglas [Imagen Propia]}
+	\caption[Vista para añadir reglas.]{Vista para añadir reglas. [Imagen Propia]}
 	\label{fig:rulesview}
 	\includegraphics[width=0.6\linewidth]{Imagenes/rules_view}
 \end{figure}
@@ -116,7 +116,7 @@ En cada caso se crean tareas diferentes, para el suceso de no existir credencial
 
 \begin{figure}[H]
 	\centering
-	\caption{Esquema de Tareas [Imagen Propia]}
+	\caption[Esquema de Tareas.]{Esquema de Tareas. [Imagen Propia]}
 	\label{fig:tareas}
 	\includegraphics[width=0.7\linewidth]{Imagenes/tareas}
 \end{figure}
@@ -129,7 +129,7 @@ Los sistemas IoT deben estar conectados siempre a Internet, por tal motivo se de
 
 \begin{figure}[H]
 	\centering
-	\caption{Conexión a Internet vía Wi-Fi ESP32 [Imagen Propia]}
+	\caption[Conexión a Internet vía Wi-Fi ESP32.]{Conexión a Internet vía Wi-Fi ESP32.  [Imagen Propia]}
 	\label{fig:conexion}
 	\includegraphics[width=0.7\linewidth]{Imagenes/conexion}
 \end{figure}
@@ -139,7 +139,7 @@ De este modo, en la Figura \ref{fig:wifi} están algunas páginas del servidor l
 
 \begin{figure}[H]
 	\centering
-	\caption{Aplicación Conexión a Wi-Fi [Imagen Propia]}
+	\caption[Aplicación Conexión a Wi-Fi.]{Aplicación Conexión a Wi-Fi. [Imagen Propia]}
 	\label{fig:wifi}
 	\subfigure[Lista de Redes]{\includegraphics[width=0.45\linewidth]{Imagenes/w_status}
 		\label{fig:red}}
@@ -153,7 +153,7 @@ Los datos que lee la tarjeta provienen de los diferentes sensores que tiene cone
 
 \begin{figure}[H]
 	\centering
-	\caption{URL de la petición HTTP [Imagen Propia]}
+	\caption[URL de la petición HTTP.]{URL de la petición HTTP. [Imagen Propia]}
 	\label{fig:json}
 	\includegraphics[width=0.7\linewidth]{Imagenes/JSON}
 \end{figure}
@@ -167,7 +167,7 @@ La interacción del usuario se da con la aplicación web mencionada anteriorment
 
 \begin{figure}[H]
 	\centering
-	\caption{Respues del la APP Web a la Tarjeta [Imagen Propia]}
+	\caption[Respuesta del la APP Web a la Tarjeta.]{Respuesta del la APP Web a la Tarjeta.  [Imagen Propia]}
 	\label{fig:httprqstesp}
 	\includegraphics[width=0.8\linewidth]{Imagenes/HTTPRqstesp}
 \end{figure}
@@ -184,9 +184,9 @@ De acuerdo con los circuitos diseñados en la Sección \ref{sec:hw} donde se pro
 
 \begin{figure}[H]
 	\centering
-	\caption{Tarjeta SmartHouse [Imagen Propia]}
+	\caption[Tarjeta SmartHouse.]{Tarjeta SmartHouse. [Imagen Propia]}
 	\label{fig:tarjeta}
-	\includegraphics[width=0.6\linewidth]{Imagenes/Tarjeta}
+	\includegraphics[width=0.6\linewidth]{Imagenes/Tarjeta.jpg}
 \end{figure}
 
 
@@ -194,7 +194,7 @@ La distribución de las diferentes salidas que posee la tarjeta se organizó en 
 
 \begin{figure}
 	\centering
-	\caption{Descripción caja eléctrica tarjeta SmartHouse [Imagen Propia]}
+	\caption[Descripción caja eléctrica tarjeta SmartHouse.]{Descripción caja eléctrica tarjeta SmartHouse. [Imagen Propia]}
 	\label{fig:labels}
 	\includegraphics[width=0.7\linewidth]{Imagenes/labels}
 \end{figure}
@@ -204,7 +204,7 @@ Conforme a lo mencionado anteriormente, el sistema se ha probado con cargas AC c
 
 \begin{figure}[H]
 	\centering
-	\caption{Control de potencia AC por ángulo de fase [Imagen Propia]}
+	\caption[Control de potencia AC por ángulo de fase.]{Control de potencia AC por ángulo de fase. [Imagen Propia]}
 	\label{fig:ACc}
 	\subfigure[Potencia al 100\%]{\includegraphics[width=0.45\linewidth]{Imagenes/AC1}}
 	\subfigure[Potencia al 20\%]{\includegraphics[width=0.43\linewidth]{Imagenes/AC0}}
@@ -214,7 +214,7 @@ Para las salidas DC se realizan pruebas con un motor DC de 1W, además de una ti
 
 \begin{figure}[H]
 	\centering
-	\caption{Control de Cargas DC [Imagen Propia]}
+	\caption[Control de Cargas DC.]{Control de Cargas DC. [Imagen Propia]}
 	\label{fig:DCc}
 	\subfigure[Potencia al 100\%]{\includegraphics[width=0.45\linewidth]{Imagenes/DC1}}
 	\subfigure[Potencial al 10\%]{\includegraphics[width=0.455\linewidth]{Imagenes/DC0}}

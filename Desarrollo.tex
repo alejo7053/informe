@@ -10,7 +10,7 @@ La aplicación web está conectada con la tarjeta Smart House (Hardware), ya que
 
 \begin{figure}[H]
 	\centering
-	\caption{Esquema del sistema IoT [Imagen Propia]}
+	\caption[Esquema del sistema IoT.]{Esquema del sistema IoT. [Imagen Propia]}
 	\label{fig:diagramas}
 	\includegraphics[width=0.7\linewidth]{Imagenes/Diagramas}
 \end{figure}
@@ -25,7 +25,7 @@ El prototipo para Smart House tiene por objetivo monitorear el entorno de aplica
 
 \begin{figure}[H]
 	\centering
-	\caption{Diagrama de la tarjeta Smart House [Imagen Propia]}
+	\caption[Diagrama de la tarjeta Smart House.]{Diagrama de la tarjeta Smart House.  [Imagen Propia]}
 	\label{fig:tar}
 	\includegraphics[width=0.7\linewidth]{Imagenes/Tarjeta}
 \end{figure}
@@ -64,7 +64,7 @@ El prototipo fue diseñado en el software Proteus, desde el esquemático hasta l
 
 \begin{figure}[H]
 	\centering
-	\caption{ESP32 creado en proteus [Imagen Propia]}
+	\caption[ESP32 creado en proteus.]{ESP32 creado en proteus. [Imagen Propia]}
 	\includegraphics[width=0.5\linewidth]{Imagenes/ESP32}	
 	\label{fig:esp32}
 \end{figure}
@@ -83,7 +83,7 @@ En los siguientes ítems se resaltarán las características más importantes qu
 			
 		\begin{figure}[H]
 			\centering
-			\caption{Módulo conversor DC-DC. Tomado de: \cite{DCDC}}
+			\caption[Módulo conversor DC-DC.]{Módulo conversor DC-DC. Tomado de: \cite{DCDC}}
 			\label{fig:DCDC}
 			\includegraphics[width=0.5\linewidth]{Imagenes/DCDC}
 		\end{figure}
@@ -98,21 +98,21 @@ En los siguientes ítems se resaltarán las características más importantes qu
 		
 		\begin{figure}[H]
 			\centering
-			\caption{Entrada de sensores[Imagen Propia]}
+			\caption[Entrada de sensores.]{Entrada de sensores. [Imagen Propia]}
 			\label{fig:SVS}
 			\includegraphics[width=0.7\linewidth]{Imagenes/SVS}
 		\end{figure}
 	
 		\begin{figure}[H]
 			\centering
-			\caption{Entrada para sensor de calidad de aire[Imagen Propia]}
+			\caption[Entrada para sensor de calidad de aire.]{Entrada para sensor de calidad de aire. [Imagen Propia]}
 			\label{fig:S1Aire}
 			\includegraphics[width=0.6\linewidth]{Imagenes/S1Aire}
 		\end{figure}
 	
 		\begin{figure}[H]
 			\centering
-			\caption{Entrada para sensores con resistencia de pull down[Imagen Propia]}
+			\caption[Entrada para sensores con resistencia de pull down.]{Entrada para sensores con resistencia de pull down. [Imagen Propia]}
 			\label{fig:ST}
 			\includegraphics[width=0.5\linewidth]{Imagenes/ST}
 		\end{figure}		
@@ -128,27 +128,20 @@ En los siguientes ítems se resaltarán las características más importantes qu
 		
 	\subsection{Salidas:}
 	\paragraph{Etapa de potencia AC:}
-		Se encuentra diseñada a una potencia de 2000W en un total de seis cargas, cuatro de ellas cuentan con un circuito para el control por ángulo de fase, como se observa en la Figura \ref{fig:CAC1}, con una capacidad individual de 500W, gracias a el TRIAC BTA26600, mostrado en la Figura \ref{fig:TRIAC}, el cual soporta una corriente máxima de 25A. Con el fin de proteger el ESP32, se hace uso de optoacopladores MOC3021, debido a su funcionalidad para aislar circuitos de forma óptica.\\
+		Se encuentra diseñada a una potencia de 2000W en un total de seis cargas, cuatro de ellas cuentan con un circuito para el control por ángulo de fase, como se observa en la Figura \ref{fig:CAC1}, con una capacidad individual de 500W, gracias a el TRIAC BTA26600, el cual soporta una corriente máxima de 25A. Con el fin de proteger el ESP32, se hace uso de optoacopladores MOC3021, debido a su funcionalidad para aislar circuitos de forma óptica.\\
 		
 		\begin{figure}[H]
 			\centering
-			\caption{Control por ángulo de fase [Imagen Propia]}
+			\caption[Control por ángulo de fase.]{Control por ángulo de fase.  [Imagen Propia]}
 			\label{fig:CAC1}
 			\includegraphics[width=0.8\linewidth]{Imagenes/CAC1}
-		\end{figure}
-	
-		\begin{figure}[H]
-			\centering
-			\caption{Triac BTA26600. Tomado de: \cite{TRIAC}}
-			\label{fig:TRIAC}
-			\includegraphics[width=0.35\linewidth]{Imagenes/TRIAC}
 		\end{figure}
 	
 		Las dos cargas restantes corresponden a un sistema de encendido y apagado, cuyo funcionamiento se basa en un relevador SRA-05VDC-CL activado a 5V por medio de un transistor BJT como switch, gracias a este relé, las salidas tienen capacidad de hasta 200W cada una. En la Figura \ref{fig:ONOFAC} se observa el circuito diseñado en Proteus. Para proteger el ESP32, el prototipo se vale de ese dispositivo, puesto que presenta un aislamiento magnético por la naturaleza de su operación.\\
 	
 		\begin{figure}[H]
 			\centering
-			\caption{Interruptor para cargas AC [Imagen Propia]}
+			\caption[Interruptor para cargas AC.]{Interruptor para cargas AC.  [Imagen Propia]}
 			\label{fig:ONOFAC}
 			\includegraphics[width=0.7\linewidth]{Imagenes/ONOFAC}
 		\end{figure}
@@ -157,14 +150,14 @@ En los siguientes ítems se resaltarán las características más importantes qu
 		
 		\begin{figure}[H]
 			\centering
-			\caption{Detector de cruce por cero [Imagen Propia]}
+			\caption[Detector de cruce por cero.]{Detector de cruce por cero.  [Imagen Propia]}
 			\label{fig:DC01}
 			\includegraphics[width=0.85\linewidth]{Imagenes/DC01}
 		\end{figure}
 	
 		\begin{figure}[H]
 			\centering
-			\caption{Schmitt trigger para el detector de cruce por cero [Imagen Propia]}
+			\caption[Schmitt trigger para el detector de cruce por cero.]{Schmitt trigger para el detector de cruce por cero. [Imagen Propia]}
 			\label{fig:DC02}
 			\includegraphics[width=0.5\linewidth]{Imagenes/DC02}
 		\end{figure}
@@ -176,21 +169,21 @@ En los siguientes ítems se resaltarán las características más importantes qu
 		
 		\begin{figure}[H]
 			\centering
-			\caption{Integrado L293D [Imagen Propia]}
+			\caption[Integrado L293D.]{Integrado L293D. [Imagen Propia]}
 			\label{fig:L293D}
 			\includegraphics[width=0.5\linewidth]{Imagenes/L293D}
 		\end{figure}
 		
 		\begin{figure}[H]
 			\centering
-			\caption{Puente H para control de motores DC [Imagen Propia]}
+			\caption[Puente H para control de motores DC.]{Puente H para control de motores DC. [Imagen Propia]}
 			\label{fig:CDC}
 			\includegraphics[width=0.7\linewidth]{Imagenes/CDC}
 		\end{figure}
 	
 		\begin{figure}[H]
 			\centering
-			\caption{Control para cargas DC [Imagen Propia]}
+			\caption[Control para cargas DC.]{Control para cargas DC. [Imagen Propia]}
 			\label{fig:ONOFDC}
 			\includegraphics[width=0.25\linewidth]{Imagenes/ONOFDC}
 		\end{figure}
@@ -204,7 +197,7 @@ En los siguientes ítems se resaltarán las características más importantes qu
 		
 		\begin{figure}[H]
 			\centering
-			\caption{Circuito tipico para el LM386 [Imagen Propia]}
+			\caption[Circuito típico para el LM386.]{Circuito típico para el LM386.  [Imagen Propia]}
 			\label{fig:AUD}
 			\includegraphics[width=0.7\linewidth]{Imagenes/AUD}
 		\end{figure}		
@@ -215,7 +208,7 @@ El firmware se desarrolla sobre el framework o SDK oficial de Espressif Systems 
 
 \begin{figure}[H]
 	\centering
-	\caption{ESP-IDF. Tomado de: \cite{ES}}
+	\caption[ESP-IDF.]{ESP-IDF. Tomado de: \cite{ES}}
 	\label{fig:what-you-need}
 	\includegraphics[width=0.5\linewidth]{Imagenes/what-you-need}
 \end{figure}
@@ -271,7 +264,7 @@ En esta sección se desarrolla una aplicación web, la cual se encarga de ejecut
 
 \begin{figure}[H]
 	\centering
-	\caption{Modelo-Vista-Controlador [Imagen Propia]}
+	\caption[Modelo-Vista-Controlador.]{Modelo-Vista-Controlador. [Imagen Propia]}
 	\label{fig:mvc}
 	\includegraphics[width=0.7\linewidth]{Imagenes/MVC}
 \end{figure}
@@ -285,7 +278,7 @@ Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llam
 
 \begin{figure}[H]
 	\centering
-	\caption[ORM]{ORM [Imagen Propia]}
+	\caption[ORM]{ORM. [Imagen Propia]}
 	\label{fig:orm}
 	\includegraphics[width=0.7\linewidth]{Imagenes/ORM}
 \end{figure}
