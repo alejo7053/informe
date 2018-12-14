@@ -29,17 +29,23 @@ La distribución de las diferentes salidas que posee la tarjeta se organizó en 
 	\includegraphics[width=0.7\linewidth]{Imagenes/labels}
 \end{figure}
 
-%%%%%%%%%%%%%%% MODIFICAR ESTE PARRAFO %%%%%%%%%%%%%%
+Conforme a lo mencionado anteriormente, el sistema se ha probado con cargas AC como bombillos LED entre 7W y 20W, de filamento de 100W, probando funcionalidades como el control de potencia AC por ángulo de fase, obteniendo los resultados esperados, según se observa en la Figura \ref{fig:ACc} donde la carga tiene el 100\% de la potencia. El voltaje de alimentación viene dado por la red eléctrica, la tarjeta simplemente conmuta el estado de la alimentación o controla la potencia entregada.\\
 
-Conforme a lo mencionado anteriormente, el sistema se ha probado con cargas AC como bombillos LED entre 7W y 20W, de filamento de 100W, probando funcionalidades como el control de potencia AC por ángulo de fase, obteniendo los resultados esperados, según se observa en la Figura \ref{fig:ACc}\textbf{(a)} donde la carga tiene el 100\% de la potencia y en la Figura \ref{fig:ACc}\textbf{(b)} con el 20\% de esta. El voltaje de alimentación viene dado por la red eléctrica, la tarjeta simplemente conmuta el estado de la alimentación o controla la potencia entregada. 
+\begin{figure}[H]
+	\centering
+	\caption[Control de potencia AC por ángulo de fase.]{Control de potencia AC por ángulo de fase. [Imagen Propia]}
+	\label{fig:ACc}
+	\includegraphics[width=0.7\linewidth]{Imagenes/AC1}
+\end{figure}
+ 
+Para las salidas DC se realizan pruebas con un motor DC de 1W, además de una tira LED de 1W, la cual se le varia la energía entrega, como se observa en la Figura \ref{fig:DCc} la carga tiene el 100\% de la energía. Estas cargas se alimentan con 12VDC directamente desde la fuente o convertidor AC-DC, los circuitos que se implementan simplemente conmutan el estado de encendido/apagado o por medio de PWM variar la energía entregada.\\
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%% MODIFICAR ESTE PARRAFO %%%%%%%%%%%%%%
-
-Para las salidas DC se realizan pruebas con un motor DC de 1W, además de una tira LED de 1W, la cual se le varia la energía entrega, como se observa en la Figura \ref{fig:DCc}\textbf{(a)} la carga tiene el 100\% de la energía y en la Figura \ref{fig:DCc}\textbf{(b)} solamente el 10\%. Estas cargas se alimentan con 12VDC directamente desde la fuente o convertidor AC-DC, los circuitos que se implementan simplemente conmutan el estado de encendido/apagado o por medio de PWM variar la energía entregada.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+	\centering
+	\caption[Control de cargas DC.]{Control de cargas DC. [Imagen Propia]}
+	\label{fig:DCc}
+	\includegraphics[width=0.7\linewidth]{Imagenes/DC1}
+\end{figure}
 
 En esta sección se evidencia tanto el hardware implementado, como su correcto funcionamiento de acuerdo con los requisitos propuestos, proporcionando las diferentes funcionalidades para que el firmware realice la gestión adecuada, es decir, controlar las salidas y recibir la información de los entradas. Se han construido diferentes circuitos, los cuales por medio del programa gestiona los diferentes dispositivos conectados a este.\\
 
