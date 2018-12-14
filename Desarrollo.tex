@@ -222,7 +222,7 @@ Con las características de operación definidas para el prototipo, y con ayuda 
 			\centering
 			\caption[Control para cargas DC.]{Control para cargas DC. [Imagen Propia]}
 			\label{fig:ONOFDC}
-			\includegraphics[width=0.25\linewidth]{Imagenes/ONOFDC}
+			\includegraphics[width=0.15\linewidth]{Imagenes/ONOFDC}
 		\end{figure}
 	
 	\paragraph{Salida audible:}
@@ -271,7 +271,7 @@ El framework usa el sistema Kconfig para facilitar la configuración \cite{ES}, 
 	\includegraphics[width=\linewidth]{Imagenes/Kgui}
 \end{figure}
 
-Para el desarrollo se modifican ítems en ``Serial Flasher Config'' como el tamaño de la flash a usar, al valor máximo de 4MB, el puerto serial donde se detecta el ESP32 y además la velocidad de transmisión a un valor de 115200 bps. Otro punto que se configura es la tabla de particiones, ya que el ESP32 puede tener una o varias aplicaciones \cite{ES}, en este caso solo contiene una y se usa la tabla de particiones por defecto que provee el framework. Asimismo, en la parte de ``Component Config'' se eligen los componentes que están disponibles y sus configuraciones básicas, por ejemplo, las opciones para el RTOS, donde se configura en qué núcleo se va a ejecutar el sistema operativo, que timer va a usar y también su tick rate, que en este caso es de 100Hz; también se activa el Wi-Fi con la configuración por defecto y que la potencia máxima sea de 20dBm para interfaz física. Esta interfaz permite configurar muchos más componentes que no se usaron o se dejan con la configuración por defecto.\\
+Para el desarrollo se modifican ítems en ``Serial Flasher Config'' como el tamaño de la flash a usar, al valor máximo de 4MB, el puerto serial donde se detecta el ESP32 y además la velocidad de transmisión a un valor de 115200 bps. Otro punto que se configura es la tabla de particiones, ya que el ESP32 puede tener una o varias aplicaciones \cite{ES}, en este caso solo contiene una y se usa la tabla de particiones por defecto que provee el framework. Asimismo, en la parte de ``Component Config'' se eligen los componentes que están disponibles y sus configuraciones básicas, por ejemplo, las opciones para el RTOS, donde se configura en qué núcleo se va a ejecutar el sistema operativo, que timer va a usar y también su tick rate, que en este caso es de 100Hz; también se activa el Wi-Fi con la configuración por defecto y que la potencia máxima sea de 20dBm para interfaz física y también se configura una velocidad de la CPU de 240MHz. Esta interfaz permite configurar muchos más componentes que no se usaron o se dejan con la configuración por defecto.\\
 
 %https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/kconfig.html
 
@@ -333,9 +333,16 @@ Las tareas externas se componen en dos pero no funcionan en paralelo, es decir, 
 
 \subsection{Aplicación Web}
 
-En esta sección se desarrolla una aplicación web, la cual se encarga de ejecutar la gestión entre el usuario y la tarjeta. De este modo, se usa un patrón de arquitectura Modelo-Vista-Controlador (MVC), siendo este realmente útil ya que separa la lógica de negocio de la interfaz de usuario, incrementando la reutilización y flexibilidad, además de la escalabilidad de ambos aspectos por separado, dicho esto, la aplicación cuenta con diferentes modelos, controladores y vistas \cite{MVC1}.\\
+En esta sección se desarrolla una aplicación web, la cual se encarga de ejecutar la gestión entre el usuario y la tarjeta por medio de una interfaz gráfica, dicha aplicación se encuentra en la nube para que este disponible desde cualquier lugar con acceso a Internet, como se observa en la Figura \ref{fig:B_appwD}. Es el intermediario de la comunicación humano-máquina, por este motivo la parte gráfica que se desarrolla es sencilla de usar.\\
 
-Se desarrolla la aplicación web de manera local y posteriormente se lanza a un servidor en Internet. Se encuentra compuesta por los siguientes sitios y las diferentes interacciones basadas en las funciones básicas crear, leer, actualizar y borrar (CRUD).
+\begin{figure}[H]
+	\centering
+	\caption[Diagrama Aplicación Web.]{Diagrama Aplicación Web. [Imagen Propia]}
+	\label{fig:B_appwD}
+	\includegraphics[width=0.7\linewidth]{Imagenes/B_AppWebDllo}
+\end{figure}
+
+Se desarrolla la aplicación web de manera local y posteriormente se lanza a un servidor en Internet. Se encuentra compuesta por los siguientes sitios y las diferentes interacciones basadas en las funciones básicas crear, leer, actualizar y borrar (CRUD).\\
 
 \begin{itemize}
 	\item Parte Pública
@@ -352,9 +359,53 @@ Se desarrolla la aplicación web de manera local y posteriormente se lanza a un 
 	\end{itemize}
 \end{itemize}
 
-De acuerdo con la lista anterior, se toman en cuenta dos partes, una pública y una privada, como se observa en la Figura \ref{fig:index}. En la parte pública se encuentra una vista con la información de contacto del fabricante, solicitudes de registro o productos y la cantidad de usuarios que actualmente están registrados en la aplicación, en general el propósito de la parte publica es permitir solicitudes del nuevo usuario o cliente que ha obtenido la tarjeta. En la parte privada se encuentra la interacción de los usuarios sea administrador, dueño de una casa o de una habitación, para controlar y observar sus datos.\\
+De acuerdo con la lista anterior, se toman en cuenta dos partes, una pública y una privada, como se observa en la Figura \ref{fig:index}. De este modo, se usa un patrón de arquitectura Modelo-Vista-Controlador (MVC), siendo este realmente útil ya que separa la lógica de negocio de la interfaz de usuario, incrementando la reutilización y flexibilidad, además de la escalabilidad de ambos aspectos por separado, dicho esto, la aplicación cuenta con diferentes modelos, controladores y vistas \cite{MVC1}. Además, se usa el framework Laravel para desarrollar toda la lógica y las vistas. La lógica está basada en MVC como se menciona, desarrollándolo sobre PHP que es el lenguaje de programación que usa Laravel y la interfaz gráfica se desarrolla con ayuda de HTML5, Bootstrap y JavaScript, como se observa en la figura \ref{fig:B_appweb}, que están integrados en Laravel, para el almacenamiento de datos se usa PostgreSQL el cual lo provee Heroku.\\
 
-Las diversas interacciones que tiene cada usuario en el panel de control se garantizan por medio del framework, creando diferentes roles para cada tipo de usuario que se esta registrando y realizando la comprobación por parte de los controladores y el middleware que este provee.\\
+Usar la arquitectura MVC y el framework Laravel es muy útil, ya que con las funcionalidades que se han provisto es necesario tener un control como el que brinda el MVC y con Laravel crear esta lógica es más sencillo que empezar desde cero, ya que no hay que preocuparse mucho sobre el motor de base de datos porque con el ORM simplemente se realizan las peticiones en PHP y ya el lo traduce a la consulta adecuada. De acuerdo a estas partes propuestas se desarrollan diferentes modelos, controladores y vistas. Los modelos creados se consignan en la Tabla \ref{table:models}, como se ha mencionado los modelos se encargan de interacción entre el controlador y la base de datos.\\
+
+\begin{table}[H]
+	\begin{center}
+		\caption{Modelos de la aplicación web.}
+		\label{table:models}
+		\begin{tabular}{|c|p{7cm}|}
+			\hline 
+			\textbf{Modelo} & \textbf{Descripción} \\ 
+			\hline 
+			User & Es el encargado de gestionar la información de los usuarios en la aplicación web y base de datos.\\ 
+			\hline 
+			House & Es el encargado de gestionar la información de las casas de los usuarios en la aplicación web y base de datos.\\ 
+			\hline 
+			Room & Es el encargado de gestionar la información de las habitaciones de los usuarios en la aplicación web y base de datos.\\ 
+			\hline 
+			Device & Es el encargado de gestionar la información de los dispositivos de una habitación en la aplicación web y base de datos.\\
+			\hline
+		\end{tabular} 
+	\end{center}
+\end{table}
+
+La lista a continuación hace referencia a los controladores desarrollados, cada controlador se encarga de gestionar el modelo y la vista adecuada de acuerdo a la petición del usuario. En cuanto a los controladores User, House, Room, Device todos cuentan con las funciones básica CRUD y presentan las diferentes vistas de cada función con los datos necesarios para cada interacción y se encuentran en la parte privada de la aplicación. El controlador Public es el encargado de gestionar la parte pública de la aplicación. Los controladores Rule, Home y Card se encargan de gestionar las reglas de cada dispositivo, el panel de control de la aplicación web y el intercambio de datos con la tarjeta SmartHouse respectivamente.\\
+
+\begin{itemize}
+	\item PublicController
+	\item UserController
+	\item HouseController
+	\item RoomController
+	\item DeviceController
+	\item RuleController
+	\item HomeController
+	\item CardController
+\end{itemize}
+
+En cuanto a la interfaz gráfica o vistas, en la parte pública se encuentra una vista con la información de contacto del fabricante, solicitudes de registro o productos y la cantidad de usuarios que actualmente están registrados en la aplicación, en general el propósito de la parte publica es permitir solicitudes del nuevo usuario o cliente que ha obtenido la tarjeta. En la parte privada se encuentra la interacción de los usuarios sea administrador, dueño de una casa o de una habitación, para controlar y observar sus datos.\\
+
+\begin{figure}[H]
+	\centering
+	\caption[Aplicación Web Desarrollada.]{Aplicación Web Desarrollada. [Imagen Propia]}
+	\label{fig:B_appweb}
+	\includegraphics[width=0.5\linewidth]{Imagenes/B_ImplAPPweb}
+\end{figure}
+
+Asimismo, por medio de funcionalidades incluidas en el framework como Bootstrap y JavaScript se desarrollan las diferentes vistas que cada usuario posee, así como un panel de control encargado de la gestión de la habitación, las casas y la solución en general. De este modo al usar Bootstrap se tiene un diseño responsivo, lo que permite la correcta visualización de la aplicación web en cualquier tamaño de pantalla y con JavaScript se logra que algunas vista sean interactivas. Las diversas interacciones que tiene cada usuario en el panel de control se garantizan por medio del MVC y el framework, creando diferentes roles para cada tipo de usuario que se esta registrando y realizando la comprobación por parte de los controladores y el middleware que este provee.\\
 
 \begin{figure}[H]
 	\centering
@@ -376,11 +427,33 @@ En esta vista únicamente hay opciones para el contacto y solicitudes, como se m
 
 \subsection{Parte Privada}
 
-En esta sección es donde se encuentra el Panel de Control para los diferentes usuarios de la aplicación. En primera instancia, un usuario administrador, el cual esta encargado de gestionar la aplicación, tiene la posibilidad de crear, ver, editar y eliminar los registros de la aplicación. La vista de este usuario se puede observar en la Figura \ref{fig:views}\textbf{(a)}. Por medio de este se activan las cuentas de los demás, razón por la cual en la parte pública están las opciones de contacto y solicitud de registro.\\
+En esta sección es donde se encuentra el Panel de Control para los diferentes usuarios de la aplicación. Se definen tres roles que comprenden los tipos de usuarios de esta solución, un usuario administrador, un usuario casa y un usuario habitación. El usuario administrador es el encargado de gestionar todo en la aplicación, leer, crear, editar y borrar cualquier característica; como los otros usuarios, casas, habitaciones o dispositivos, la vista de este usuario se puede observar en la Figura \ref{fig:views}\textbf{(a)}. El usuario casa se refiere a un administrador de la casa donde se tengan instaladas más de una tarjeta SmartHouse, es decir, que un hogar cuente con tres habitaciones en las cuales todas cuentan con tarjetas de SmartHouse, este usuario tiene la capacidad de leer, editar y controlar las habitaciones de su casa, como se ve en la Figura \ref{fig:views}\textbf{(b)}. Por último el usuario habitación es la mínima unidad, ya que es el cliente que posee una tarjeta SmartHouse instalada en su habitación, este puede gestionar sus dispositivos, leer y editar algunas características propias de su habitación, según se observa en la Figura \ref{fig:views}\textbf{(c)}. En la tabla \ref{table:roles} se puede encontrar un resumen de cada rol.\\
 
-También existe el usuario dueño de la vivienda donde se encuentra el dispositivo, este es opcional y es para gestionar los dispositivos presentes dentro de un mismo domicilio. Es un administrador de la casa, el cual puede revisar y editar algunos campos de sus usuarios hijos o usuarios habitación y sus diferentes casas y habitaciones registradas a su nombre, como se ve en la Figura \ref{fig:views}\textbf{(b)}, de este modo el rol de dicho usuario es administrar su hogar y visualizar los datos de esta.\\
+\begin{table}[H]
+	\begin{center}
+		\caption{Roles en la aplicación web.}
+		\label{table:roles}
+		\begin{tabular}{|c|p{8cm}|}
+			\hline 
+			\textbf{Rol} & \textbf{Descripción} \\ 
+			\hline 
+			Usuario Administrador & Gestiona toda la aplicación web. Puede crear, leer, editar y eliminar diferentes componentes dentro de esta.\\ 
+			\hline 
+			Usuario Casa & Gestiona su propia casa registrada en la aplicación web. Puede leer y editar características de su propia casa y habitaciones.\\ 
+			\hline 
+			Usuario Habitación & Gestiona su propia habitación registrada en la aplicación web. Puede leer y editar características de su propia habitación.\\ 
+			\hline 
+		\end{tabular} 
+	\end{center}
+\end{table}
 
-Por último, otro rol es el de usuario habitación, el cuál únicamente visualiza sus propios datos, como la habitación y los dispositivos presentes en esta, según se observa en la Figura \ref{fig:views}\textbf{(c)}. A este solo le compete la información de lo que posee en su cuarto, por tal motivo el panel de control muestra una vista general de los datos y el estado de sus dispositivos, además de tener la capacidad de editar partes básicas de su habitación y perfil. Dicho usuario puede o no estar sujeto a un usuario padre o usuario casa, ya que, solamente posee una tarjeta para su habitación y ninguna otra en dicha casa.\\
+Dichos roles se gestionan a través del framework Laravel para asegurar que los propósitos de cada uno se cumplan, cabe resaltar que el usuario administrador no puede gestionar de ningún modo los estados de las salidas que poseen los dispositivos de casa usuario. El desarrollo de estos roles se enfoca en el usuario habitación y el usuario administrador, siendo el usuario casa un ítem adicional para asegurar la escalabilidad de la solución sin tener cambios en la base de datos.\\
+
+%En primera instancia, un usuario administrador, el cual esta encargado de gestionar la aplicación, tiene la posibilidad de crear, ver, editar y eliminar los registros de la aplicación. La vista de este usuario se puede observar en la Figura \ref{fig:views}\textbf{(a)}. Por medio de este se activan las cuentas de los demás, razón por la cual en la parte pública están las opciones de contacto y solicitud de registro.\\
+
+%También existe el usuario dueño de la vivienda donde se encuentra el dispositivo, este es opcional y es para gestionar los dispositivos presentes dentro de un mismo domicilio. Es un administrador de la casa, el cual puede revisar y editar algunos campos de sus usuarios hijos o usuarios habitación y sus diferentes casas y habitaciones registradas a su nombre, como se ve en la Figura \ref{fig:views}\textbf{(b)}, de este modo el rol de dicho usuario es administrar su hogar y visualizar los datos de esta.\\
+
+%Por último, otro rol es el de usuario habitación, el cuál únicamente visualiza sus propios datos, como la habitación y los dispositivos presentes en esta, según se observa en la Figura \ref{fig:views}\textbf{(c)}. A este solo le compete la información de lo que posee en su cuarto, por tal motivo el panel de control muestra una vista general de los datos y el estado de sus dispositivos, además de tener la capacidad de editar partes básicas de su habitación y perfil. Dicho usuario puede o no estar sujeto a un usuario padre o usuario casa, ya que, solamente posee una tarjeta para su habitación y ninguna otra en dicha casa.\\
 
 \begin{figure}[p]
 	\centering
@@ -400,7 +473,7 @@ Además de este panel de control, desde el cuál se realizan las operaciones sob
 	\includegraphics[width=\linewidth]{Imagenes/Update_view}
 \end{figure}
 
-Adicional a esto, si el usuario desea añadir, modificar o eliminar una regla, por ejemplo, quiere encender el bombillo led a una hora deseada, esto lo puede lograr mediante el botón de reglas en el panel de control, el cual lo redirige a la vista que se observa en la Figura \ref{fig:rulesview}. En esta se indica una hora de inicio y finalización en la que el bombillo led enciende a la hora de inicio y se apaga a la hora de fin, si es la regla de apagado solo necesita una hora de inicio para apagarlo.\\
+Adicional a esto, si el usuario desea añadir, modificar o eliminar una regla, por ejemplo, quiere encender un bombillo led a una hora deseada, esto lo puede lograr mediante el botón de reglas en el panel de control, el cual lo redirige a la vista que se observa en la Figura \ref{fig:rulesview}. En esta se indica una hora de inicio y finalización en la que el bombillo led enciende a la hora de inicio y se apaga a la hora de fin, si es la regla de apagado solo necesita una hora de inicio para apagarlo.\\
 
 \begin{figure}[H]
 	\centering
@@ -436,30 +509,6 @@ Adicional a esto, si el usuario desea añadir, modificar o eliminar una regla, p
 %	\includegraphics[width=0.7\linewidth]{Imagenes/ORM}
 %\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-En la aplicación web se definen tres roles que comprenden los tipos de usuarios de esta solución, un usuario administrador, un usuario casa y un usuario habitación. El usuario administrador es el encargado de gestionar todo en la aplicación, leer, crear, editar y borrar cualquier característica; como los otros usuarios, casas, habitaciones o dispositivos. El usuario casa se refiere a un administrador de la casa donde se tengan instaladas más de una tarjeta SmartHouse, es decir, que un hogar cuente con tres habitaciones en las cuales todas cuentan con tarjetas de SmartHouse, este usuario tiene la capacidad de leer, editar y controlar las habitaciones de su casa. Por último el usuario habitación es la mínima unidad, ya que es el cliente que posee una tarjeta SmartHouse instalada en su habitación, este puede gestionar sus dispositivos, leer y editar algunas características propias de su habitación. En la tabla \ref{table:roles} se puede encontrar un resumen de cada rol.\\
-
-\begin{table}[H]
-	\begin{center}
-		\caption{Roles en la aplicación web.}
-		\label{table:roles}
-		\begin{tabular}{|c|p{8cm}|}
-			\hline 
-			\textbf{Rol} & \textbf{Descripción} \\ 
-			\hline 
-			Usuario Administrador & Gestiona toda la aplicación web. Puede crear, leer, editar y eliminar diferentes componentes dentro de esta.\\ 
-			\hline 
-			Usuario Casa & Gestiona su propia casa registrada en la aplicación web. Puede leer y editar características de su propia casa y habitaciones.\\ 
-			\hline 
-			Usuario Habitación & Gestiona su propia habitación registrada en la aplicación web. Puede leer y editar características de su propia habitación.\\ 
-			\hline 
-		\end{tabular} 
-	\end{center}
-\end{table}
-
-Dichos roles se gestionan a través del framework Laravel para asegurar que los propósitos de cada uno se cumplan, cabe resaltar que el usuario administrador no puede gestionar de ningún modo los estados de las salidas que poseen los dispositivos de casa usuario. El desarrollo de estos roles se enfoca en el usuario habitación y el usuario administrador, siendo el usuario casa un ítem adicional para asegurar la escalabilidad de la solución sin tener cambios en la base de datos.\\
-
-Asimismo, por medio de funcionalidades incluidas en el framework como Bootstrap y JavaScript se desarrollan las diferentes vistas que cada usuario posee, así como un panel de control encargado de la gestión de la habitación para el usuario habitación o de la gestión de las casas y habitaciones para el usuario casa y la gestión general para el usuario administrador. De este modo al usar Bootstrap se tiene un diseño responsivo, lo que permite la correcta visualización de la aplicación web en cualquier tamaño de pantalla.\\
 
 \section{Pruebas}
 
