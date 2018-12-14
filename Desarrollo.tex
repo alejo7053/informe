@@ -21,7 +21,7 @@ Además, para el funcionamiento del Firmware y el Hardware se hace uso del ESP32
 
 \section{Hardware}\label{sec:hw}
 
-El prototipo para Smart House tiene por objetivo monitorear el entorno de aplicación y controlarlo por medio de mecanismos como motores o dispositivos de iluminación, razón por la cual está equipada con etapas de potencia de corriente alterna y directa, etapa de adquisición de datos, entre otras características, como se muestra en el diagrama de la Figura \ref{fig:tar} y en la Tabla \ref{fig:tar}, que permitan cumplir con los objetivos planteados.\\
+El diseño de hardware parte desde un concepto general de la solución, es decir, su estructura ilustrada en la Figura \ref{fig:tar}, está definida con el fin de abarcar de manera completa cada una de las funcionalidades necesarias para la correcta operación del dispositivo, a la vez que contempla características clave para cumplir con los objetivos propuestos, tales como las etapas de adquisición de datos encargada de recolectar la información del entorno de aplicación, etapa de control de cargas para manipular mecanismos como motores o dispositivos de iluminación, entre otras, de tal manera que al desarrollar cada etapa por separado, se logra crear el prototipo completo.\\
 
 \begin{figure}[H]
 	\centering
@@ -29,6 +29,11 @@ El prototipo para Smart House tiene por objetivo monitorear el entorno de aplica
 	\label{fig:tar}
 	\includegraphics[width=0.7\linewidth]{Imagenes/Tarjeta}
 \end{figure}
+
+En primer lugar, al definir el ESP32 como unidad central de mando se tiene disponibilidad de 34 GPIO programables, entre los cuales algunos de ellos cuentan con diferentes enfoques más específicos como DAC y ADC, entre otros, los cuales son distribuidos para la adquisición de datos por parte de sensores, así como también la manipulación de las correspondientes cargas y demás salidas del dispositivo. Debido a que el ESP32 opera a un nivel lógico de 3.3V, se hace necesario garantizar este voltaje en algunas etapas de la estructura del hardware.\\
+
+En la Tabla \ref{fig:tar}, se observan las características definidas para el diseño del hardware, basados en las cualidades y numero de pines con los cuales cuenta el ESP32 como limitante.\\
+
 
 \begin{table}[H]
 	\begin{center}
@@ -60,7 +65,7 @@ El prototipo para Smart House tiene por objetivo monitorear el entorno de aplica
 	\end{center}
 \end{table}
 
-El prototipo fue diseñado en el software Proteus, desde el esquemático hasta la placa de circuito impreso (PCB). En la Figura \ref{fig:esp32} se observa el diagrama esquemático de la tarjeta ESP32 construido junto con su distribución de pines, además de sus conexiones correspondientes dentro de este programa. El prototipo está separado en dos secciones, la etapa de potencia AC y la etapa DC, en la última, se encuentra la mayor parte de circuitos que funcionan con corriente directa.\\
+Con las características de operación definidas para el prototipo, y con ayuda del software Proteus se realizan simulaciones de algunas etapas del hardware, de tal manera que sea en menor cantidad las pruebas realizadas en protoboard antes de la implementación del prototipo, el cual fue diseñado en este software desde el esquemático hasta la placa de circuito impreso (PCB). En la Figura \ref{fig:esp32} se observa el diagrama esquemático de la tarjeta ESP32 construido junto con su distribución de pines, además de sus conexiones correspondientes dentro de este programa. El prototipo está separado en dos secciones, la etapa de potencia AC y la etapa DC, en la última, se encuentra la mayor parte de circuitos que funcionan con corriente directa.\\
 
 \begin{figure}[H]
 	\centering
@@ -69,9 +74,20 @@ El prototipo fue diseñado en el software Proteus, desde el esquemático hasta l
 	\label{fig:esp32}
 \end{figure}
 
-En los siguientes ítems se resaltarán las características más importantes que lleva el circuito:\\
-
 	\subsection{Alimentación}
+	
+	En la Figura \ref{fig:balidc}\textbf{(a)} y \ref{fig:balidc}\textbf{(b)} se observa como está planteada la etapa de alimentación tanto para la etapa AC como la etapa DC respectivamente, la cual da soporte al funcionamiento total del dispositivo, es decir, se encarga de recibir la energía eléctrica y acondicionarla para dar correcto suministro a las diferentes etapas del hardware, incluyendo la unidad central de mando y los circuitos de control.\\
+	
+	Debido a que el voltaje DC más alto presenta una magnitud de 12V, se decide tomar este voltaje y reducirlo a los niveles lógicos requeridos para el manejo adecuado de dispositivos como sensores, así como también el ESP32. \\
+	
+	\begin{figure}[H]
+		\centering
+		\caption[Etapa de alimentacion AC y DC.]{Etapa de alimentacion AC y DC. [Imagen Propia]}
+		\subfigure[Etapa Alimentación AC]{\includegraphics[width=0.5\linewidth]{Imagenes/B_AliAC}}
+		\subfigure[Etapa Alimentación DC]{\includegraphics[width=0.6\linewidth]{Imagenes/B_Alimentacion}}
+		\label{fig:balidc}
+	\end{figure}
+	
 	
 	\paragraph{Corriente alterna (AC):}
 		El prototipo recibe el voltaje directamente de la red eléctrica a la que se encuentra conectado el entorno de aplicación, el cual está pensado para una habitación dentro de una Smart House; en el caso de Colombia, la red doméstica comúnmente otorga 110V AC, los cuales son regulados para el funcionamiento adecuado del prototipo, como la etapa de potencia AC y el detector de cruce por cero con el fin de sincronizar la tarjeta a dicha red eléctrica.\\
@@ -79,7 +95,7 @@ En los siguientes ítems se resaltarán las características más importantes qu
 	\paragraph{Corriente directa (DC):}
 		Para la alimentación DC del circuito, se hace uso de un conversor AC-DC que regula el voltaje de la red eléctrica a 12V DC, con los cuales se maneja la etapa de potencia DC, además de ser usados por dos módulos conversores DC-DC, mostrados en la Figura \ref{fig:DCDC}, ambos con entradas de 12V DC y con salidas a los niveles lógicos comunes, 5V y 3.3V, empleados con el fin de alimentar dispositivos como optoacopladores, transistores BJT o relevadores con activación de 5V, así como también la tarjeta de prototipo ESP32.\\
 		
-		Cabe resaltar que la tarjeta permite una entrada externa de 12VDC a 5A si se desean controlar cargas a un máximo de 50W.\\
+		Cabe resaltar que la tarjeta cuenta con una fuente interna de 12VDC a 2A para la etapa DC y una ranura para agregar una fuente externa de 12VDC a 5A si se desean controlar cargas a un máximo de 50W, en el Anexo C se encuentra como conmutar entre la fuente interna y externa.\\
 			
 		\begin{figure}[H]
 			\centering
@@ -89,6 +105,15 @@ En los siguientes ítems se resaltarán las características más importantes qu
 		\end{figure}
 	
 	\subsection{Entradas}
+	
+	La etapa de entradas mostrada en la Figura \ref{fig:BEntradas} está enfocada principalmente a sensores y circuitos que permitan conocer el estado del entorno, es decir, que permitan medir magnitudes como temperatura, iluminación, movimiento, presencia de lluvia, calidad de aire, entre otras. Esta etapa también permite sincronizar el dispositivo con la red eléctrica a la cual se encuentra conectado. Toda esta información tiene como destino la unidad central de mando para vincularla con el resto del sistema IoT.
+	
+	\begin{figure}[H]
+		\centering
+		\caption[Etapa de Entradas.]{Etapa de Entradas. [Imagen Propia]}
+		\includegraphics[width=0.5\linewidth]{Imagenes/B_Entradas}\label{fig:BEntradas}
+	\end{figure}
+	
 	\paragraph{Sensores:}
 		El prototipo viene equipado con una etapa de adquisición de datos con capacidad entre 7 a 134 sensores, pues posee una entrada I2C, ampliando el número de dispositivos conectados, lo cual también permitiría adicionar tareas más específicas en escenarios que lo requieran.\\
 		
@@ -118,15 +143,25 @@ En los siguientes ítems se resaltarán las características más importantes qu
 		\end{figure}		
 	
 	\paragraph{Calibración de audio:}
-		Para calibrar la salida audible se hace uso de una resistencia variable (Potenciómetro), el cual permite regular el voltaje de entrada al circuito de amplificación mostrado en la Figura \ref{fig:AUD}; este será descrito en el presente capitulo en la sección de salidas del hardware.\\ 
+		Para calibrar la salida audible se hace uso de una resistencia variable (Potenciómetro), el cual permite regular el voltaje de entrada al circuito de amplificación mostrado en la Figura \ref{fig:AUD}; este será descrito en el presente capitulo en la sección de salidas del hardware.
 		
 	\paragraph{Botón enable:}
-		Presionando el botón enable se reinicia la tarjeta ESP32, junto con su firmware.\\
+		Presionando el botón enable se reinicia la tarjeta ESP32, junto con su firmware.
 		
 	\paragraph{Botón reset:}
 		Presionando el botón reset se borran las credenciales ingresadas para la conexión del ESP32 a la red WiFi.\\
 		
 	\subsection{Salidas:}
+	
+	Las salidas del prototipo están vinculadas directamente con el circuito de control correspondiente a las cargas, es decir, las salidas DC están diseñadas para ser controladas por medio de PWM, mientras que las salidas AC por medio de control por Angulo de fase en sus salidas controladas. Estos circuitos de contorl están manejados por la unidad central de mando tal como se observa en el esquema de esta etapa ilustrado en la Figura \ref{fig:BSalidas}.\\ 
+	
+	\begin{figure}[H]
+		\centering
+		\caption[Etapa de Salidas.]{Etapa de Salidas. [Imagen Propia]}
+		\label{fig:BSalidas}
+		\includegraphics[width=0.7\linewidth]{Imagenes/B_Salidas}
+	\end{figure}	
+	
 	\paragraph{Etapa de potencia AC:}
 		Se encuentra diseñada a una potencia de 2000W en un total de seis cargas, cuatro de ellas cuentan con un circuito para el control por ángulo de fase, como se observa en la Figura \ref{fig:CAC1}, con una capacidad individual de 500W, gracias a el TRIAC BTA26600, el cual soporta una corriente máxima de 25A. Con el fin de proteger el ESP32, se hace uso de optoacopladores MOC3021, debido a su funcionalidad para aislar circuitos de forma óptica.\\
 		
@@ -137,7 +172,7 @@ En los siguientes ítems se resaltarán las características más importantes qu
 			\includegraphics[width=0.8\linewidth]{Imagenes/CAC1}
 		\end{figure}
 	
-		Las dos cargas restantes corresponden a un sistema de encendido y apagado, cuyo funcionamiento se basa en un relevador SRA-05VDC-CL activado a 5V por medio de un transistor BJT como switch, gracias a este relé, las salidas tienen capacidad de hasta 200W cada una. En la Figura \ref{fig:ONOFAC} se observa el circuito diseñado en Proteus. Para proteger el ESP32, el prototipo se vale de ese dispositivo, puesto que presenta un aislamiento magnético por la naturaleza de su operación.\\
+		Las dos cargas restantes corresponden a un sistema de encendido y apagado, cuyo funcionamiento se basa en un relevador SRA-05VDC-CL ya que permite una activación a 5V, realizada a través de un transistor BJT como switch, gracias a este relé, las salidas tienen capacidad de hasta 200W cada una. En la Figura \ref{fig:ONOFAC} se observa el circuito diseñado en Proteus. Para proteger el ESP32, el prototipo se vale de ese dispositivo, puesto que presenta un aislamiento magnético por la naturaleza de su operación.\\
 	
 		\begin{figure}[H]
 			\centering
@@ -163,7 +198,7 @@ En los siguientes ítems se resaltarán las características más importantes qu
 		\end{figure}
 	
 	\paragraph{Etapa DC:}
-		Esta etapa cuenta con cuatro salidas de control diseñadas para cargas de 12V, de las cuales, dos de ellas tienen un enfoque a motores, puesto que está equipada con control de velocidad a base de PWM e inversión de giro con un puente H usando transistores mosfet IRLZ44N; el puente h se encuentra controlado por un circuito integrado L293D, que garantiza un voltaje Vgs adecuado para la correcta activación del los transistores; este circuito se muestra en las Figuras \ref{fig:L293D} y \ref{fig:CDC}.\cite{IRL}.\\
+		Esta etapa cuenta con cuatro salidas de control diseñadas para cargas de 12V, de las cuales, dos de ellas tienen un enfoque a motores, puesto que está equipada con control de velocidad a base de PWM e inversión de giro con un puente H usando transistores mosfet IRLZ44N; los cuales fueron seleccionados debido a que permiten ser activados a niveles lógicos, además de su capacidad para trabajar en potencias de hasta 50W. El puente h se encuentra controlado por un circuito integrado L293D, que garantiza un voltaje Vgs adecuado para la correcta activación del los transistores; este circuito se muestra en las Figuras \ref{fig:L293D} y \ref{fig:CDC}.\cite{IRL}.\\
 		
 		Las dos salidas restantes también cuentan con mosfet IRLZ44N, y su control igualmente es a base de PWM, mas no permite realizar la inversión de giro, por lo cual se enfoca a dispositivos como lámparas LEDs. El diseño en Proteus se muestra en la Figura \ref{fig:ONOFDC}.\\
 		
