@@ -306,7 +306,7 @@ Para las tareas internas se usan colas, ya que es la forma más común comunicac
 	\includegraphics[width=0.5\linewidth]{Imagenes/B_colas}
 \end{figure}
 
-Las tareas externas se componen en dos pero no funcionan en paralelo, es decir, si está activa una de estas la otra está inactiva. Este modo de funcionamiento se debe a que una tarea permite que el usuario a través de Wi-Fi para el acceso a la red, IPv4, TCP como protocolo de transporte y un servidor local HTTP en el ESP32 se puedan ingresar las credenciales para la red Wi-Fi a la que se conecta la tarjeta para su salida a Internet. La otra tarea se ha mencionado anteriormente como tarea central, la cual después de verificar la conexión a Internet, conectándose por medio de Wi-Fi al módem o enrutador, comienza a gestionar la escritura y lectura de datos de la aplicación web por medio del protocolo HTTP; leyendo y enviando datos en el sistema embebido, una librería muy útil en este intercambio de datos es cJSON que permite la comprensión del texto en estructura JSON, además de las otras encargadas de gestionar toda la conexión con la aplicación web, como LwIP.\\
+Las tareas externas se componen en dos pero no funcionan en paralelo, es decir, si está activa una de estas la otra está inactiva. Este modo de funcionamiento se debe a que una tarea permite que el usuario a través de Wi-Fi para el acceso a la red, IPv4, TCP como protocolo de transporte y un servidor local HTTP en el ESP32 se puedan ingresar las credenciales para la red Wi-Fi a la que se conecta la tarjeta para su salida a Internet. La otra tarea se ha mencionado anteriormente como tarea central, la cual después de verificar la conexión a Internet, conectándose por medio de Wi-Fi al módem o enrutador, obtiene la hora y la fecha de la red mediante el protocolo SNTP y posteriormente comienza a gestionar la escritura y lectura de datos de la aplicación web por medio del protocolo HTTP; leyendo y enviando datos en el sistema embebido, una librería muy útil en este intercambio de datos es cJSON que permite la comprensión del texto en estructura JSON, además de las otras encargadas de gestionar toda la conexión con la aplicación web, como LwIP.\\
 %Sobre el firmware se desarrollan los siguientes temas:
 
 %\paragraph{Tareas:}Se ejecutan constantemente en el sistema operativo, realizando diferentes funciones para lectura, escritura y control.
@@ -333,7 +333,7 @@ Las tareas externas se componen en dos pero no funcionan en paralelo, es decir, 
 
 \subsection{Aplicación Web}
 
-En esta sección se desarrolla una aplicación web, la cual se encarga de ejecutar la gestión entre el usuario y la tarjeta por medio de una interfaz gráfica, dicha aplicación se encuentra en la nube para que este disponible desde cualquier lugar con acceso a Internet, como se observa en la Figura \ref{fig:B_appwD}. Es el intermediario de la comunicación humano-máquina, por este motivo la parte gráfica que se desarrolla es sencilla de usar.\\
+En esta sección se desarrolla una aplicación web, la cual se encarga de ejecutar la gestión entre el usuario y la tarjeta por medio de una interfaz gráfica, dicha aplicación se encuentra en la nube para que esté disponible desde cualquier lugar con acceso a Internet, como se observa en la Figura \ref{fig:B_appwD}. Es el intermediario de la comunicación humano-máquina, por este motivo la parte gráfica que se desarrolla es sencilla de usar.\\
 
 \begin{figure}[H]
 	\centering
@@ -359,7 +359,7 @@ Se desarrolla la aplicación web de manera local y posteriormente se lanza a un 
 	\end{itemize}
 \end{itemize}
 
-De acuerdo con la lista anterior, se toman en cuenta dos partes, una pública y una privada, como se observa en la Figura \ref{fig:index}. De este modo, se usa un patrón de arquitectura Modelo-Vista-Controlador (MVC), siendo este realmente útil ya que separa la lógica de negocio de la interfaz de usuario, incrementando la reutilización y flexibilidad, además de la escalabilidad de ambos aspectos por separado, dicho esto, la aplicación cuenta con diferentes modelos, controladores y vistas \cite{MVC1}. Además, se usa el framework Laravel para desarrollar toda la lógica y las vistas. La lógica está basada en MVC como se menciona, desarrollándolo sobre PHP que es el lenguaje de programación que usa Laravel y la interfaz gráfica se desarrolla con ayuda de HTML5, Bootstrap y JavaScript, como se observa en la figura \ref{fig:B_appweb}, que están integrados en Laravel, para el almacenamiento de datos se usa PostgreSQL el cual lo provee Heroku.\\
+De acuerdo con la lista anterior, se toman en cuenta dos partes, una pública y una privada, como se observa en la Figura \ref{fig:index}. De este modo, se usa un patrón de arquitectura Modelo-Vista-Controlador (MVC), siendo este realmente útil ya que separa la lógica de negocio de la interfaz de usuario, incrementando la reutilización y flexibilidad, además de la escalabilidad de ambos aspectos por separado, dicho esto, la aplicación cuenta con diferentes modelos, controladores y vistas \cite{MVC1}. Además, se usa el framework Laravel para desarrollar toda la lógica y las vistas. La lógica está basada en MVC como se menciona, desarrollándose sobre PHP que es el lenguaje de programación que usa Laravel y la interfaz gráfica se desarrolla con ayuda de HTML5, Bootstrap y JavaScript, como se observa en la figura \ref{fig:B_appweb}, que están integrados en Laravel, para el almacenamiento de datos se usa PostgreSQL el cual lo provee Heroku.\\
 
 Usar la arquitectura MVC y el framework Laravel es muy útil, ya que con las funcionalidades que se han provisto es necesario tener un control como el que brinda el MVC y con Laravel crear esta lógica es más sencillo que empezar desde cero, ya que no hay que preocuparse mucho sobre el motor de base de datos porque con el ORM simplemente se realizan las peticiones en PHP y ya el lo traduce a la consulta adecuada. De acuerdo a estas partes propuestas se desarrollan diferentes modelos, controladores y vistas. Los modelos creados se consignan en la Tabla \ref{table:models}, como se ha mencionado los modelos se encargan de interacción entre el controlador y la base de datos.\\
 
@@ -396,7 +396,7 @@ La lista a continuación hace referencia a los controladores desarrollados, cada
 	\item CardController
 \end{itemize}
 
-En cuanto a la interfaz gráfica o vistas, en la parte pública se encuentra una vista con la información de contacto del fabricante, solicitudes de registro o productos y la cantidad de usuarios que actualmente están registrados en la aplicación, en general el propósito de la parte publica es permitir solicitudes del nuevo usuario o cliente que ha obtenido la tarjeta. En la parte privada se encuentra la interacción de los usuarios sea administrador, dueño de una casa o de una habitación, para controlar y observar sus datos.\\
+En cuanto a la interfaz gráfica o vistas, en la parte pública se encuentra una vista con la información de contacto del fabricante, solicitudes de registro o productos y la cantidad de usuarios que actualmente están registrados en la aplicación, en general el propósito de la parte pública es permitir solicitudes del nuevo usuario o cliente que ha obtenido la tarjeta. En la parte privada se encuentra la interacción de los usuarios sea administrador, dueño de una casa o de una habitación, para controlar y observar sus datos.\\
 
 \begin{figure}[H]
 	\centering
@@ -405,7 +405,7 @@ En cuanto a la interfaz gráfica o vistas, en la parte pública se encuentra una
 	\includegraphics[width=0.5\linewidth]{Imagenes/B_ImplAPPweb}
 \end{figure}
 
-Asimismo, por medio de funcionalidades incluidas en el framework como Bootstrap y JavaScript se desarrollan las diferentes vistas que cada usuario posee, así como un panel de control encargado de la gestión de la habitación, las casas y la solución en general. De este modo al usar Bootstrap se tiene un diseño responsivo, lo que permite la correcta visualización de la aplicación web en cualquier tamaño de pantalla y con JavaScript se logra que algunas vista sean interactivas. Las diversas interacciones que tiene cada usuario en el panel de control se garantizan por medio del MVC y el framework, creando diferentes roles para cada tipo de usuario que se esta registrando y realizando la comprobación por parte de los controladores y el middleware que este provee.\\
+Asimismo, por medio de funcionalidades incluidas en el framework como Bootstrap y JavaScript se desarrollan las diferentes vistas que cada usuario posee, así como un panel de control encargado de la gestión de la habitación, las casas y la solución en general. De este modo al usar Bootstrap se tiene un diseño responsivo, lo que permite la correcta visualización de la aplicación web en cualquier tamaño de pantalla y con JavaScript se logra que algunas vista sean interactivas. Las diversas interacciones que tiene cada usuario en el panel de control se garantizan por medio del MVC y el framework, creando diferentes roles para cada tipo de usuario que se está registrando y realizando la comprobación por parte de los controladores y el middleware que este provee.\\
 
 \begin{figure}[H]
 	\centering
@@ -464,7 +464,7 @@ Dichos roles se gestionan a través del framework Laravel para asegurar que los 
 	\subfigure[Usuario de Habitación]{\includegraphics[width=0.9\linewidth]{Imagenes/UserR_view}}
 \end{figure}
 
-Además de este panel de control, desde el cuál se realizan las operaciones sobre la aplicación, en la parte privada se encuentra la ruta encargada de la actualización Servidor-Tarjeta, es decir, en esta ruta es donde se intercambia la información. Allí se realiza una petición HTTP tipo GET por parte de la tarjeta, incluyendo en su contenido el id de la habitación en la que está instalada, junto con el token correspondiente a esta, además en la URL se añade un texto tipo JSON en el cual se ubican todas los datos de la lectura actual de los sensores; esta petición la responde el servidor con un texto también tipo JSON que contiene la información pertinente de las cargas o actuadores como se observa la Figura \ref{fig:updateview}. Para dar seguridad a dicha transacción, se utiliza el token mencionado anteriormente, el cual se verifica mediante el id de la habitación comparando el recibido con el almacenado.\\
+Además de este panel de control, desde el cual se realizan las operaciones sobre la aplicación, en la parte privada se encuentra la ruta encargada de la actualización Servidor-Tarjeta, es decir, en esta ruta es donde se intercambia la información. Allí se realiza una petición HTTP tipo GET por parte de la tarjeta, incluyendo en su contenido el id de la habitación en la que está instalada, junto con el token correspondiente a esta, además en la URL se añade un texto tipo JSON en el cual se ubican todas los datos de la lectura actual de los sensores; esta petición la responde el servidor con un texto también tipo JSON que contiene la información pertinente de las cargas o actuadores como se observa la Figura \ref{fig:updateview}. Para dar seguridad a dicha transacción, se utiliza el token mencionado anteriormente, el cual se verifica mediante el id de la habitación comparando el recibido con el almacenado.\\
 
 \begin{figure}[H]
 	\centering
@@ -511,4 +511,3 @@ Adicional a esto, si el usuario desea añadir, modificar o eliminar una regla, p
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Pruebas}
-
