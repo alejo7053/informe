@@ -17,7 +17,7 @@ La aplicación web está conectada con la tarjeta Smart House (Hardware), ya que
 
 Para la construcción del hardware se tomaron como referencia valores de operación presentes en el mercado, de modo que las salidas para cargas DC fueron definidas a un voltaje de 12V, ya que se comercializan dispositivos como lámparas LEDs o mecanismos capaces de abrir y cerrar ventanas o persianas con este nivel de tensión, entre otros. Por otra parte, el voltaje para las cargas AC se define con base en la red eléctrica doméstica de Colombia, siendo esta 110VAC. Para las entradas del dispositivo se cuenta con los sensores mencionados anteriormente en la Sección \ref{sec:sensors}, los cuales funcionan con voltajes lógicos de 5V y 3.3V. Estos sensores se eligen por ser los más usados en dicho ámbito además de que se acomodan a las necesidades de una habitación, como sensar presencia, temperatura, calidad del aire y demás.\\
 
-Además, para el funcionamiento del Firmware y el Hardware se hace uso del ESP32 como unidad central de mando, ya que cuenta con un procesador de 32 bits de dos núcleos, de los cuales uno de ellos se encarga de la conexión WiFi, mientras que el otro se encarga de los demás procesos del sistema descritos en el presente capítulo. Adicionalmente, el ESP32 cuenta con múltiples salidas y entradas como DACs y ADCs, lo cual permite manejar salidas de audio, entradas analógicas y demás. La ventaja del ESP32 es su integración del WiFi, Bluetooth y otras capacidades en un solo chip en comparación con las distintas tarjetas presentes en el mercado; también su precio con respecto a las funcionalidades que este ofrece.\\
+Además, para el funcionamiento de la aplicación y el hardware se hace uso del ESP32 como unidad central de mando, ya que cuenta con un procesador de 32 bits de dos núcleos, de los cuales uno de ellos se encarga de la conexión WiFi, mientras que el otro se encarga de los demás procesos del sistema descritos en el presente capítulo. Adicionalmente, el ESP32 cuenta con múltiples salidas y entradas como DACs y ADCs, lo cual permite manejar salidas de audio, entradas analógicas y demás; las cuales se programan a través del framework oficial del ESP32, el ESP-IDF. La ventaja del ESP32 es su integración del WiFi, Bluetooth y otras capacidades en un solo chip en comparación con las distintas tarjetas presentes en el mercado; también su precio con respecto a las funcionalidades que este ofrece.\\
 
 \section{Hardware}\label{sec:hw}
 
@@ -153,7 +153,7 @@ Con las características de operación definidas para el prototipo, y con ayuda 
 	\paragraph{Botón reset:}
 		Presionando el botón reset se borran las credenciales ingresadas para la conexión del ESP32 a la red WiFi.\\
 		
-	\subsection{Salidas:}
+	\subsection{Salidas}
 	
 	Las salidas del prototipo están vinculadas directamente con el circuito de control correspondiente a las cargas, es decir, las salidas DC están diseñadas para ser controladas por medio de PWM, mientras que las salidas AC por medio de control por Angulo de fase en sus salidas controladas. Estos circuitos de contorl están manejados por la unidad central de mando tal como se observa en el esquema de esta etapa ilustrado en la Figura \ref{fig:BSalidas}.\\ 
 	
@@ -239,9 +239,10 @@ Con las características de operación definidas para el prototipo, y con ayuda 
 			\includegraphics[width=0.7\linewidth]{Imagenes/AUD}
 		\end{figure}		
 				
-\section{Firmware}
+\section{Software}
 
-El firmware se desarrolla sobre el framework o SDK oficial de Espressif Systems ESP-IDF, el cual posee una documentación \cite{ES} muy útil a la hora de utilizar las diferentes APIs presentes en este; para el desarrollo de la aplicación es necesario contar con los requisitos que se observan en la Figura \ref{fig:what-you-need}. Esta característica del sistema incluye un kernel de tiempo real llamado FreeRTOS, el cual da soporte al manejo de los diversos recursos del sistema; al ser un RTOS, las funciones se definen mediante tareas, entonces cada funcionalidad de la tarjeta o grupo de funcionalidades se desarrolla en una o varias tareas que realicen las acciones adecuadas. Por ejemplo, en el caso de los sensores, cada uno tiene una tarea para la lectura y gestión de datos, así como también ocurre de manera similar con las salidas de la tarjeta, pues cuentan con tareas encargadas de la gestión del encendido y apagado, asimismo para el control de cargas, ya sea por ángulo de fase o PWM.\\
+\subsection{Aplicación Sistema Embebido}
+La aplicación se desarrolla sobre el framework o SDK oficial de Espressif Systems ESP-IDF, el cual posee una documentación \cite{ES} muy útil a la hora de utilizar las diferentes APIs presentes en este; para el desarrollo es necesario contar con los requisitos que se observan en la Figura \ref{fig:what-you-need}. Esta característica del sistema incluye un kernel de tiempo real llamado FreeRTOS, el cual da soporte al manejo de los diversos recursos del sistema; al ser un RTOS, las funciones se definen mediante tareas, entonces cada funcionalidad de la tarjeta o grupo de funcionalidades se desarrolla en una o varias tareas que realicen las acciones adecuadas. Se usa este framework debido a que es el oficial para este chip, de este modo está en constantes actualizaciones y agregando nuevas funcionalidades.\\
 
 \begin{figure}[H]
 	\centering
@@ -250,77 +251,193 @@ El firmware se desarrolla sobre el framework o SDK oficial de Espressif Systems 
 	\includegraphics[width=0.5\linewidth]{Imagenes/what-you-need}
 \end{figure}
 
+Además, la aplicación a desarrollar se puede observar en la Figura \ref{fig:App}, este diagrama explica, por ejemplo, en el caso de los sensores, cada uno tiene una tarea para la lectura y gestión de datos, así como también ocurre de manera similar con las salidas de la tarjeta, pues cuentan con tareas encargadas de la gestión del encendido y apagado, asimismo para el control de cargas, ya sea por ángulo de fase o PWM. Antes de realizar las funciones de la aplicación se procede a configurar el framework, sus componentes y algunas partes del freeRTOS.\\
 
-Sobre el firmware se desarrollan los siguientes temas:
+\begin{figure}[H]
+	\centering
+	\caption[Diagrama Aplicación del Sistema Embebido.]{Diagrama Aplicación del Sistema Embebido. [Imagen Propia]}
+	\label{fig:App}
+	\includegraphics[width=0.7\linewidth]{Imagenes/B_Aplicacion}
+\end{figure}
 
-\paragraph{Tareas:}
+\subsubsection{Configuración ESP-IDF}
 
-Se ejecutan constantemente en el sistema operativo, realizando diferentes funciones para lectura, escritura y control.
+El framework usa el sistema Kconfig para facilitar la configuración \cite{ES}, provee una interfaz gráfica sencilla, ilustrada en la Figura \ref{fig:Kconf}, donde se configuran distintos parámetros de este.
 
-\paragraph{GPIO:}
+\begin{figure}[H]
+	\centering
+	\caption[Interfaz de Configuración ESP-IDF.]{Interfaz de Configuración ESP-IDF. [Imagen Propia]}
+	\label{fig:Kconf}
+	\includegraphics[width=\linewidth]{Imagenes/Kgui}
+\end{figure}
 
-El ESP-WROOM-32 posee diferentes GPIO, los cuales se usan para leer o escribir señales digitales; en cuanto a los sensores, se pueden enviar señales con el fin de iniciar su lectura o simplemente tener el pin en modo entrada y leerlo cada cierto intervalo de tiempo generando datos de lectura, o en modo salida para el control de los diversos dispositivos que se han desarrollado en el hardware.
+Para el desarrollo se modifican ítems en ``Serial Flasher Config'' como el tamaño de la flash a usar, al valor máximo de 4MB, el puerto serial donde se detecta el ESP32 y además la velocidad de transmisión a un valor de 115200 bps. Otro punto que se configura es la tabla de particiones, ya que el ESP32 puede tener una o varias aplicaciones \cite{ES}, en este caso solo contiene una y se usa la tabla de particiones por defecto que provee el framework. Asimismo, en la parte de ``Component Config'' se eligen los componentes que están disponibles y sus configuraciones básicas, por ejemplo, las opciones para el RTOS, donde se configura en qué núcleo se va a ejecutar el sistema operativo, que timer va a usar y también su tick rate, que en este caso es de 100Hz; también se activa el Wi-Fi con la configuración por defecto y que la potencia máxima sea de 20dBm para interfaz física. Esta interfaz permite configurar muchos más componentes que no se usaron o se dejan con la configuración por defecto.\\
 
-\paragraph{ADC,DAC:}
+%https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/kconfig.html
 
-Los ADC se usan para leer los datos de algunos sensores que proporcionan señales analógicos, por este motivo se hace la conversión de la señal analógica a un valor digital dentro de la tarjeta, así luego identificar el dato de la lectura del sensor. Los DAC son usados para realizar la operación contraria, es decir, teniendo valores digitales convertirlos a un valor analógico por ejemplo generar audios o diferentes señales a partir del software. Para esto se usa el driver correspondiente que provee el ESP-IDF para cada funcionalidad, sea para ADC o DAC o para salidas de audio por medio de I2S.
+La implementación de esta aplicación se divide en las entradas, salidas y comunicación, como se puede observar en la Figura \ref{fig:App}. En la parte de entradas se crean tareas o interrupciones encargadas de la lectura de los sensores que previamente están acondicionados por el hardware para su correcto funcionamiento; del mismo modo las salidas cuentan con diferentes tareas para gestionar su estado, es decir, si se encuentran encendidas/apagadas o tienen algún tipo de control y finalmente la parte de comunicaciones se gestiona a través de Wi-Fi para la conexión física, protocolo TCP para la conexión de los datos a través de Internet usando HTTP para encontrar los recursos en la red.
+
+\subsubsection{Entradas}
+
+En esta sección se han desarrollado diferentes tareas o interrupciones para cada uno de los sensores, ya que por su naturaleza sus tiempos de muestreo son distintos, por ejemplo, la temperatura y humedad son variables que tienen cambios lentos en comparación con la luminosidad; por otra parte los sensores de movimiento o lluvia se implementan por medio de interrupciones, ya que por su naturaleza están enfocados a eventos, es decir, si detecto lluvia o hubo movimiento genere una interrupción que envié los datos a la aplicación web. Por este motivo se tienen en cuenta dichas características para crear diferentes tareas que realicen la gestión de cada dispositivo, con diferentes tiempos de muestreo y utilizando distintos métodos para leer sus valores, las tareas creadas se pueden encontrar con más detalle en el Anexo \ref{AnexoA} en la Tabla \ref{table:tasks}.\\
+
+Para el detector de cruce por cero, el sensor de movimiento y el de lluvia se utilizan interrupciones, ya que no es necesario estar monitoreando estas entradas sino que generan una señal para que la aplicación realice alguna acción. La interrupción instalada para el pin del detector de cruce por cero da inicio a dos timers para que se puedan controlar las cargas AC con el control de ángulo de fase, estos son diferentes al que usa el RTOS para su funcionamiento; mientras que la interrupción de los sensores envían datos a una tarea que identifica cual señal está recibiendo y envía la información a una tarea central.\\
+
+En los demás sensores se tienen tareas con diferentes tiempos de espera para su lectura. En el sensor de luminosidad se utiliza una interfaz I2C para su lectura, para esto se instala el driver I2C en los pines 33 y 32 configurando las direcciones del sensor (esclavo) y del ESP32 (maestro); el dispositivo de calidad de aire arroja datos analógicos, por lo tanto se utiliza el driver del ADC para su lectura, instalándolo en el pin correspondiente; el sensor de temperatura y humedad posee una comunicación 1-Wire por lo tanto se envía una trama que pide datos al DHT11 y este responde por el mismo cable, para este sensor fue necesario el desarrollo de una librería con el fin de su correcto funcionamiento, tomando como referencia algunas librerías de arduino y otros encontradas en la web para su uso.\\
+
+\subsubsection{Salidas}
+
+En cuanto a las salidas se tienen dos grupos, las salidas DC y las salidas AC. En las salidas DC se tiene inversión de giro y control de velocidad para motores, estás son dos de las cuatro salidas, para realizar este control sobre los motores DC se instala el driver de la librería LedC el cual genera señales de PWM en los pines donde se instale y se encuentra en el ESP-IDF, asimismo en las otras dos se cuenta con este driver pero solo cuenta con el control de energía entregada más no con el de inversión de giro. \\
+
+Las salidas AC tienen control de potencia por ángulo de fase, para asegurar este control se utiliza el detector de cruce por cero y los timers que activa con cada interrupción, con el propósito de activar el switch en algún punto de un semiciclo de la onda AC, además cuenta con dos salidas de on/off, las cuales usan pines GPIO.\\
+
+Las salidas de AC controladas tienen una tarea dedicas a ellas igualmente que las salidas para motores DC. Las salidas DC con un control simple y las salidas AC on/off se encuentran en una misma tarea y tienen la posibilidad de activarse por reglas de tiempo programadas desde la aplicación web, es decir, que se encienda o se apague a una hora determinada por el usuario. Esta regla también activa una tarea de audio, la cual por medio de un pin usado como DAC y utilizando el driver I2S reproduce ciertos audios precargados en la aplicación. Cabe resaltar que todas estas tareas reciben la información de una tarea central, cada una procesa los datos que le pertenecen y realiza acciones basándose en estos.\\
+
+\subsubsection{Comunicación}
+
+En la aplicación se dan diferentes tres tipos de comunicación, dos de carácter interno (dentro de la misma solución) y dos externas a través de Wi-Fi. Las comunicaciones internas se dan entre las tareas de entradas y una tarea central y entre esta y las tareas de salida.\\
+
+Para las tareas internas se usan colas, ya que es la forma más común comunicación entre tareas en un sistema operativo, así que hay una cola para las entradas y otra para las salidas, estas colas las gestiona la tarea ``http\_get\_task'', recibiendo los datos de lectura de los sensores, como se observa en la Figura \ref{fig:colas} y enviando los datos para las salidas de la tarjeta. El tipo de variable que manejan estas colas son strings organizados en formato JSON.\\
+
+\begin{figure}[H]
+	\centering
+	\caption[Comunicación por colas.]{Comunicación por colas. [Imagen Propia]}
+	\label{fig:colas}
+	\includegraphics[width=0.5\linewidth]{Imagenes/B_colas}
+\end{figure}
+
+Las tareas externas se componen en dos pero no funcionan en paralelo, es decir, si está activa una de estas la otra está inactiva. Este modo de funcionamiento se debe a que una tarea permite que el usuario a través de Wi-Fi para el acceso a la red, IPv4, TCP como protocolo de transporte y un servidor local HTTP en el ESP32 se puedan ingresar las credenciales para la red Wi-Fi a la que se conecta la tarjeta para su salida a Internet. La otra tarea se ha mencionado anteriormente como tarea central, la cual después de verificar la conexión a Internet, conectándose por medio de Wi-Fi al módem o enrutador, comienza a gestionar la escritura y lectura de datos de la aplicación web por medio del protocolo HTTP; leyendo y enviando datos en el sistema embebido, una librería muy útil en este intercambio de datos es cJSON que permite la comprensión del texto en estructura JSON, además de las otras encargadas de gestionar toda la conexión con la aplicación web, como LwIP.\\
+%Sobre el firmware se desarrollan los siguientes temas:
+
+%\paragraph{Tareas:}Se ejecutan constantemente en el sistema operativo, realizando diferentes funciones para lectura, escritura y control.
+
+%\paragraph{GPIO:}El ESP-WROOM-32 posee diferentes GPIO, los cuales se usan para leer o escribir señales digitales; en cuanto a los sensores, se pueden enviar señales con el fin de iniciar su lectura o simplemente tener el pin en modo entrada y leerlo cada cierto intervalo de tiempo generando datos de lectura, o en modo salida para el control de los diversos dispositivos que se han desarrollado en el hardware.
+
+%\paragraph{ADC,DAC:}Los ADC se usan para leer los datos de algunos sensores que proporcionan señales analógicos, por este motivo se hace la conversión de la señal analógica a un valor digital dentro de la tarjeta, así luego identificar el dato de la lectura del sensor. Los DAC son usados para realizar la operación contraria, es decir, teniendo valores digitales convertirlos a un valor analógico por ejemplo generar audios o diferentes señales a partir del software. Para esto se usa el driver correspondiente que provee el ESP-IDF para cada funcionalidad, sea para ADC o DAC o para salidas de audio por medio de I2S.
 
 %\paragraph{Consola:}para realizar diferentes pruebas directamente desde la tarjeta, se usa la opción de la consola, la cual se comunica por medio del puerto serie, para esto se crean las funciones y los comandos que estaran disponibles; algunos son \textit{http}, para ejecutar las peticiones http manualmente y observar su respuesta, \textit{pin} para realizar la prueba de un pin digital como entrada o salida, \textit{help} para observar la lista de comandos, entre otros.
 
-\paragraph{HTTP Request:}
+%\paragraph{HTTP Request:}Las peticiones HTTP son indispensables en estas aplicaciones del campo IOT, por tal motivo en el desarrollo del firmware se usan las librerías pertinentes para realizarlas como LwIP que se encarga de la gestión del protocolo TCP/IP, cJSON para la gestión de los datos recibidos del servidor. Asimismo leer las respuestas de estas peticiones desde el servidor, ya que por medio de dichas peticiones se encuentra la comunicación tarjeta-servidor.
 
-Las peticiones HTTP son indispensables en estas aplicaciones del campo IOT, por tal motivo en el desarrollo del firmware se usan las librerías pertinentes para realizarlas como LwIP que se encarga de la gestión del protocolo TCP/IP, cJSON para la gestión de los datos recibidos del servidor. Asimismo leer las respuestas de estas peticiones desde el servidor, ya que por medio de dichas peticiones se encuentra la comunicación tarjeta-servidor.
+%\paragraph{Servidor HTTP Local:}El servidor local se desarrolla para proporcionar las credenciales de la red WiFi a la cual se debe conectar la tarjeta, para este servidor se adicionan las paginas en HTML y las librerías de JavaScript y hojas de estilo para su visualización por medio de diferentes APIs de la librería LwIP y hace uso de algunas peticiones HTTP como GET y POST para garantizar el correcto funcionamiento. La tarjeta solo puede gestionar máximo 4 hosts conectados al mismo tiempo.
 
-\paragraph{Servidor HTTP Local:}
+%\paragraph{Hora de Red:}Se obtiene la hora mediante el protocolo simple de tiempo de red (SNTP), este resulta de gran utilidad para la sincronización de los relojes de los sistemas informáticos. Se mantiene actualizada con el objetivo de realizar diferentes acciones respecto a esta. Además, se usan librerías propias de un sistema operativo como time, sys para almacenar y acceder a dicho dato luego de la sincronización con la hora de la red.
 
-El servidor local se desarrolla para proporcionar las credenciales de la red WiFi a la cual se debe conectar la tarjeta, para este servidor se adicionan las paginas en HTML y las librerías de JavaScript y hojas de estilo para su visualización por medio de diferentes APIs de la librería LwIP y hace uso de algunas peticiones HTTP como GET y POST para garantizar el correcto funcionamiento. La tarjeta solo puede gestionar máximo 4 hosts conectados al mismo tiempo.
+%\paragraph{Timers:}La tarjeta posee dos grupos de timers y cada uno tiene dos timers, un timer lo usa el sistema operativo, otro es configurado con el fin de realizar el control de potencia AC por ángulo de fase, para tener la sincronía necesaria con la señal de la red eléctrica.
 
-\paragraph{Hora de Red:}
+%\paragraph{I2C:}El protocolo I2C se activa por medio de la instalación del driver en algún par de pines GPIO disponibles en la tarjeta. Se configura e inicia y posteriormente se crea una tarea la cuál se encarga de solicitar y leer los datos de los diferentes sensores conectados a este.
 
-Se obtiene la hora mediante el protocolo simple de tiempo de red (SNTP), este resulta de gran utilidad para la sincronización de los relojes de los sistemas informáticos. Se mantiene actualizada con el objetivo de realizar diferentes acciones respecto a esta. Además, se usan librerías propias de un sistema operativo como time, sys para almacenar y acceder a dicho dato luego de la sincronización con la hora de la red.
+%\paragraph{PWM:}Se ha mencionado anteriormente que con el propósito de controlar las cargas DC se usa una salida PWM, el ESP32 proporciona esta funcionalidad en algunos de sus pines, para su uso se configura y asignan los valores de funcionamiento por medio de la librería Ledc, la cual proporciona diferentes características para cada canal de PWM que se usa.
 
-\paragraph{Timers:}
+%\paragraph{Interrupciones:}Las interrupciones se usan para no gastar recursos en un monitoreo constante de las entradas, sólo cuando exista un cambio de nivel en la entrada el dispositivo desencadena una serie de instrucciones relacionadas con el tipo de interrupción y diversas funciones creadas para esta, la interrupción se usa por medio de los diferentes pines con este propósito en el hardware. Adicionalmente, se deben iniciar estas interrupciones en ciertos puntos del sistema para que no lo saturen antes de arrancar todas sus funcionalidades.
 
-La tarjeta posee dos grupos de timers y cada uno tiene dos timers, un timer lo usa el sistema operativo, otro es configurado con el fin de realizar el control de potencia AC por ángulo de fase, para tener la sincronía necesaria con la señal de la red eléctrica.
+\subsection{Aplicación Web}
 
-\paragraph{I2C:}
+En esta sección se desarrolla una aplicación web, la cual se encarga de ejecutar la gestión entre el usuario y la tarjeta. De este modo, se usa un patrón de arquitectura Modelo-Vista-Controlador (MVC), siendo este realmente útil ya que separa la lógica de negocio de la interfaz de usuario, incrementando la reutilización y flexibilidad, además de la escalabilidad de ambos aspectos por separado, dicho esto, la aplicación cuenta con diferentes modelos, controladores y vistas \cite{MVC1}.\\
 
-El protocolo I2C se activa por medio de la instalación del driver en algún par de pines GPIO disponibles en la tarjeta. Se configura e inicia y posteriormente se crea una tarea la cuál se encarga de solicitar y leer los datos de los diferentes sensores conectados a este.
+Se desarrolla la aplicación web de manera local y posteriormente se lanza a un servidor en Internet. Se encuentra compuesta por los siguientes sitios y las diferentes interacciones basadas en las funciones básicas crear, leer, actualizar y borrar (CRUD).
 
-\paragraph{PWM:}
+\begin{itemize}
+	\item Parte Pública
+	\item Parte Privada
+	\begin{itemize}
+		\item Intercambio de datos5
+		\item Panel de Control
+		\begin{itemize}
+			\item Crear
+			\item Ver
+			\item Editar
+			\item Eliminar 
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
 
-Se ha mencionado anteriormente que con el propósito de controlar las cargas DC se usa una salida PWM, el ESP32 proporciona esta funcionalidad en algunos de sus pines, para su uso se configura y asignan los valores de funcionamiento por medio de la librería Ledc, la cual proporciona diferentes características para cada canal de PWM que se usa.
+De acuerdo con la lista anterior, se toman en cuenta dos partes, una pública y una privada, como se observa en la Figura \ref{fig:index}. En la parte pública se encuentra una vista con la información de contacto del fabricante, solicitudes de registro o productos y la cantidad de usuarios que actualmente están registrados en la aplicación, en general el propósito de la parte publica es permitir solicitudes del nuevo usuario o cliente que ha obtenido la tarjeta. En la parte privada se encuentra la interacción de los usuarios sea administrador, dueño de una casa o de una habitación, para controlar y observar sus datos.\\
 
-\paragraph{Interrupciones:}
-
-Las interrupciones se usan para no gastar recursos en un monitoreo constante de las entradas, sólo cuando exista un cambio de nivel en la entrada el dispositivo desencadena una serie de instrucciones relacionadas con el tipo de interrupción y diversas funciones creadas para esta, la interrupción se usa por medio de los diferentes pines con este propósito en el hardware. Adicionalmente, se deben iniciar estas interrupciones en ciertos puntos del sistema para que no lo saturen antes de arrancar todas sus funcionalidades.
-
-\section{Software}
-
-En esta sección se desarrolla una aplicación web, la cual se encarga de ejecutar la gestión entre el usuario y la tarjeta. De este modo, se usa un patrón de arquitectura Modelo-Vista-Controlador (MVC), siendo este realmente útil ya que separa la lógica de negocio de la interfaz de usuario, incrementando la reutilización y flexibilidad, además de la escalabilidad de ambos aspectos por separado, dicho esto, la aplicación cuenta con diferentes modelos, controladores y vistas \cite{MVC1}. La función de cada parte de esta arquitectura se puede observar en la Figura \ref{fig:mvc}.\\
-
-\begin{figure}[H]
-	\centering
-	\caption[Modelo-Vista-Controlador.]{Modelo-Vista-Controlador. [Imagen Propia]}
-	\label{fig:mvc}
-	\includegraphics[width=0.7\linewidth]{Imagenes/MVC}
-\end{figure}
-
-
-Su funcionamiento es el siguiente, primero el usuario realiza alguna acción en la interfaz (por ejemplo, presiona un botón, un enlace, etc), luego el controlador recibe (por parte de los objetos de la interfaz-vista) la notificación de la acción solicitada por el usuario. El controlador gestiona el evento que llega, accediendo al modelo y actualizándolo, posiblemente modificándolo de forma adecuada a la acción solicitada por el usuario (por ejemplo, el controlador actualiza los datos del perfil del usuario) y después la interfaz de usuario espera nuevas interacciones del usuario, comenzando el ciclo nuevamente \cite{MVC2}.\\
-
-Este patrón de diseño se usa en la programación orientada a objetos, por lo tanto se realiza la aplicación en el lenguaje de programación PHP, ya que es realmente útil para realizar la gestión de peticiones y envíos de formularios en dicha aplicación, además de que es importante también la gestión de las bases de datos de la aplicación, por este motivo se utiliza un framework basado en este lenguaje y esta arquitectura. Para gestionar las diferentes partes de la aplicación, en este caso se usa el framework Laravel, pues como se menciona anteriormente, está orientado a facilitar las tareas comunes de la mayoría de proyectos web que utilizan HTML5 y PHP.\\
-
-Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llamado Eloquent. Esta es una forma de mapear los datos que se encuentran en la base de datos a objetos de PHP y viceversa, esto facilita el uso de diferentes gestores de bases de datos como MySQL, SQLite, entre otras, ya que todas las consultas estan en PHP y el ORM ya se encarga del mapeo a los comandos SQL como se observa en la Figura \ref{fig:orm}. Eloquent usa los modelos para enviar y recibir información de la base de datos\cite{Eloq}.\\
+Las diversas interacciones que tiene cada usuario en el panel de control se garantizan por medio del framework, creando diferentes roles para cada tipo de usuario que se esta registrando y realizando la comprobación por parte de los controladores y el middleware que este provee.\\
 
 \begin{figure}[H]
 	\centering
-	\caption[ORM]{ORM. [Imagen Propia]}
-	\label{fig:orm}
-	\includegraphics[width=0.7\linewidth]{Imagenes/ORM}
+	\caption[Página de Inicio.]{Página de Inicio. [Imagen Propia]}
+	\label{fig:index}
+	\includegraphics[width=0.5\linewidth]{Imagenes/Index}
 \end{figure}
 
-Adicionalmente, para la aplicación web se definen tres roles que comprenden los tipos de usuarios de esta solución, un usuario administrador, un usuario casa y un usuario habitación. El usuario administrador es el encargado de gestionar todo en la aplicación, leer, crear, editar y borrar cualquier característica; como los otros usuarios, casas, habitaciones o dispositivos. El usuario casa se refiere a un administrador de la casa donde se tengan instaladas más de una tarjeta SmartHouse, es decir, que un hogar cuente con tres habitaciones en las cuales todas cuentan con tarjetas de SmartHouse, este usuario tiene la capacidad de leer, editar y controlar las habitaciones de su casa. Por último el usuario habitación es la mínima unidad, ya que es el cliente que posee una tarjeta SmartHouse instalada en su habitación, este puede gestionar sus dispositivos, leer y editar algunas características propias de su habitación. En la tabla \ref{table:roles} se puede encontrar un resumen de cada rol.\\
+\subsection{Parte Pública}
+
+En esta vista únicamente hay opciones para el contacto y solicitudes, como se menciona anteriormente, es sencilla debido a la poca información que contiene, según se observa en la Figura \ref{fig:publicview}.
+
+\begin{figure}[H]
+	\centering
+	\caption[Vista Pública.]{Vista Pública. [Imagen Propia]}
+	\label{fig:publicview}
+	\includegraphics[width=0.25\linewidth]{Imagenes/Public_view}
+\end{figure}
+
+\subsection{Parte Privada}
+
+En esta sección es donde se encuentra el Panel de Control para los diferentes usuarios de la aplicación. En primera instancia, un usuario administrador, el cual esta encargado de gestionar la aplicación, tiene la posibilidad de crear, ver, editar y eliminar los registros de la aplicación. La vista de este usuario se puede observar en la Figura \ref{fig:views}\textbf{(a)}. Por medio de este se activan las cuentas de los demás, razón por la cual en la parte pública están las opciones de contacto y solicitud de registro.\\
+
+También existe el usuario dueño de la vivienda donde se encuentra el dispositivo, este es opcional y es para gestionar los dispositivos presentes dentro de un mismo domicilio. Es un administrador de la casa, el cual puede revisar y editar algunos campos de sus usuarios hijos o usuarios habitación y sus diferentes casas y habitaciones registradas a su nombre, como se ve en la Figura \ref{fig:views}\textbf{(b)}, de este modo el rol de dicho usuario es administrar su hogar y visualizar los datos de esta.\\
+
+Por último, otro rol es el de usuario habitación, el cuál únicamente visualiza sus propios datos, como la habitación y los dispositivos presentes en esta, según se observa en la Figura \ref{fig:views}\textbf{(c)}. A este solo le compete la información de lo que posee en su cuarto, por tal motivo el panel de control muestra una vista general de los datos y el estado de sus dispositivos, además de tener la capacidad de editar partes básicas de su habitación y perfil. Dicho usuario puede o no estar sujeto a un usuario padre o usuario casa, ya que, solamente posee una tarjeta para su habitación y ninguna otra en dicha casa.\\
+
+\begin{figure}[p]
+	\centering
+	\caption[Vistas de Usuarios.]{Vistas de Usuarios. [Imagen Propia]}
+	\label{fig:views}
+	\subfigure[Usuario Administrador]{\includegraphics[width=0.9\linewidth]{Imagenes/Admin_view}}
+	\subfigure[Usuario de Casa]{\includegraphics[width=0.9\linewidth]{Imagenes/UserH_view}}
+	\subfigure[Usuario de Habitación]{\includegraphics[width=0.9\linewidth]{Imagenes/UserR_view}}
+\end{figure}
+
+Además de este panel de control, desde el cuál se realizan las operaciones sobre la aplicación, en la parte privada se encuentra la ruta encargada de la actualización Servidor-Tarjeta, es decir, en esta ruta es donde se intercambia la información. Allí se realiza una petición HTTP tipo GET por parte de la tarjeta, incluyendo en su contenido el id de la habitación en la que está instalada, junto con el token correspondiente a esta, además en la URL se añade un texto tipo JSON en el cual se ubican todas los datos de la lectura actual de los sensores; esta petición la responde el servidor con un texto también tipo JSON que contiene la información pertinente de las cargas o actuadores como se observa la Figura \ref{fig:updateview}. Para dar seguridad a dicha transacción, se utiliza el token mencionado anteriormente, el cual se verifica mediante el id de la habitación comparando el recibido con el almacenado.\\
+
+\begin{figure}[H]
+	\centering
+	\caption[Página de intercambio de datos.]{Página de intercambio de datos. [Imagen Propia]}
+	\label{fig:updateview}
+	\includegraphics[width=\linewidth]{Imagenes/Update_view}
+\end{figure}
+
+Adicional a esto, si el usuario desea añadir, modificar o eliminar una regla, por ejemplo, quiere encender el bombillo led a una hora deseada, esto lo puede lograr mediante el botón de reglas en el panel de control, el cual lo redirige a la vista que se observa en la Figura \ref{fig:rulesview}. En esta se indica una hora de inicio y finalización en la que el bombillo led enciende a la hora de inicio y se apaga a la hora de fin, si es la regla de apagado solo necesita una hora de inicio para apagarlo.\\
+
+\begin{figure}[H]
+	\centering
+	\caption[Vista para añadir reglas.]{Vista para añadir reglas. [Imagen Propia]}
+	\label{fig:rulesview}
+	\includegraphics[width=0.25\linewidth]{Imagenes/rules_view}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%La función de cada parte de esta arquitectura se puede observar en la Figura \ref{fig:mvc}.\\
+%
+%\begin{figure}[H]
+%	\centering
+%	\caption[Modelo-Vista-Controlador.]{Modelo-Vista-Controlador. [Imagen Propia]}
+%	\label{fig:mvc}
+%	\includegraphics[width=0.7\linewidth]{Imagenes/MVC}
+%\end{figure}
+%
+%
+%Su funcionamiento es el siguiente, primero el usuario realiza alguna acción en la interfaz (por ejemplo, presiona un botón, un enlace, etc), luego el controlador recibe (por parte de los objetos de la interfaz-vista) la notificación de la acción solicitada por el usuario. El controlador gestiona el evento que llega, accediendo al modelo y actualizándolo, posiblemente modificándolo de forma adecuada a la acción solicitada por el usuario (por ejemplo, el controlador actualiza los datos del perfil del usuario) y después la interfaz de usuario espera nuevas interacciones del usuario, comenzando el ciclo nuevamente \cite{MVC2}.\\
+%
+%Este patrón de diseño se usa en la programación orientada a objetos, por lo tanto se realiza la aplicación en el lenguaje de programación PHP, ya que es realmente útil para realizar la gestión de peticiones y envíos de formularios en dicha aplicación, además de que es importante también la gestión de las bases de datos de la aplicación, por este motivo se utiliza un framework basado en este lenguaje y esta arquitectura. Para gestionar las diferentes partes de la aplicación, en este caso se usa el framework Laravel, pues como se menciona anteriormente, está orientado a facilitar las tareas comunes de la mayoría de proyectos web que utilizan HTML5 y PHP.\\
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llamado Eloquent. Esta es una forma de mapear los datos que se encuentran en la base de datos a objetos de PHP y viceversa, esto facilita el uso de diferentes gestores de bases de datos como MySQL, SQLite, entre otras, ya que todas las consultas estan en PHP y el ORM ya se encarga del mapeo a los comandos SQL como se observa en la Figura \ref{fig:orm}. Eloquent usa los modelos para enviar y recibir información de la base de datos\cite{Eloq}.\\
+%
+%\begin{figure}[H]
+%	\centering
+%	\caption[ORM]{ORM. [Imagen Propia]}
+%	\label{fig:orm}
+%	\includegraphics[width=0.7\linewidth]{Imagenes/ORM}
+%\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+En la aplicación web se definen tres roles que comprenden los tipos de usuarios de esta solución, un usuario administrador, un usuario casa y un usuario habitación. El usuario administrador es el encargado de gestionar todo en la aplicación, leer, crear, editar y borrar cualquier característica; como los otros usuarios, casas, habitaciones o dispositivos. El usuario casa se refiere a un administrador de la casa donde se tengan instaladas más de una tarjeta SmartHouse, es decir, que un hogar cuente con tres habitaciones en las cuales todas cuentan con tarjetas de SmartHouse, este usuario tiene la capacidad de leer, editar y controlar las habitaciones de su casa. Por último el usuario habitación es la mínima unidad, ya que es el cliente que posee una tarjeta SmartHouse instalada en su habitación, este puede gestionar sus dispositivos, leer y editar algunas características propias de su habitación. En la tabla \ref{table:roles} se puede encontrar un resumen de cada rol.\\
 
 \begin{table}[H]
 	\begin{center}
