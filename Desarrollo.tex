@@ -143,7 +143,7 @@ Con las características de operación definidas para el prototipo, y con ayuda 
 	\paragraph{Botón reset:}	Presionando el botón reset se borran las credenciales ingresadas para la conexión del ESP32 a la red Wi-Fi.\\
 	\subsection{Salidas}
 	
-	Las salidas del prototipo están vinculadas directamente con el circuito de control correspondiente a las cargas, es decir, las salidas DC están diseñadas para ser controladas por medio de PWM, mientras que las salidas AC por medio de control por Angulo de fase en sus salidas controladas. Estos circuitos de contorl están manejados por la unidad central de mando tal como se observa en el esquema de esta etapa ilustrado en la Figura \ref{fig:BSalidas}.\\ 
+	Las salidas del prototipo están vinculadas directamente con el circuito de control correspondiente a las cargas, es decir, las salidas DC están diseñadas para ser controladas por medio de PWM, mientras que las salidas AC por medio de control por Angulo de fase en sus salidas controladas. Estos circuitos de control están manejados por la unidad central de mando tal como se observa en el esquema de esta etapa ilustrado en la Figura \ref{fig:BSalidas}.\\ 
 	
 	\begin{figure}[H]
 		\centering
@@ -239,7 +239,7 @@ La aplicación se desarrolla sobre el framework o SDK oficial de Espressif Syste
 	\includegraphics[width=0.5\linewidth]{Imagenes/what-you-need}
 \end{figure}
 
-Además, la aplicación a desarrollar se puede observar en la Figura \ref{fig:App}, este diagrama explica, por ejemplo, en el caso de los sensores, cada uno tiene una tarea para la lectura y gestión de datos, así como también ocurre de manera similar con las salidas de la tarjeta, pues cuentan con tareas encargadas de la gestión del encendido y apagado, asimismo para el control de cargas, ya sea por ángulo de fase o PWM. Antes de realizar las funciones de la aplicación se procede a configurar el framework, sus componentes y algunas partes del freeRTOS.\\
+Además, la aplicación a desarrollar se puede observar en la Figura \ref{fig:App}, este diagrama explica, en el caso de los sensores, cada uno tiene una tarea para la lectura y gestión de datos, así como también ocurre de manera similar con las salidas de la tarjeta, pues cuentan con tareas encargadas de la gestión del encendido y apagado, asimismo para el control de cargas, ya sea por ángulo de fase o PWM. Antes de realizar las funciones de la aplicación se procede a configurar el framework, sus componentes y algunas partes del freeRTOS.\\
 
 \begin{figure}[H]
 	\centering
