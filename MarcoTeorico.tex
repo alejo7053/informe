@@ -18,9 +18,7 @@ Laravel es un framework de código abierto fácil de asimilar para lenguaje PHP,
 
 “Laravel es accesible, pero potente, y proporciona potentes herramientas necesarias para aplicaciones grandes y robustas. Una magnífica inversión de contenedores de control, un sistema de migración expresivo y un soporte de prueba de unidades estrechamente integrado le brindan las herramientas que necesita para construir cualquier aplicación'' \cite{Lara}.\\
 
-Algunas características generales de este framework son:
-
-
+Algunas características generales de este framework son:\\
 
 \begin{itemize}
 	\item Sistema de ruteo, también RESTful
@@ -30,8 +28,6 @@ Algunas características generales de este framework son:
 	\item Basado en Composer
 	\item Soporte para el caché
 	\item Soporte para MVC
-	\item Usa componentes de Symfony
-	\item Adopta las especificaciones PSR-2 y PSR-4	
 \end{itemize}
 
 \subsection{HTTP}
@@ -56,7 +52,7 @@ HTTP define un conjunto de métodos de solicitudes para indicar la acción desea
 
 \subsection{JSON}
 
-JSON (JavaScript Object Notation – Notacion de Objetos de JavaScript) es un formato basado en texto para representar datos e intercambiarlos, comúnmente utilizado en aplicaciones web pues para las maquinas resulta simple interpretando y generarlo, al igual que para los humanos es cómodo leerlo y escribirlo. JSON no tiene dependencia directa con el lenguaje de programación utilizado, no obstante su sintaxis comparte convenciones conocidas en  lenguajes de programación como C, C++, Java, JavaScript, Python, entre otros, lo cual lo hace ideal para cumplir su objetivo. \\
+JSON (JavaScript Object Notation – Notacion de Objetos de JavaScript) es un formato basado en texto para representar datos e intercambiarlos, comúnmente utilizado en aplicaciones web pues para las maquinas resulta simple interpretando y generarlo, al igual que para los humanos es cómodo leerlo y escribirlo. JSON no tiene dependencia directa con el lenguaje de programación utilizado, no obstante su sintaxis comparte convenciones conocidas en  lenguajes de programación como C, C++, Java, JavaScript, Python, entre otros, lo cual lo hace ideal para cumplir su objetivo.\cite{JSON}\\
 
 ``JSON está constituído por dos estructuras:
 
@@ -86,9 +82,7 @@ Smart House es un entorno que tiene sistemas sofisticados a través de los cuale
 
 Este es un potente módulo MCU Wi-Fi + BT + BLE creado con un enfoque hacia aplicaciones de IoT, esta también dirigido e implementado en una amplia variedad de proyectos con tareas simples o más exigentes gracias a sus amplias capacidades y alcance físico por su conexión Wifi a internet, además de garantizar un bajo consumo de potencia y un reducido tamaño según se observa en la Figura \ref{fig:esp32-wroom-s32-00}. La corriente de reposo del chip ESP32 es inferior a 5 $\mu$A, lo que lo hace adecuado para aplicaciones de electrónica con batería y portátiles.\\
 
-El chip en cuestión está diseñado para ser adaptable y tener escalabilidad. Su CPU cuenta con dos núcleos, los cuales pueden ser administrados y controlados individualmente, modificación también su frecuencia de reloj en un rango entre 80MHz y 240MHz, con velocidades de datos de hasta 150Mbps y una potencia de salida de 20.5 dBm en la antena. Además de contar con múltiples periféricos, tales como sensores hall, interfaz de tarjeta SD, soporte para Ethernet, SPI de alta velocidad, UART, I2C, entre otras.\\
-
-El sistema operativo elegido para ESP32 es freeRTOS con LwIP; TLS 1.2 con aceleración de hardware está integrado también, además se admite la actualización segura (cifrada) a través del aire (OTA), de modo que los desarrolladores puedan actualizar continuamente sus productos incluso después de su lanzamiento.\cite{EW32}
+El chip en cuestión está diseñado para ser adaptable y tener escalabilidad. Su CPU cuenta con dos núcleos, los cuales pueden ser administrados y controlados individualmente, modificación también su frecuencia de reloj en un rango entre 80MHz y 240MHz, con velocidades de datos de hasta 150Mbps y una potencia de salida de 20.5 dBm en la antena. Además de contar con múltiples periféricos, tales como sensores hall, interfaz de tarjeta SD, soporte para Ethernet, SPI de alta velocidad, UART, I2C, entre otras.El sistema operativo elegido para ESP32 es freeRTOS con LwIP.\cite{EW32}\\
 
 
 \begin{figure}[H]
@@ -100,17 +94,17 @@ El sistema operativo elegido para ESP32 es freeRTOS con LwIP; TLS 1.2 con aceler
 
 \subsection{Corriente Alterna (AC)}
 
-La corriente alterna, presenta un flujo de electrones en intervalos regulares o en ciclos. Normalmente generadas en centrales eléctricas para hacer que fluya a través de las líneas eléctricas y finalmente llegando a entornos como hogares, siendo usados por los usuarios a través de enchufes sobre la pared. Esta corriente eléctrica viene con un estándar utilizado en EE.UU. a 60Hz, mientras que en Europa y en muchos lugares del mundo se manejan frecuencias de 50Hz. \cite{Cor}
+La corriente alterna, presenta un flujo de electrones en intervalos regulares o en ciclos. Normalmente generadas en centrales eléctricas para hacer que fluya a través de las líneas eléctricas y finalmente llegando a entornos como hogares, siendo usados por los usuarios a través de enchufes sobre la pared. Esta corriente eléctrica viene con un estándar utilizado en EE.UU. a 60Hz, mientras que en Europa y en muchos lugares del mundo se manejan frecuencias de 50Hz.\cite{TC}\\
 
 \subsection{Corriente Directa (DC)}
 
-La corriente directa tiene un flujo de electrones constante, tal como la energía eléctrica de una batería en una linterna o cualquier otro aparato de este estilo. En contraste con la corriente alterna, la perdida de energía al transportarla a largas distancias es mucho menor, además de que su cambio de voltaje resulta relativamente más económico. \cite{Cor}\\
+La corriente directa tiene un flujo de electrones constante, tal como la energía eléctrica de una batería en una linterna o cualquier otro aparato de este estilo. En contraste con la corriente alterna, la perdida de energía al transportarla a largas distancias es mucho menor, además de que su cambio de voltaje resulta relativamente más económico. \cite{TC}\\
 
 \subsection{Control de potencia AC por ángulo de fase}
 
 Dispositivos como TRIAC y SCR facilitan el uso de técnicas para controlar la potencia de una carga mediante la manipulación del voltaje promedio, modificando el ángulo de fase que suministra la corriente alterna de la red eléctrica. Esta técnica es utilizada en aplicaciones como intensidad lumínica, control de temperatura, regulación de velocidad en motores, entre otras.\cite{CEKIT}\\
 
-Se puede asumir que un TRIAC	conectado en serie a el dispositivo, se comporta como un interruptor que se activa o desactiva con la presencia o ausencia de una corriente Ig en la compuerta (G). En la Figura \ref{fig:triacgraph} se observa el control de una onda seno con un periodo de 360 grados, donde la parte (a) representa la tensión a través del TRIAC y en la parte (b) la tensión sobre la carga; se observa allí que el TRIAC permanece como un circuito abierto en los primeros 45 grados de cada semiciclo, pues este es el ángulo donde comienza la conducción, conocido también como ángulo de disparo, punto a partir del cual la carga adquiere todo el voltaje de la red. \cite{CEKIT}.\\
+Se puede asumir que un TRIAC conectado en serie a el dispositivo, se comporta como un interruptor que se activa o desactiva con la presencia o ausencia de una corriente Ig en la compuerta (G). En la Figura \ref{fig:triacgraph} se observa el control de una onda seno con un periodo de 360 grados, donde la parte (a) representa la tensión a través del TRIAC y en la parte (b) la tensión sobre la carga; se observa allí que el TRIAC permanece como un circuito abierto en los primeros 45 grados de cada semiciclo, pues este es el ángulo donde comienza la conducción, conocido también como ángulo de disparo, punto a partir del cual la carga adquiere todo el voltaje de la red. \cite{CEKIT}.\\
 
 
 \begin{figure}[H]
@@ -140,7 +134,7 @@ I2C, también conocido como IIC ó TWI – Two Wire Interface es un protocolo de
 
 \subsubsection{Módulo GY-30}
 
-El modulo sensor digital GY-30 BH1750FVI ilustrado en la Figura \ref{fig:gy-30} permite tomar una medición de la intensidad de luz ambiente o luz visible, contando con un ADC de 16bits y comunicación por medio del protocolo I2C, de tal manera que puede ser implementado en la mayoría de micro controladores. Este sensor arroja valores en la unidad Lux (Lumen /m$^2$ ), la cual es una unidad estándar para esta magnitud, teniendo un rango de operación entre 1 y 65353 lx.\cite{GY30}\\
+El modulo sensor digital GY-30 BH1750FVI ilustrado en la Figura \ref{fig:gy-30} permite tomar una medición de la intensidad de luz ambiente o luz visible, contando con un ADC de 16bits y comunicación por medio del protocolo I2C, de tal manera que puede ser implementado en la mayoría de microcontroladores. Este sensor arroja valores en la unidad Lux (Lumen /m$^2$ ), la cual es una unidad estándar para esta magnitud, teniendo un rango de operación entre 1 y 65353 lx.\cite{GY30}\\
 
 \begin{figure}[H]
 	\centering
@@ -160,10 +154,9 @@ El sensor digital DHT11 permite medir temperatura y humedad a un costo bajo, se 
 	\includegraphics[width=0.4\linewidth]{Imagenes/dht11}
 \end{figure}
 
-
 \subsubsection{Módulo sensor de calidad de aire MQ-135}
 
-La serie MQ de sensores de gas son sensores analógicos, por lo cual son fáciles de implementar con cualquier microcontrolador que posea un conversor analógico digital (ADC) adecuado. Estos detectores son electroquímicos y cambian su resistencia con la exposición a determinados gases, internamente poseen un calentador que se encarga de aumentar la temperatura interna para que el sensor pueda reaccionar con los gases provocando un cambio de valor en la resistencia, su estructura interior se puede observar en la Figura \ref{fig:estructura-del-sensor-mq}.\cite{MQ1}
+MQ es la serie de sensores de gas, son sensores analógicos, por lo cual son fáciles de implementar con cualquier microcontrolador que posea un conversor analógico digital (ADC). Estos detectores son electroquímicos y cambian su resistencia con la exposición a determinados gases, su estructura interior se puede observar en la Figura \ref{fig:estructura-del-sensor-mq}.\cite{MQ1}
 
 \begin{figure}[H]
 	\centering
@@ -172,7 +165,7 @@ La serie MQ de sensores de gas son sensores analógicos, por lo cual son fácile
 	\includegraphics[width=0.7\linewidth]{Imagenes/Estructura_del_sensor_MQ}
 \end{figure}
 
-El Sensor Calidad Aire MQ135 se utilizan en equipos de control de calidad del aire a edificios y oficinas, son adecuados para la detección de NH3, NOx, alcohol, benceno, humo, CO2, etc; además de que estos sensores vienen en módulos como se observa en la Figura \ref{fig:sensor-calidad-aire-mq135}, lo que facilita su uso, simplemente se debe conectar al microcontrolador sin necesidad de utilizar algún circuito de acople. \cite{MQ1}
+El sensor MQ135 de calidad de aire se utiliza en equipos de control de calidad del aire en diferentes escenarios, son adecuados para la detección de NH3, NOx, alcohol, benceno, humo, CO2, etc; además de que estos sensores vienen en módulos como se observa en la Figura \ref{fig:sensor-calidad-aire-mq135}, lo que facilita su uso, simplemente se debe conectar al microcontrolador, cuidando que este tenga un voltaje de entrada de 0VDC a 5VDC. \cite{MQ1}
 
 \begin{figure}[H]
 	\centering
@@ -180,8 +173,6 @@ El Sensor Calidad Aire MQ135 se utilizan en equipos de control de calidad del ai
 	\label{fig:sensor-calidad-aire-mq135}
  	\includegraphics[width=0.35\linewidth]{Imagenes/sensor-calidad-aire-mq135}
 \end{figure}
-
-Este sensor es sensible en similar proporción a los gases mencionados, con lo que se puede determinar si el aire está limpio o si existe presencia de algún gas nocivo.\\
 
 Los datos de salida de este sensor no son valores absolutos, simplemente proporciona una salida analógica que se debe monitorear y ser comparada con los valores típicos proporcionados en la hoja de datos.\cite{MQ2}
 
@@ -191,7 +182,7 @@ Los sensores de estado describen si la variable está en alto (1) o en bajo (0),
 
 \paragraph{Módulo detector de lluvia: }
 
-Es un módulo relativamente simple que consiste en una serie de pistas conductoras organizadas de forma paralela e impresas sobre una placa de baquelita como se observa en la Figura \ref{fig:yl-83}. La separación entre sus caminos es muy pequeña, con el fin de crear un corto circuito cada vez que las pistas se mojan, ya que es un circuito abierto y el agua hace que se cree un camino de baja resistencia entre las pistas que tienen diferente potencial (Vcc-GND). La corriente que fluye a través de estas pistas se ve limitada por resistencias de 10K$\Omega$ en cada conductor, lo que impide que el corto circuito que se genera cuando se moja la placa vaya a estropear el micro controlador.\cite{LLU}
+Es un módulo relativamente simple que consiste en una serie de pistas conductoras organizadas de forma paralela e impresas sobre una placa de baquelita como se observa en la Figura \ref{fig:yl-83}. La separación entre sus caminos es muy pequeña, con el fin de crear un corto circuito cada vez que las pistas se mojan. La corriente que fluye a través de estas pistas se ve limitada por resistencias de 10K$\Omega$ en cada conductor, lo que impide que el corto circuito que se genera cuando se moja la placa vaya a estropear el micro controlador.\cite{LLU}
 
 \begin{figure}[H]
 	\centering
@@ -200,9 +191,7 @@ Es un módulo relativamente simple que consiste en una serie de pistas conductor
 	\includegraphics[width=0.35\linewidth]{Imagenes/YL-83}
 \end{figure}
 
-El circuito de control es el que posee las resistencias limitadoras de corriente y es el encargado de alimentar el módulo de la Figura \ref{fig:yl-83}. Como se observa en la Figura \ref{fig:yl-831} tiene un amplificador operacional, específicamente el circuito integrado LM392. Este se ocupa de amplificar el pequeño diferencial de voltaje que se produce cuando una gota de agua cae sobre las pistas del módulo. Aquí es donde se genera la señal de salida que puede ser del tipo analógica o digital. La señal digital oscilará entre los valores HIGH y LOW dependiendo de si hay agua o no sobre las pistas de la placa.\\
-
-La salida analógica entregará un nivel de voltaje que variará dependiendo de la cantidad de agua que haya sobre el módulo.\cite{LLU}\\
+El circuito de control es el que posee las resistencias limitadoras de corriente y es el encargado de alimentar el módulo de la Figura \ref{fig:yl-83}. Como se observa en la Figura \ref{fig:yl-831} tiene un amplificador operacional LM392. Este se ocupa de amplificar el pequeño diferencial de voltaje que se produce cuando una gota de agua cae sobre las pistas del módulo. Aquí es donde se genera la señal de salida que puede ser analógica o digital.\cite{LLU}\\
 
 \begin{figure}[H]
 	\centering
@@ -233,19 +222,21 @@ Los sistemas operativos en tiempo real, tienen como parámetro clave al tiempo, 
 
 Para procesos con nula tolerancia a fallos, se conoce como un sistema en tiempo real duro, muchos de estos sistemas se encuentran en el control de procesos industriales, en aeronáutica, en la milicia y en áreas de aplicación similares. El caso contrario, cuando se tiene cierta permisividad a que muy ocasionalmente existan errores, se conoce como sistema en tiempo real suave, los sistemas de audio digital o de multimedia están en esta categoría. Los teléfonos digitales también son ejemplos de sistema en tiempo real suave. \cite{SO} \\
 
-``Como en los sistemas en tiempo real es crucial cumplir con tiempos predeterminados para realizar una acción, algunas veces el sistema operativo es simplemente una biblioteca enlazada con los programas de aplicación, en donde todo está acoplado en forma estrecha y no hay protección entre cada una de las partes del sistema. Un ejemplo de este tipo de sistema en tiempo real es freeRTOS.  Las categorías de sistemas para computadoras de bolsillo, sistemas integrados y sistemas en tiempo real se traslapan en forma considerable. Casi todos ellos tienen por lo menos ciertos aspectos de tiempo real suave. Los sistemas integrados y de tiempo real sólo ejecutan software que colocan los diseñadores del sistema; los usuarios no pueden agregar su propio software, lo cual facilita la protección. \\
-
-Los sistemas de computadoras de bolsillo y los sistemas integrados están diseñados para los consumidores, mientras que los sistemas en tiempo real son más adecuados para el uso industrial. Sin embargo, tienen ciertas características en común''. \cite{SO}
+%``Como en los sistemas en tiempo real es crucial cumplir con tiempos predeterminados para realizar una acción, algunas veces el sistema operativo es simplemente una biblioteca enlazada con los programas de aplicación, en donde todo está acoplado en forma estrecha y no hay protección entre cada una de las partes del sistema. Un ejemplo de este tipo de sistema en tiempo real es freeRTOS.  Las categorías de sistemas para computadoras de bolsillo, sistemas integrados y sistemas en tiempo real se traslapan en forma considerable. Casi todos ellos tienen por lo menos ciertos aspectos de tiempo real suave. Los sistemas integrados y de tiempo real sólo ejecutan software que colocan los diseñadores del sistema; los usuarios no pueden agregar su propio software, lo cual facilita la protección. \\
+%
+%Los sistemas de computadoras de bolsillo y los sistemas integrados están diseñados para los consumidores, mientras que los sistemas en tiempo real son más adecuados para el uso industrial. Sin embargo, tienen ciertas características en común''. \cite{SO}
 
 \subsection{ESP-IDF}
 
 ESP-IDF es el entorno de desarrollo oficial para el ESP32 desarrollado por Espressif System, el cual mediante una serie de comandos específicos escritos en la terminal (en el caso de linux), habilita la configuración del ESP32 en cuanto a su funcionamiento, es decir, permite encender o apagar características como el WiFi, el Bluetooth o realizar particiones de memoria, además de esto, se puede cargar el código por el puerto USB al ESP32, al igual que visualizar la información generada por el ESP32 por el mismo puerto. Este entorno se encuentra construido con diferentes características y APIs, algunas de ellas se mencionan a continuación. \cite{ES}
 
-\paragraph{FreeRTOS:}el framework está desarrollado sobre este sistema operativo de tiempo real, tomando algunas funcionalidades propias, como la tareas y las colas.
+\paragraph{FreeRTOS:}El framework está desarrollado sobre este sistema operativo de tiempo real, tomando algunas funcionalidades propias, como la tareas y las colas.
 
-\paragraph{Wi-Fi:}el módulo ESP-WROOM-32 posee la capacidad en el hardware para la conexión a una red Wi-Fi, y este software proporciona las librerias y las funcionalidades a fin de realizar dicha conexion y enviar o recibir datos.
+\paragraph{Tareas:}Se ejecutan constantemente en el sistema operativo, realizando diferentes funciones para lectura, escritura y control.
 
-\paragraph{Particiones:}el MCU contiene una memoria flash, la cual por medio de este framework se le pueden realizar particiones, dedicadas a almacenar la lista de instrucciones, y también para guardar ciertos archivos. Estas se configuran a través de un fichero csv.
+\paragraph{Wi-Fi:}El módulo ESP-WROOM-32 posee la capacidad en el hardware para la conexión a una red Wi-Fi, y este software proporciona las librerias y las funcionalidades a fin de realizar dicha conexion y enviar o recibir datos.
+
+\paragraph{Particiones:}El MCU contiene una memoria flash, la cual por medio de este framework se le pueden realizar particiones, dedicadas a almacenar la lista de instrucciones y también para guardar ciertos archivos. Estas se configuran a través de un fichero csv.
 
 %\paragraph{Consola:}el framework provee una libreria para realizar la programacion de una consola, con el fin de ejecutar diferentes funcionalidades programadas dentro del sistema por el desarrollador.
 
@@ -272,7 +263,7 @@ Para construir la aplicación web se tiene una lógica basada en un Modelo Vista
 
 Su funcionamiento es el siguiente, primero el usuario realiza alguna acción en la interfaz (por ejemplo, presiona un botón, un enlace, etc), luego el controlador recibe (por parte de los objetos de la interfaz-vista) la notificación de la acción solicitada por el usuario. El controlador gestiona el evento que llega, accediendo al modelo y actualizándolo, posiblemente modificándolo de forma adecuada a la acción solicitada por el usuario (por ejemplo, el controlador actualiza los datos del perfil del usuario) y después la interfaz de usuario espera nuevas interacciones del usuario, comenzando el ciclo nuevamente \cite{MVC2}.\\
 
-Este patrón de diseño se usa en la programación orientada a objetos, por lo tanto se realiza la aplicación en el lenguaje de programación PHP, ya que es realmente útil para realizar la gestión de peticiones y envíos de formularios en dicha aplicación, además de que es importante también la gestión de las bases de datos de la aplicación, por este motivo se utiliza un framework basado en este lenguaje y esta arquitectura. Para gestionar las diferentes partes de la aplicación, en este caso se usa el framework Laravel, pues como se menciona anteriormente, está orientado a facilitar las tareas comunes de la mayoría de proyectos web que utilizan HTML5 y PHP.\\
+Este patrón de diseño se usa en la programación orientada a objetos, por lo tanto se realiza la aplicación en el lenguaje de programación PHP, ya que es realmente útil para realizar la gestión de peticiones y envíos de formularios en dicha aplicación, además de que es importante también la gestión de las bases de datos de la aplicación, por este motivo se utiliza un framework basado en este lenguaje ayudando en la implementación de dicha arquitectura. Para gestionar las diferentes partes de la aplicación, en este caso se usa el framework Laravel, pues como se menciona anteriormente, está orientado a facilitar las tareas comunes de la mayoría de proyectos web que utilizan HTML5 y PHP.\\
 
 Además, con este framework se hace uso de un ORM (Mapeo Objeto-Relacional) llamado Eloquent. Esta es una forma de mapear los datos que se encuentran en la base de datos a objetos de PHP y viceversa, esto facilita el uso de diferentes gestores de bases de datos como MySQL, SQLite, entre otras, ya que todas las consultas estan en PHP y el ORM ya se encarga del mapeo a los comandos SQL como se observa en la Figura \ref{fig:orm}. Eloquent usa los modelos para enviar y recibir información de la base de datos\cite{Eloq}.\\
 
