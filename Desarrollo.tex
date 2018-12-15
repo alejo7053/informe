@@ -6,13 +6,13 @@ Como se mencionó anteriormente, el Usuario Administrador es quien otorga las cr
 
 En ese orden de ideas, los demás usuarios tienen privilegios limitados a las necesidades de cada rol, es decir, los Usuarios Casa tienen acceso a la revisión y edición de algunos campos de las viviendas registradas a su nombre y de los usuarios Habitación vinculados a él, además de poder gestionar los dispositivos en el hogar. Cabe resaltar que este usuario es opcional, puesto que un Usuario Habitación puede operar de manera independiente, teniendo esta la simple vista de los dispositivos conectados, es decir, tiene acceso a el panel de control que representa la habitación en cuestión.\\
  
-La aplicación web está conectada con la tarjeta Smart House (Hardware), ya que esta cuenta con conexión a Internet vía WiFi, la cual es gestionada por el Firmware del dispositivo, con el fin de realizar el vínculo entre software y hardware de manera adecuada. Además, el firmware gestiona las múltiples tareas que realiza la tarjeta, como lo son la lectura de datos y la gestión de las cargas conectadas a las diferentes salidas AC o DC, entre otras funcionalidades.\\
+La aplicación web está conectada con la tarjeta Smart House (Hardware), ya que esta cuenta con conexión a Internet vía WiFi, la cual es gestionada por aplicación presente en el ESP32, con el fin de realizar el vínculo entre software y hardware de manera adecuada. Además, el sistema operativo gestiona las múltiples tareas que realiza la tarjeta, como lo son la lectura de datos y la gestión de las cargas conectadas a las diferentes salidas AC o DC, entre otras funcionalidades.\\
 
 \begin{figure}[H]
 	\centering
 	\caption[Esquema del sistema IoT.]{Esquema del sistema IoT. [Imagen Propia]}
 	\label{fig:diagramas}
-	\includegraphics[width=0.7\linewidth]{Imagenes/Diagramas}
+	\includegraphics[width=0.73\linewidth]{Imagenes/Diagramas}
 \end{figure}
 
 Para la construcción del hardware se tomaron como referencia valores de operación presentes en el mercado, de modo que las salidas para cargas DC fueron definidas a un voltaje de 12V, ya que se comercializan dispositivos como lámparas LEDs o mecanismos capaces de abrir y cerrar ventanas o persianas con este nivel de tensión, entre otros. Por otra parte, el voltaje para las cargas AC se define con base en la red eléctrica doméstica de Colombia, siendo esta 110VAC. Para las entradas del dispositivo se cuenta con los sensores mencionados anteriormente en la Sección \ref{sec:sensors}, los cuales funcionan con voltajes lógicos de 5V y 3.3V. Estos sensores se eligen por ser los más usados en dicho ámbito además de que se acomodan a las necesidades de una habitación, como sensar presencia, temperatura, calidad del aire y demás.\\
@@ -27,7 +27,7 @@ El diseño de hardware parte desde un concepto general de la solución, es decir
 	\centering
 	\caption[Diagrama de la tarjeta Smart House.]{Diagrama de la tarjeta Smart House.  [Imagen Propia]}
 	\label{fig:tar}
-	\includegraphics[width=0.7\linewidth]{Imagenes/Tarjeta}
+	\includegraphics[width=0.99\linewidth]{Imagenes/Tarjeta}
 \end{figure}
 
 En primer lugar, al definir el ESP32 como unidad central de mando se tiene disponibilidad de 34 GPIO programables, entre los cuales algunos de ellos cuentan con diferentes enfoques más específicos como DAC y ADC, entre otros, los cuales son distribuidos para la adquisición de datos por parte de sensores, así como también la manipulación de las correspondientes cargas y demás salidas del dispositivo. Debido a que el ESP32 opera a un nivel lógico de 3.3V, se hace necesario garantizar este voltaje en algunas etapas de la estructura del hardware.\\
@@ -80,20 +80,19 @@ Con las características de operación definidas para el prototipo, y con ayuda 
 	
 	Debido a que el voltaje DC más alto presenta una magnitud de 12V, se decide tomar este voltaje y reducirlo a los niveles lógicos requeridos para el manejo adecuado de dispositivos como sensores, así como también el ESP32. \\
 	
-	\begin{figure}[H]
-		\centering
-		\caption[Etapa de alimentacion AC y DC.]{Etapa de alimentacion AC y DC. [Imagen Propia]}
-		\subfigure[Etapa Alimentación AC]{\includegraphics[width=0.5\linewidth]{Imagenes/B_AliAC}}
-		\subfigure[Etapa Alimentación DC]{\includegraphics[width=0.6\linewidth]{Imagenes/B_Alimentacion}}
-		\label{fig:balidc}
-	\end{figure}
-	
-	
 	\paragraph{Corriente alterna (AC):}
 		El prototipo recibe el voltaje directamente de la red eléctrica a la que se encuentra conectado el entorno de aplicación, el cual está pensado para una habitación dentro de una Smart House; en el caso de Colombia, la red doméstica comúnmente otorga 110V AC, los cuales son regulados para el funcionamiento adecuado del prototipo, como la etapa de potencia AC y el detector de cruce por cero con el fin de sincronizar la tarjeta a dicha red eléctrica.\\
-		
+	
 	\paragraph{Corriente directa (DC):}
-		Para la alimentación DC del circuito, se hace uso de un conversor AC-DC que regula el voltaje de la red eléctrica a 12V DC, con los cuales se maneja la etapa de potencia DC, además de ser usados por dos módulos conversores DC-DC, mostrados en la Figura \ref{fig:DCDC}, ambos con entradas de 12V DC y con salidas a los niveles lógicos comunes, 5V y 3.3V, empleados con el fin de alimentar dispositivos como optoacopladores, transistores BJT o relevadores con activación de 5V, así como también la tarjeta de prototipo ESP32.\\
+	Para la alimentación DC del circuito, se hace uso de un conversor AC-DC que regula el voltaje de la red eléctrica a 12V DC, con los cuales se maneja la etapa de potencia DC, además de ser usados por dos módulos conversores DC-DC, mostrados en la Figura \ref{fig:DCDC}, ambos con entradas de 12V DC y con salidas a los niveles lógicos comunes, 5V y 3.3V, empleados con el fin de alimentar dispositivos como optoacopladores, transistores BJT o relevadores con activación de 5V, así como también la tarjeta de prototipo ESP32.\\
+	
+		\begin{figure}[H]
+			\centering
+			\caption[Etapa de alimentacion AC y DC.]{Etapa de alimentacion AC y DC. [Imagen Propia]}
+			\subfigure[Etapa Alimentación AC]{\includegraphics[width=0.5\linewidth]{Imagenes/B_AliAC}}
+			\subfigure[Etapa Alimentación DC]{\includegraphics[width=0.6\linewidth]{Imagenes/B_Alimentacion}}
+			\label{fig:balidc}
+		\end{figure}
 		
 		Cabe resaltar que la tarjeta cuenta con una fuente interna de 12VDC a 2A para la etapa DC y una ranura para agregar una fuente externa de 12VDC a 5A si se desean controlar cargas a un máximo de 50W, en el Anexo C se encuentra como conmutar entre la fuente interna y externa.\\
 			
@@ -101,7 +100,7 @@ Con las características de operación definidas para el prototipo, y con ayuda 
 			\centering
 			\caption[Módulo conversor DC-DC.]{Módulo conversor DC-DC. Tomado de: \cite{DCDC}}
 			\label{fig:DCDC}
-			\includegraphics[width=0.5\linewidth]{Imagenes/DCDC}
+			\includegraphics[width=0.35\linewidth]{Imagenes/DCDC}
 		\end{figure}
 	
 	\subsection{Entradas}
@@ -111,29 +110,23 @@ Con las características de operación definidas para el prototipo, y con ayuda 
 	\begin{figure}[H]
 		\centering
 		\caption[Etapa de Entradas.]{Etapa de Entradas. [Imagen Propia]}
-		\includegraphics[width=0.7\linewidth]{Imagenes/B_Entradas}\label{fig:BEntradas}
+		\includegraphics[width=0.9\linewidth]{Imagenes/B_Entradas}\label{fig:BEntradas}
 	\end{figure}
 	
 	\paragraph{Sensores:}
 		El prototipo viene equipado con una etapa de adquisición de datos con capacidad entre 7 a 134 sensores, pues posee una entrada I2C, ampliando el número de dispositivos conectados, lo cual también permitiría adicionar tareas más específicas en escenarios que lo requieran.\\
 		
-		Con la finalidad de realizar pruebas del prototipo, se hacen uso de 5 sensores para medir magnitudes y situaciones en el entorno, tal como calidad del aire, temperatura, humedad, luz visible, movimiento y presencia de lluvia, debido a que estas medidas o estados se encuentran en casi cualquier ambiente. Teniendo en cuenta que el ESP32 funciona en voltajes lógicos de 3.3V, se tienen 4 entradas de sensores directamente conectados a los pines de la tarjeta, con la capacidad de cambiar el voltaje de alimentación para 3 de ellos, como se muestra en la Figura \ref{fig:SVS}, pues en el mercado se encuentran sensores que manejan voltajes de alimentación ya sea de 3.3V o 5V, mientras que la cuarta entrada se encuentra alimentada con 5V, ya que tiene un uso específico en las pruebas para el sensor de calidad de aire, esta viene acondicionada con un diodo zener en contraposición, para evitar que la tarjeta ESP32 tenga un voltaje de entrada superior a 3.3V, según se observa en la Figura \ref{fig:S1Aire}.\\
+		Con la finalidad de realizar pruebas del prototipo, se hacen uso de 5 sensores para medir magnitudes y situaciones en el entorno, tal como calidad del aire, temperatura, humedad, luz visible, movimiento y presencia de lluvia, debido a que estas medidas o estados se encuentran en casi cualquier ambiente. Teniendo en cuenta que el ESP32 funciona en voltajes lógicos de 3.3V, se tienen 4 entradas de sensores directamente conectados a los pines de la tarjeta, con la capacidad de cambiar el voltaje de alimentación para 3 de ellos, como se muestra en la Figura \ref{fig:SVS}\textbf{(a)}, pues en el mercado se encuentran sensores que manejan voltajes de alimentación ya sea de 3.3V o 5V, mientras que la cuarta entrada se encuentra alimentada con 5V, ya que tiene un uso específico en las pruebas para el sensor de calidad de aire, esta viene acondicionada con un diodo zener en contraposición, para evitar que la tarjeta ESP32 tenga un voltaje de entrada superior a 3.3V, según se observa en la Figura \ref{fig:SVS}\textbf{(b)}.\\
+
+		\begin{figure}[H]
+			\centering
+			\caption[Entradas de sensores.]{Entradas de sensores. [Imagen Propia]}
+			\label{fig:SVS}
+			\subfigure[Entrada Sensores]{\includegraphics[width=0.5\linewidth]{Imagenes/SVS}}
+			\subfigure[Entrada para sensor de calidad de aire]{\includegraphics[width=0.4\linewidth]{Imagenes/S1Aire}}
+		\end{figure}
 		
 		Las tres entradas para sensores de estado (ST1, ST2, ST3), a diferencia de las demás, se encuentran conectadas a pines de la tarjeta que no presentan resistencia de pull down por software, por ello se agregan estas al sistema, tal como se observa en la Figura \ref{fig:ST}.\\
-		
-		\begin{figure}[H]
-			\centering
-			\caption[Entrada de sensores.]{Entrada de sensores. [Imagen Propia]}
-			\label{fig:SVS}
-			\includegraphics[width=0.7\linewidth]{Imagenes/SVS}
-		\end{figure}
-	
-		\begin{figure}[H]
-			\centering
-			\caption[Entrada para sensor de calidad de aire.]{Entrada para sensor de calidad de aire. [Imagen Propia]}
-			\label{fig:S1Aire}
-			\includegraphics[width=0.6\linewidth]{Imagenes/S1Aire}
-		\end{figure}
 	
 		\begin{figure}[H]
 			\centering
@@ -146,13 +139,8 @@ Con las características de operación definidas para el prototipo, y con ayuda 
 	
 	\paragraph{Calibración de audio:}
 		Para calibrar la salida audible se hace uso de una resistencia variable (Potenciómetro), el cual permite regular el voltaje de entrada al circuito de amplificación mostrado en la Figura \ref{fig:AUD}; este será descrito en el presente capitulo en la sección de salidas del hardware.
-		
-	\paragraph{Botón enable:}
-		Presionando el botón enable se reinicia la tarjeta ESP32, junto con su firmware.
-		
-	\paragraph{Botón reset:}
-		Presionando el botón reset se borran las credenciales ingresadas para la conexión del ESP32 a la red WiFi.\\
-		
+	\paragraph{Botón enable:}	Presionando el botón enable se reinicia la aplicación y la tarjeta ESP32.	
+	\paragraph{Botón reset:}	Presionando el botón reset se borran las credenciales ingresadas para la conexión del ESP32 a la red Wi-Fi.\\
 	\subsection{Salidas}
 	
 	Las salidas del prototipo están vinculadas directamente con el circuito de control correspondiente a las cargas, es decir, las salidas DC están diseñadas para ser controladas por medio de PWM, mientras que las salidas AC por medio de control por Angulo de fase en sus salidas controladas. Estos circuitos de contorl están manejados por la unidad central de mando tal como se observa en el esquema de esta etapa ilustrado en la Figura \ref{fig:BSalidas}.\\ 
@@ -201,22 +189,22 @@ Con las características de operación definidas para el prototipo, y con ayuda 
 	
 	\paragraph{Etapa DC:}
 		Esta etapa cuenta con cuatro salidas de control diseñadas para cargas de 12V, de las cuales, dos de ellas tienen un enfoque a motores, puesto que está equipada con control de velocidad a base de PWM e inversión de giro con un puente H usando transistores mosfet IRLZ44N; los cuales fueron seleccionados debido a que permiten ser activados a niveles lógicos, además de su capacidad para trabajar en potencias de hasta 50W. El puente h se encuentra controlado por un circuito integrado L293D, que garantiza un voltaje Vgs adecuado para la correcta activación del los transistores; este circuito se muestra en las Figuras \ref{fig:L293D} y \ref{fig:CDC}.\cite{IRL}.\\
-		
-		Las dos salidas restantes también cuentan con mosfet IRLZ44N, y su control igualmente es a base de PWM, mas no permite realizar la inversión de giro, por lo cual se enfoca a dispositivos como lámparas LEDs. El diseño en Proteus se muestra en la Figura \ref{fig:ONOFDC}.\\
-		
+
 		\begin{figure}[H]
 			\centering
 			\caption[Integrado L293D.]{Integrado L293D. [Imagen Propia]}
 			\label{fig:L293D}
 			\includegraphics[width=0.5\linewidth]{Imagenes/L293D}
 		\end{figure}
-		
-		\begin{figure}[H]
-			\centering
-			\caption[Puente H para control de motores DC.]{Puente H para control de motores DC. [Imagen Propia]}
-			\label{fig:CDC}
-			\includegraphics[width=0.7\linewidth]{Imagenes/CDC}
-		\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\caption[Puente H para control de motores DC.]{Puente H para control de motores DC. [Imagen Propia]}
+	\label{fig:CDC}
+	\includegraphics[width=0.7\linewidth]{Imagenes/CDC}
+\end{figure}
+
+		Las dos salidas restantes también cuentan con mosfet IRLZ44N, y su control igualmente es a base de PWM, mas no permite realizar la inversión de giro, por lo cual se enfoca a dispositivos como lámparas LEDs. El diseño en Proteus se muestra en la Figura \ref{fig:ONOFDC}.\\
 	
 		\begin{figure}[H]
 			\centering
@@ -271,7 +259,7 @@ El framework usa el sistema Kconfig para facilitar la configuración \cite{ES}, 
 	\includegraphics[width=\linewidth]{Imagenes/Kgui}
 \end{figure}
 
-Para el desarrollo se modifican ítems en ``Serial Flasher Config'' como el tamaño de la flash a usar, al valor máximo de 4MB, el puerto serial donde se detecta el ESP32 y además la velocidad de transmisión a un valor de 115200 bps. Otro punto que se configura es la tabla de particiones, ya que el ESP32 puede tener una o varias aplicaciones \cite{ES}, en este caso solo contiene una y se usa la tabla de particiones por defecto que provee el framework. Asimismo, en la parte de ``Component Config'' se eligen los componentes que están disponibles y sus configuraciones básicas, por ejemplo, las opciones para el RTOS, donde se configura en qué núcleo se va a ejecutar el sistema operativo, que timer va a usar y también su tick rate, que en este caso es de 100Hz; también se activa el Wi-Fi con la configuración por defecto y que la potencia máxima sea de 20dBm para interfaz física y también se configura una velocidad de la CPU de 240MHz. Esta interfaz permite configurar muchos más componentes que no se usaron o se dejan con la configuración por defecto.\\
+Para el desarrollo se modifican items en ``Serial Flasher Config'' como el tamaño de la flash a usar, al valor máximo de 4MB, el puerto serial donde se detecta el ESP32 y además la velocidad de transmisión a un valor de 115200 bps. Otro punto que se configura es la tabla de particiones, ya que el ESP32 puede tener una o varias aplicaciones \cite{ES}, en este caso solo contiene una y se usa la tabla de particiones por defecto que provee el framework. Asimismo, en la parte de ``Component Config'' se eligen los componentes que están disponibles y sus configuraciones básicas, por ejemplo, las opciones para el RTOS, donde se configura en qué núcleo se va a ejecutar el sistema operativo, que timer va a usar y también su tick rate, que en este caso es de 100Hz; también se activa el Wi-Fi con la configuración por defecto y que la potencia máxima sea de 20dBm para interfaz física y también se configura una velocidad de la CPU de 240MHz. Esta interfaz permite configurar muchos más componentes que no se usaron o se dejan con la configuración por defecto.\\
 
 %https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/kconfig.html
 
@@ -433,7 +421,7 @@ En esta sección es donde se encuentra el Panel de Control para los diferentes u
 	\begin{center}
 		\caption{Roles en la aplicación web.}
 		\label{table:roles}
-		\begin{tabular}{|c|p{8cm}|}
+		\begin{tabular}{|c|p{9cm}|}
 			\hline 
 			\textbf{Rol} & \textbf{Descripción} \\ 
 			\hline 
@@ -479,7 +467,18 @@ Adicional a esto, si el usuario desea añadir, modificar o eliminar una regla, p
 	\centering
 	\caption[Vista para añadir reglas.]{Vista para añadir reglas. [Imagen Propia]}
 	\label{fig:rulesview}
-	\includegraphics[width=0.25\linewidth]{Imagenes/rules_view}
+	\includegraphics[width=0.4\linewidth]{Imagenes/rules_view}
+\end{figure}
+
+\subsubsection{Base de datos}
+
+Para el desarrollo se la base de datos se plantea el modelo que se observa en la Figura \ref{fig:DB}, es un bosquejo de qué tablas se usan para almacenar los datos y las diferentes relaciones que posee, en el capítulo de resultados se presenta con más detalle como quedo estructura la base de datos. Para este desarrollo se tienen en cuenta los modelos mencionados anteriormente, como también ciertos campos que permitan identificar los roles y demás información relevante hacia los datos que se almacenan, como las medidas de los sensores o los estados de las salidas.
+
+\begin{figure}[H]
+	\centering
+	\caption{Base de datos SmartHouse [Imagen Propia]}
+	\label{fig:DB}
+	\includegraphics[width=0.75\linewidth]{Imagenes/DB0}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -509,5 +508,3 @@ Adicional a esto, si el usuario desea añadir, modificar o eliminar una regla, p
 %	\includegraphics[width=0.7\linewidth]{Imagenes/ORM}
 %\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Pruebas}
